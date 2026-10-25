@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from shkolla.views import login_api, profili_api, statistikat_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/login/', login_api, name='login_api'),
+    path('api/me/', profili_api, name='profili_api'),
+    path('api/statistikat/', statistikat_api, name='statistikat_api'),
 ]
