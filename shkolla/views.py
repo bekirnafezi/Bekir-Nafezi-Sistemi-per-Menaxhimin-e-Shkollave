@@ -270,3 +270,67 @@ def nxenesit_api(request):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+# ==========================================
+# API 7 - Detajet dhe menaxhimi i nxenesit
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def nxenesi_detaje_api(request, nxenesi_id):
+
+    nxenesi = get_object_or_404(
+        Nxenesi,
+        id=nxenesi_id
+    )
+
+    # GET - Shfaqja e nje nxenesi
+    if request.method == 'GET':
+
+        serializer = NxenesiSerializer(nxenesi)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i klases se nxenesit
+    if request.method == 'PATCH':
+
+        serializer = NxenesiSerializer(
+            nxenesi,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e nxenesit
+    if request.method == 'DELETE':
+
+        try:
+            nxenesi.delete()
+
+        except ProtectedError:
+
+            return Response(
+                {
+                    'gabim': 'Nxenesi nuk mund te fshihet sepse ka nota ose mungesa te lidhura.'
+                },
+                status=status.HTTP_409_CONFLICT
+            )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )

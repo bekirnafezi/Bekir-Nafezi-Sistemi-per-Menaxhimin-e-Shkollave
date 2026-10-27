@@ -23,6 +23,7 @@ from shkolla.views import (
     klasat_api,
     klasa_detaje_api,
     nxenesit_api,
+     nxenesi_detaje_api,
 )
 
 urlpatterns = [
@@ -33,4 +34,9 @@ urlpatterns = [
     path('api/klasat/', klasat_api, name='klasat_api'),
     path('api/klasat/<int:klasa_id>/', klasa_detaje_api, name='klasa_detaje_api'), 
     path('api/nxenesit/', nxenesit_api, name='nxenesit_api'),
+    path(
+    'api/nxenesit/<int:nxenesi_id>/',
+    nxenesi_detaje_api,
+    name='nxenesi_detaje_api'
+),
 ]
