@@ -23,7 +23,11 @@ from shkolla.views import (
     klasat_api,
     klasa_detaje_api,
     nxenesit_api,
-     nxenesi_detaje_api,
+    nxenesi_detaje_api,
+    mesimdhenesit_api,
+    mesimdhenesi_detaje_api,
+    lendet_api,
+    lenda_detaje_api,
 )
 
 urlpatterns = [
@@ -38,5 +42,25 @@ urlpatterns = [
     'api/nxenesit/<int:nxenesi_id>/',
     nxenesi_detaje_api,
     name='nxenesi_detaje_api'
+),
+    path(
+    'api/mesimdhenesit/',
+    mesimdhenesit_api,
+    name='mesimdhenesit_api'
+),
+    path(
+    'api/mesimdhenesit/<int:mesimdhenesi_id>/',
+    mesimdhenesi_detaje_api,
+    name='mesimdhenesi_detaje_api'
+),
+    path(
+    'api/lendet/',
+    lendet_api,
+    name='lendet_api'
+),
+    path(
+    'api/lendet/<int:lenda_id>/',
+    lenda_detaje_api,
+    name='lenda_detaje_api'
 ),
 ]

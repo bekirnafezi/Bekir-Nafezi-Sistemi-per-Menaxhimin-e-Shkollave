@@ -9,8 +9,13 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 
 from shkolla.permissions import EshteDrejtor
-from shkolla.models import Klasa, Nxenesi, Mesimdhenesi, Nota, Mungesa
-from shkolla.serializers import KlasaSerializer, NxenesiSerializer
+from shkolla.models import Klasa, Nxenesi, Mesimdhenesi, Nota, Mungesa, Lenda
+from shkolla.serializers import (
+    KlasaSerializer,
+    NxenesiSerializer,
+    MesimdhenesiSerializer,
+    LendaSerializer,
+)
 
 
 # ==========================================
@@ -327,6 +332,226 @@ def nxenesi_detaje_api(request, nxenesi_id):
             return Response(
                 {
                     'gabim': 'Nxenesi nuk mund te fshihet sepse ka nota ose mungesa te lidhura.'
+                },
+                status=status.HTTP_409_CONFLICT
+            )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+    # ==========================================
+# API 8 - Lista dhe regjistrimi i mesimdhenesve
+# ==========================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([EshteDrejtor])
+def mesimdhenesit_api(request):
+
+    # GET - Shfaqja e mesimdhenesve
+    if request.method == 'GET':
+
+        mesimdhenesit = Mesimdhenesi.objects.select_related(
+            'perdorues'
+        ).order_by('id')
+
+        serializer = MesimdhenesiSerializer(
+            mesimdhenesit,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # POST - Regjistrimi i profilit te mesimdhenesit
+    if request.method == 'POST':
+
+        serializer = MesimdhenesiSerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+# API 9 - Detajet dhe menaxhimi i mesimdhenesit
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def mesimdhenesi_detaje_api(request, mesimdhenesi_id):
+
+    mesimdhenesi = get_object_or_404(
+        Mesimdhenesi,
+        id=mesimdhenesi_id
+    )
+
+    # GET - Shfaqja e nje mesimdhenesi
+    if request.method == 'GET':
+
+        serializer = MesimdhenesiSerializer(mesimdhenesi)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i profilit te mesimdhenesit
+    if request.method == 'PATCH':
+
+        serializer = MesimdhenesiSerializer(
+            mesimdhenesi,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e profilit te mesimdhenesit
+    if request.method == 'DELETE':
+
+        try:
+            mesimdhenesi.delete()
+
+        except ProtectedError:
+
+            return Response(
+                {
+                    'gabim': 'Mesimdhenesi nuk mund te fshihet sepse ka angazhime te lidhura.'
+                },
+                status=status.HTTP_409_CONFLICT
+            )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+    # ==========================================
+# API 10 - Lista dhe regjistrimi i lendeve
+# ==========================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([EshteDrejtor])
+def lendet_api(request):
+
+    # GET - Shfaqja e te gjitha lendeve
+    if request.method == 'GET':
+
+        lendet = Lenda.objects.all().order_by('id')
+
+        serializer = LendaSerializer(
+            lendet,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # POST - Regjistrimi i nje lende te re
+    if request.method == 'POST':
+
+        serializer = LendaSerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+# API 11 - Detajet dhe menaxhimi i lendeve
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def lenda_detaje_api(request, lenda_id):
+
+    lenda = get_object_or_404(
+        Lenda,
+        id=lenda_id
+    )
+
+    # GET - Shfaqja e nje lende
+    if request.method == 'GET':
+
+        serializer = LendaSerializer(lenda)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i emrit te lendes
+    if request.method == 'PATCH':
+
+        serializer = LendaSerializer(
+            lenda,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e lendes
+    if request.method == 'DELETE':
+
+        try:
+            lenda.delete()
+
+        except ProtectedError:
+
+            return Response(
+                {
+                    'gabim': 'Lenda nuk mund te fshihet sepse ka angazhime te lidhura.'
                 },
                 status=status.HTTP_409_CONFLICT
             )
