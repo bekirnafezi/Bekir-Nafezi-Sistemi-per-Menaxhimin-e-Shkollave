@@ -9,12 +9,13 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 
 from shkolla.permissions import EshteDrejtor
-from shkolla.models import Klasa, Nxenesi, Mesimdhenesi, Nota, Mungesa, Lenda
+from shkolla.models import Klasa, Nxenesi, Mesimdhenesi, Nota, Mungesa, Lenda,  Angazhimi
 from shkolla.serializers import (
     KlasaSerializer,
     NxenesiSerializer,
     MesimdhenesiSerializer,
     LendaSerializer,
+    AngazhimiSerializer,
 )
 
 
@@ -552,6 +553,115 @@ def lenda_detaje_api(request, lenda_id):
             return Response(
                 {
                     'gabim': 'Lenda nuk mund te fshihet sepse ka angazhime te lidhura.'
+                },
+                status=status.HTTP_409_CONFLICT
+            )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+    # ==========================================
+# API 12 - Lista dhe regjistrimi i angazhimeve
+# ==========================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([EshteDrejtor])
+def angazhimet_api(request):
+
+    # GET - Shfaqja e te gjitha angazhimeve
+    if request.method == 'GET':
+
+        angazhimet = Angazhimi.objects.all().order_by('id')
+
+        serializer = AngazhimiSerializer(
+            angazhimet,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # POST - Regjistrimi i nje angazhimi te ri
+    if request.method == 'POST':
+
+        serializer = AngazhimiSerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+# API 13 - Detajet dhe menaxhimi i angazhimeve
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def angazhimi_detaje_api(request, angazhimi_id):
+
+    angazhimi = get_object_or_404(
+        Angazhimi,
+        id=angazhimi_id
+    )
+
+    # GET - Shfaqja e nje angazhimi
+    if request.method == 'GET':
+
+        serializer = AngazhimiSerializer(angazhimi)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i nje angazhimi
+    if request.method == 'PATCH':
+
+        serializer = AngazhimiSerializer(
+            angazhimi,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e nje angazhimi
+    if request.method == 'DELETE':
+
+        try:
+            angazhimi.delete()
+
+        except ProtectedError:
+
+            return Response(
+                {
+                    'gabim': 'Angazhimi nuk mund te fshihet sepse ka nota ose mungesa te lidhura.'
                 },
                 status=status.HTTP_409_CONFLICT
             )

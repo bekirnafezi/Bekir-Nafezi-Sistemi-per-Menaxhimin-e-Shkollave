@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda
+from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi
 
 
 class KlasaSerializer(serializers.ModelSerializer):
@@ -105,3 +105,50 @@ class LendaSerializer(serializers.ModelSerializer):
         ]
 
         read_only_fields = ['id']
+
+
+        # ==========================================
+# Serializer per angazhimet e mesimdhenesve
+# ==========================================
+
+class AngazhimiSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Angazhimi
+        fields = ['id', 'mesimdhenesi', 'klasa', 'lenda']
+        read_only_fields = ['id']
+
+    def validate(self, attrs):
+
+        mesimdhenesi = attrs.get(
+            'mesimdhenesi',
+            getattr(self.instance, 'mesimdhenesi', None)
+        )
+
+        klasa = attrs.get(
+            'klasa',
+            getattr(self.instance, 'klasa', None)
+        )
+
+        lenda = attrs.get(
+            'lenda',
+            getattr(self.instance, 'lenda', None)
+        )
+
+        # Kontrollojme nese angazhimi ekziston
+        ekziston = Angazhimi.objects.filter(
+            mesimdhenesi=mesimdhenesi,
+            klasa=klasa,
+            lenda=lenda
+        )
+
+        # Gjate ndryshimit nuk llogarisim regjistrimin aktual
+        if self.instance:
+            ekziston = ekziston.exclude(id=self.instance.id)
+
+        if ekziston.exists():
+            raise serializers.ValidationError(
+                "Ky angazhim ekziston tashme."
+            )
+
+        return attrs

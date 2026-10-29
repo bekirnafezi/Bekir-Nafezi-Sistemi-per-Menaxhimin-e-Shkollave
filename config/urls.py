@@ -28,6 +28,8 @@ from shkolla.views import (
     mesimdhenesi_detaje_api,
     lendet_api,
     lenda_detaje_api,
+    angazhimet_api,
+     angazhimi_detaje_api,
 )
 
 urlpatterns = [
@@ -62,5 +64,17 @@ urlpatterns = [
     'api/lendet/<int:lenda_id>/',
     lenda_detaje_api,
     name='lenda_detaje_api'
+),
+
+    path(
+    'api/angazhimet/',
+    angazhimet_api,
+    name='angazhimet_api'
+),
+
+    path(
+    'api/angazhimet/<int:angazhimi_id>/',
+    angazhimi_detaje_api,
+    name='angazhimi_detaje_api'
 ),
 ]
