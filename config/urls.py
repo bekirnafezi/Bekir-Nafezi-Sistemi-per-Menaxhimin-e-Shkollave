@@ -29,8 +29,11 @@ from shkolla.views import (
     lendet_api,
     lenda_detaje_api,
     angazhimet_api,
-     angazhimi_detaje_api,
+    angazhimi_detaje_api,
+    notat_api,
+    nota_detaje_api,
 )
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -76,5 +79,17 @@ urlpatterns = [
     'api/angazhimet/<int:angazhimi_id>/',
     angazhimi_detaje_api,
     name='angazhimi_detaje_api'
+),
+
+    path(
+    'api/notat/',
+    notat_api,
+    name='notat_api'
+),
+
+    path(
+    'api/notat/<int:nota_id>/',
+    nota_detaje_api,
+    name='nota_detaje_api'
 ),
 ]

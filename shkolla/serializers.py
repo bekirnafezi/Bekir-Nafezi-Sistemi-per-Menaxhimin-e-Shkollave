@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi
+from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi, Nota
 
 
 class KlasaSerializer(serializers.ModelSerializer):
@@ -150,5 +150,49 @@ class AngazhimiSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "Ky angazhim ekziston tashme."
             )
+
+        return attrs
+
+    # ==========================================
+# Serializer per notat e nxenesve
+# ==========================================
+
+class NotaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Nota
+        fields = ['id', 'nxenesi', 'angazhimi', 'vleresimi']
+        read_only_fields = ['id']
+
+    # Kontrollojme vleren e notes
+    def validate_vleresimi(self, value):
+
+        if value < 1 or value > 5:
+            raise serializers.ValidationError(
+                "Nota duhet te jete nga 1 deri ne 5."
+            )
+
+        return value
+
+    # Kontrollojme lidhjen nxenes - angazhim
+    def validate(self, attrs):
+
+        nxenesi = attrs.get(
+            'nxenesi',
+            getattr(self.instance, 'nxenesi', None)
+        )
+
+        angazhimi = attrs.get(
+            'angazhimi',
+            getattr(self.instance, 'angazhimi', None)
+        )
+
+        if nxenesi and angazhimi:
+
+            if nxenesi.klasa_id != angazhimi.klasa_id:
+
+                raise serializers.ValidationError(
+                    "Nxenesi nuk i perket klases se ketij angazhimi."
+                )
 
         return attrs

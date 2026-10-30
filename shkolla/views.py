@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.shortcuts import get_object_or_404
 from django.db.models.deletion import ProtectedError
-
+from django.utils import timezone
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -16,6 +16,7 @@ from shkolla.serializers import (
     MesimdhenesiSerializer,
     LendaSerializer,
     AngazhimiSerializer,
+    NotaSerializer,
 )
 
 
@@ -665,6 +666,106 @@ def angazhimi_detaje_api(request, angazhimi_id):
                 },
                 status=status.HTTP_409_CONFLICT
             )
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+   # ==========================================
+# API 14 - Lista dhe regjistrimi i notave
+# ==========================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([EshteDrejtor])
+def notat_api(request):
+
+    # GET - Shfaqja e te gjitha notave
+    if request.method == 'GET':
+
+        notat = Nota.objects.all().order_by('id')
+
+        serializer = NotaSerializer(
+            notat,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # POST - Regjistrimi i nje note te re
+    if request.method == 'POST':
+
+        serializer = NotaSerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            # Ruajme noten me daten aktuale
+            serializer.save(data=timezone.now())
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+# API 15 - Detajet dhe menaxhimi i notave
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def nota_detaje_api(request, nota_id):
+
+    nota = get_object_or_404(
+        Nota,
+        id=nota_id
+    )
+
+    # GET - Shfaqja e nje note
+    if request.method == 'GET':
+
+        serializer = NotaSerializer(nota)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i nje note
+    if request.method == 'PATCH':
+
+        serializer = NotaSerializer(
+            nota,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e nje note
+    if request.method == 'DELETE':
+
+        nota.delete()
 
         return Response(
             status=status.HTTP_204_NO_CONTENT
