@@ -17,6 +17,7 @@ from shkolla.serializers import (
     LendaSerializer,
     AngazhimiSerializer,
     NotaSerializer,
+    MungesaSerializer,
 )
 
 
@@ -766,6 +767,106 @@ def nota_detaje_api(request, nota_id):
     if request.method == 'DELETE':
 
         nota.delete()
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+    # ==========================================
+# API - Lista dhe regjistrimi i mungesave
+# ==========================================
+
+@api_view(['GET', 'POST'])
+@permission_classes([EshteDrejtor])
+def mungesat_api(request):
+
+    # GET - Shfaqja e te gjitha mungesave
+    if request.method == 'GET':
+
+        mungesat = Mungesa.objects.all().order_by('id')
+
+        serializer = MungesaSerializer(
+            mungesat,
+            many=True
+        )
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # POST - Regjistrimi i nje mungese
+    if request.method == 'POST':
+
+        serializer = MungesaSerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # ==========================================
+# API - Detajet, ndryshimi dhe fshirja e mungeses
+# ==========================================
+
+@api_view(['GET', 'PATCH', 'DELETE'])
+@permission_classes([EshteDrejtor])
+def mungesa_detaje_api(request, mungesa_id):
+
+    # Gjejme mungesen sipas ID-se
+    mungesa = get_object_or_404(
+        Mungesa,
+        id=mungesa_id
+    )
+
+    # GET - Shfaqja e nje mungese
+    if request.method == 'GET':
+
+        serializer = MungesaSerializer(mungesa)
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+    # PATCH - Ndryshimi i mungeses
+    if request.method == 'PATCH':
+
+        serializer = MungesaSerializer(
+            mungesa,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            return Response(
+                serializer.data,
+                status=status.HTTP_200_OK
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # DELETE - Fshirja e mungeses
+    if request.method == 'DELETE':
+
+        mungesa.delete()
 
         return Response(
             status=status.HTTP_204_NO_CONTENT

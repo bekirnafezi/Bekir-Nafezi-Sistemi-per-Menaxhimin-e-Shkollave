@@ -32,6 +32,8 @@ from shkolla.views import (
     angazhimi_detaje_api,
     notat_api,
     nota_detaje_api,
+    mungesat_api,
+    mungesa_detaje_api,
 )
 
 
@@ -92,4 +94,6 @@ urlpatterns = [
     nota_detaje_api,
     name='nota_detaje_api'
 ),
+path('api/mungesat/', mungesat_api, name='mungesat_api'),
+path('api/mungesat/<int:mungesa_id>/', mungesa_detaje_api, name='mungesa_detaje_api'),
 ]

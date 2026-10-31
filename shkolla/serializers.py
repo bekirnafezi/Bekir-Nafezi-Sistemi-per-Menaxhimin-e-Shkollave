@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi, Nota
+from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi, Nota,  Mungesa
 
 
 class KlasaSerializer(serializers.ModelSerializer):
@@ -175,6 +175,43 @@ class NotaSerializer(serializers.ModelSerializer):
         return value
 
     # Kontrollojme lidhjen nxenes - angazhim
+    def validate(self, attrs):
+
+        nxenesi = attrs.get(
+            'nxenesi',
+            getattr(self.instance, 'nxenesi', None)
+        )
+
+        angazhimi = attrs.get(
+            'angazhimi',
+            getattr(self.instance, 'angazhimi', None)
+        )
+
+        if nxenesi and angazhimi:
+
+            if nxenesi.klasa_id != angazhimi.klasa_id:
+
+                raise serializers.ValidationError(
+                    "Nxenesi nuk i perket klases se ketij angazhimi."
+                )
+
+        return attrs
+
+class MungesaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Mungesa
+
+        fields = [
+            'id',
+            'nxenesi',
+            'angazhimi',
+            'data',
+            'arsyetimi'
+        ]
+
+        read_only_fields = ['id']
+
     def validate(self, attrs):
 
         nxenesi = attrs.get(
