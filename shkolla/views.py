@@ -680,10 +680,24 @@ def angazhimi_detaje_api(request, angazhimi_id):
 @permission_classes([EshteDrejtor])
 def notat_api(request):
 
-    # GET - Shfaqja e te gjitha notave
+        # GET - Shfaqja dhe filtrimi i notave
     if request.method == 'GET':
 
         notat = Nota.objects.all().order_by('id')
+
+        # Marrim ID-ne e nxenesit nga URL-ja
+        nxenesi_id = request.query_params.get('nxenesi')
+
+        # Filtrojme notat nese eshte dhene nxenesi
+        if nxenesi_id is not None:
+
+            if not nxenesi_id.isdigit():
+                return Response(
+                    {'gabim': 'ID e nxenesit duhet te jete numer.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            notat = notat.filter(nxenesi_id=int(nxenesi_id))
 
         serializer = NotaSerializer(
             notat,
@@ -694,6 +708,7 @@ def notat_api(request):
             serializer.data,
             status=status.HTTP_200_OK
         )
+    
 
     # POST - Regjistrimi i nje note te re
     if request.method == 'POST':
@@ -780,10 +795,26 @@ def nota_detaje_api(request, nota_id):
 @permission_classes([EshteDrejtor])
 def mungesat_api(request):
 
-    # GET - Shfaqja e te gjitha mungesave
+       # GET - Shfaqja dhe filtrimi i mungesave
     if request.method == 'GET':
 
         mungesat = Mungesa.objects.all().order_by('id')
+
+        # Marrim ID-ne e nxenesit nga URL-ja
+        nxenesi_id = request.query_params.get('nxenesi')
+
+        # Filtrojme mungesat sipas nxenesit
+        if nxenesi_id is not None:
+
+            if not nxenesi_id.isdigit():
+                return Response(
+                    {'gabim': 'ID e nxenesit duhet te jete numer.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            mungesat = mungesat.filter(
+                nxenesi_id=int(nxenesi_id)
+            )
 
         serializer = MungesaSerializer(
             mungesat,
