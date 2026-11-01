@@ -1,0 +1,19 @@
+SCHOOL CONTROL - ENDPOINTET E API
+
+api/auth/login/ -> login_api
+api/me/ -> profili_api
+api/statistikat/ -> statistikat_api
+api/klasat/ -> klasat_api
+api/klasat/<int:klasa_id>/ -> klasa_detaje_api
+api/nxenesit/ -> nxenesit_api
+api/nxenesit/<int:nxenesi_id>/ -> nxenesi_detaje_api
+api/mesimdhenesit/ -> mesimdhenesit_api
+api/mesimdhenesit/<int:mesimdhenesi_id>/ -> mesimdhenesi_detaje_api
+api/lendet/ -> lendet_api
+api/lendet/<int:lenda_id>/ -> lenda_detaje_api
+api/angazhimet/ -> angazhimet_api
+api/angazhimet/<int:angazhimi_id>/ -> angazhimi_detaje_api
+api/notat/ -> notat_api
+api/notat/<int:nota_id>/ -> nota_detaje_api
+api/mungesat/ -> mungesat_api
+api/mungesat/<int:mungesa_id>/ -> mungesa_detaje_api
