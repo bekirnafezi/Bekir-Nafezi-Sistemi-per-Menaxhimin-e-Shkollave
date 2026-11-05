@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from shkolla.frontend_views import login_page
 from shkolla.views import (
     login_api,
     profili_api,
@@ -37,7 +38,11 @@ from shkolla.views import (
 )
 
 
+
 urlpatterns = [
+    path('', login_page, name='home'),
+    path('login/', login_page, name='login'),
+
     path('admin/', admin.site.urls),
     path('api/auth/login/', login_api, name='login_api'),
     path('api/me/', profili_api, name='profili_api'),
