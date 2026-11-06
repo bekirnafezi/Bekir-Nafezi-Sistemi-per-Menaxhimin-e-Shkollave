@@ -1,13 +1,23 @@
 from rest_framework import serializers
-from .models import Klasa, Nxenesi, Mesimdhenesi, Lenda , Angazhimi, Nota,  Mungesa
+
+from .models import (
+    Klasa,
+    Nxenesi,
+    Mesimdhenesi,
+    Lenda,
+    Angazhimi,
+    Nota,
+    Mungesa
+)
 
 
 class KlasaSerializer(serializers.ModelSerializer):
 
- class Meta:
+    class Meta:
         model = Klasa
         fields = ['id', 'emri', 'kujdestari']
         read_only_fields = ['id']
+
 
 class NxenesiSerializer(serializers.ModelSerializer):
 
@@ -28,6 +38,7 @@ class NxenesiSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Nxenesi
+
         fields = [
             'id',
             'perdorues',
@@ -36,6 +47,7 @@ class NxenesiSerializer(serializers.ModelSerializer):
             'email',
             'klasa'
         ]
+
         read_only_fields = ['id']
 
     def validate_perdorues(self, perdorues):
@@ -47,9 +59,6 @@ class NxenesiSerializer(serializers.ModelSerializer):
 
         return perdorues
 
-    # ==========================================
-# Serializer per mesimdhenesit
-# ==========================================
 
 class MesimdhenesiSerializer(serializers.ModelSerializer):
 
@@ -90,9 +99,6 @@ class MesimdhenesiSerializer(serializers.ModelSerializer):
 
         return perdorues
 
-    # ==========================================
-# Serializer per lendet
-# ==========================================
 
 class LendaSerializer(serializers.ModelSerializer):
 
@@ -107,15 +113,18 @@ class LendaSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 
-        # ==========================================
-# Serializer per angazhimet e mesimdhenesve
-# ==========================================
-
 class AngazhimiSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Angazhimi
-        fields = ['id', 'mesimdhenesi', 'klasa', 'lenda']
+
+        fields = [
+            'id',
+            'mesimdhenesi',
+            'klasa',
+            'lenda'
+        ]
+
         read_only_fields = ['id']
 
     def validate(self, attrs):
@@ -135,14 +144,12 @@ class AngazhimiSerializer(serializers.ModelSerializer):
             getattr(self.instance, 'lenda', None)
         )
 
-        # Kontrollojme nese angazhimi ekziston
         ekziston = Angazhimi.objects.filter(
             mesimdhenesi=mesimdhenesi,
             klasa=klasa,
             lenda=lenda
         )
 
-        # Gjate ndryshimit nuk llogarisim regjistrimin aktual
         if self.instance:
             ekziston = ekziston.exclude(id=self.instance.id)
 
@@ -153,18 +160,22 @@ class AngazhimiSerializer(serializers.ModelSerializer):
 
         return attrs
 
-    # ==========================================
-# Serializer per notat e nxenesve
-# ==========================================
 
 class NotaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Nota
-        fields = ['id', 'nxenesi', 'angazhimi', 'vleresimi']
+
+        fields = [
+            'id',
+            'nxenesi',
+            'angazhimi',
+            'vleresimi',
+            'data'
+        ]
+
         read_only_fields = ['id']
 
-    # Kontrollojme vleren e notes
     def validate_vleresimi(self, value):
 
         if value < 1 or value > 5:
@@ -174,7 +185,6 @@ class NotaSerializer(serializers.ModelSerializer):
 
         return value
 
-    # Kontrollojme lidhjen nxenes - angazhim
     def validate(self, attrs):
 
         nxenesi = attrs.get(
@@ -190,12 +200,12 @@ class NotaSerializer(serializers.ModelSerializer):
         if nxenesi and angazhimi:
 
             if nxenesi.klasa_id != angazhimi.klasa_id:
-
                 raise serializers.ValidationError(
                     "Nxenesi nuk i perket klases se ketij angazhimi."
                 )
 
         return attrs
+
 
 class MungesaSerializer(serializers.ModelSerializer):
 
@@ -227,7 +237,6 @@ class MungesaSerializer(serializers.ModelSerializer):
         if nxenesi and angazhimi:
 
             if nxenesi.klasa_id != angazhimi.klasa_id:
-
                 raise serializers.ValidationError(
                     "Nxenesi nuk i perket klases se ketij angazhimi."
                 )

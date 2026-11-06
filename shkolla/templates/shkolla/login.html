@@ -1,27 +1,173 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="sq">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>School Control | Hyrje</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/login.css' %}">
+    <script src="{% static 'shkolla/js/login.js' %}" defer></script>
 </head>
-
 <body>
+    <main class="login-container">
+        <div class="window-light" aria-hidden="true"></div>
+        <div class="ambient-light" aria-hidden="true"></div>
 
-    <main>
+        <svg class="dark-shape" viewBox="0 0 900 1000" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="panelColor" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#171438"/>
+                    <stop offset="0.55" stop-color="#24184F"/>
+                    <stop offset="1" stop-color="#342165"/>
+                </linearGradient>
+                <linearGradient id="edgeColor" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#B36CFB" stop-opacity="0.9"/>
+                    <stop offset="1" stop-color="#8D49E9" stop-opacity="0.2"/>
+                </linearGradient>
+            </defs>
+            <path d="M0 0 H755 C874 116 852 229 735 349 C607 478 550 591 568 701 C580 833 500 931 305 1000 H0Z" fill="url(#panelColor)"/>
+            <path d="M755 0 C874 116 852 229 735 349 C607 478 550 591 568 701 C580 833 500 931 305 1000" fill="none" stroke="url(#edgeColor)" stroke-width="4" opacity=".68"/>
+            <path d="M775 0 C903 117 866 238 758 355" fill="none" stroke="#C58BFA" stroke-width="2.5" opacity=".35"/>
+        </svg>
 
-        <section>
-            <h1>School Control</h1>
-            <p>Sistemi për Menaxhimin e Shkollave</p>
+        <div class="bottom-ribbon" aria-hidden="true"></div>
+        <div class="corner-orb" aria-hidden="true"></div>
+
+        <section class="login-left" aria-label="Për School Control">
+            <div class="brand">
+                <svg class="brand-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 22 32 9l28 13-28 13L4 22Z" fill="#D7A6FF"/>
+                    <path d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z" fill="#FFFFFF"/>
+                    <path d="M59 23v19" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="59" cy="46" r="4" fill="#C679FF"/>
+                </svg>
+
+                <h1>School <span>Control</span></h1>
+                <p>Sistemi për Menaxhimin e<br>Shkollave</p>
+                <span class="brand-wave" aria-hidden="true"></span>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/>
+                            <path d="M2.5 20v-2.2c0-3.3 2.5-5.3 6.5-5.3s6.5 2 6.5 5.3V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <circle cx="17.5" cy="8.5" r="2.3" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M18 13.5c2.5.3 3.5 1.7 3.5 4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Menaxhimi i përdoruesve</span>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="m3 8 9-5 9 5-9 5-9-5Zm0 5 9 5 9-5M3 18l9 5 9-5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Klasat dhe lëndët mësimore</span>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M4 19V12m5 7V6m5 13v-9m5 9V3" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <span>Notat dhe mungesat</span>
+                </div>
+
+                <div class="feature">
+                    <span class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3.5 14 5l2.5-.3.8 2.5L20 8l-.5 2.5L21 12l-1.5 2 .5 2.2-2.7 1-.8 2.5-2.5-.3-2 1.5-2-1.5-2.5.3-.8-2.5-2.7-1 .5-2.2L3 12l1.5-2L4 8l2.7-.8.8-2.5L10 5 12 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                    </span>
+                    <span>Raportet dhe statistikat</span>
+                </div>
+            </div>
         </section>
 
-        <section>
-            <h2>Hyr në Sistem</h2>
-            <p>Përdor llogarinë tënde për të vazhduar.</p>
-        </section>
+        <div class="login-illustration" aria-hidden="true">
+            <img src="{% static 'shkolla/images/globi_librat.svg' %}" alt="">
+        </div>
 
+        <section class="login-right" aria-label="Identifikimi në sistem">
+            <div class="login-card">
+                <svg class="card-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 22 32 9l28 13-28 13L4 22Z" fill="#8538E7"/>
+                    <path d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z" fill="#A45DF3"/>
+                    <path d="M59 23v19" stroke="#7432C5" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="59" cy="46" r="4" fill="#B965F5"/>
+                </svg>
+
+                <div class="login-header">
+                    <h2>Hyr në Sistem</h2>
+                    <p>Përdor llogarinë tënde për të vazhduar</p>
+                </div>
+
+                <form id="login-form" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Fjalëkalimi</label>
+
+                        <div class="input-wrap">
+                            <span class="input-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                                    <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8"/>
+                                </svg>
+                            </span>
+
+                            <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Fjalëkalimi"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <p id="login-message" role="status" aria-live="polite"></p>
+
+                    <button class="login-button" type="submit">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M11 4h7a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7M14 12H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Hyr
+                    </button>
+
+                    <p class="login-help">Keni harruar fjalëkalimin?</p>
+                </form>
+            </div>
+        </section>
     </main>
-
 </body>
 </html>
