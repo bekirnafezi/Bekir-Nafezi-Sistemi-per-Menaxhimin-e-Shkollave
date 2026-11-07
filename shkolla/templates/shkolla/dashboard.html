@@ -846,6 +846,7 @@
             <nav class="sidebar-menu" aria-label="Menuja kryesore">
 
                 <a href="/dashboard/" class="menu-item active">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -856,10 +857,13 @@
                             <path d="M9 21v-7h6v7"/>
                         </svg>
                     </span>
+
                     <span>Paneli Kryesor</span>
+
                 </a>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -867,14 +871,17 @@
                              stroke-linejoin="round" aria-hidden="true">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                             <circle cx="9" cy="7" r="4"/>
-                            <path d="M22 21v-2a4 4 0 0 1-3-3.87"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
                             <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                         </svg>
                     </span>
+
                     <span>Përdoruesit</span>
+
                 </span>
 
-                <span class="menu-item">
+                <a href="{% url 'klasat' %}" class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -885,10 +892,13 @@
                             <path d="m3 17 9 5 9-5"/>
                         </svg>
                     </span>
+
                     <span>Klasat</span>
-                </span>
+
+                </a>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -899,10 +909,13 @@
                             <path d="M22 9v7"/>
                         </svg>
                     </span>
+
                     <span>Nxënësit</span>
+
                 </span>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -914,24 +927,30 @@
                             <path d="M16 11h6"/>
                         </svg>
                     </span>
+
                     <span>Mësimdhënësit</span>
+
                 </span>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
-                             stroke-width="2" stroke-linecap="round"
+                             stroke-width="1.9" stroke-linecap="round"
                              stroke-linejoin="round" aria-hidden="true">
                             <path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1"/>
                             <path d="M12 6c3-2 6-2 9-1v15c-3-1-6-1-9 1"/>
                             <path d="M12 6v15"/>
                         </svg>
                     </span>
+
                     <span>Lëndët</span>
+
                 </span>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -942,10 +961,13 @@
                             <path d="m8 15 2 2 5-5"/>
                         </svg>
                     </span>
+
                     <span>Angazhimet</span>
+
                 </span>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -957,10 +979,13 @@
                             <path d="M2 20h20"/>
                         </svg>
                     </span>
+
                     <span>Notat</span>
+
                 </span>
 
                 <span class="menu-item">
+
                     <span class="menu-icon">
                         <svg width="22" height="22" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor"
@@ -970,7 +995,9 @@
                             <path d="M12 3v9l6 3"/>
                         </svg>
                     </span>
+
                     <span>Mungesat</span>
+
                 </span>
 
             </nav>
@@ -1018,6 +1045,7 @@
                 <section class="welcome-section">
 
                     <div class="welcome-text">
+
                         <h2>
                             Mirë se vini,
                             <span id="welcome-name">Drejtor!</span>
@@ -1028,6 +1056,7 @@
                             School Control ju mundëson menaxhim të lehtë,
                             të shpejtë dhe efikas të proceseve shkollore.
                         </p>
+
                     </div>
 
                 </section>
@@ -1035,6 +1064,7 @@
                 <section class="statistics-section">
 
                     <div class="stat-card students-card">
+
                         <div class="stat-icon">
                             <svg width="29" height="29" viewBox="0 0 24 24"
                                  fill="currentColor" aria-hidden="true">
@@ -1045,13 +1075,16 @@
                                       opacity=".65"/>
                             </svg>
                         </div>
+
                         <div class="stat-info">
                             <p>Nxënës</p>
                             <h3 id="total-students">—</h3>
                         </div>
+
                     </div>
 
                     <div class="stat-card teachers-card">
+
                         <div class="stat-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor"
@@ -1060,16 +1093,20 @@
                                 <path d="m2 9 10-5 10 5-10 5L2 9Z"/>
                                 <path d="M6 12v5c4 3 8 3 12 0v-5"/>
                                 <path d="M22 9v7"/>
-                                <circle cx="22" cy="18" r="1.5" fill="currentColor"/>
+                                <circle cx="22" cy="18" r="1.5"
+                                        fill="currentColor"/>
                             </svg>
                         </div>
+
                         <div class="stat-info">
                             <p>Mësimdhënës</p>
                             <h3 id="total-teachers">—</h3>
                         </div>
+
                     </div>
 
                     <div class="stat-card classes-card">
+
                         <div class="stat-icon">
                             <svg width="29" height="29" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor"
@@ -1080,27 +1117,35 @@
                                 <path d="m3 17 9 5 9-5"/>
                             </svg>
                         </div>
+
                         <div class="stat-info">
                             <p>Klasa</p>
                             <h3 id="total-classes">—</h3>
                         </div>
+
                     </div>
 
                     <div class="stat-card subjects-card">
+
                         <div class="stat-icon">
                             <svg width="29" height="29" viewBox="0 0 24 24"
-                                 fill="none" stroke="currentColor"
-                                 stroke-width="1.9" stroke-linecap="round"
-                                 stroke-linejoin="round" aria-hidden="true">
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.9"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1"/>
                                 <path d="M12 6c3-2 6-2 9-1v15c-3-1-6-1-9 1"/>
                                 <path d="M12 6v15"/>
                             </svg>
                         </div>
+
                         <div class="stat-info">
                             <p>Lëndë</p>
                             <h3 id="total-subjects">—</h3>
                         </div>
+
                     </div>
 
                 </section>
@@ -1112,21 +1157,27 @@
                 <section class="analytics-section">
 
                     <div class="dashboard-panel grades-panel">
+
                         <div class="panel-header">
                             <h3>Ecuria e Notave</h3>
                         </div>
+
                         <div id="grades-chart" class="chart-container">
                             <p>Statistikat e notave do të shfaqen këtu.</p>
                         </div>
+
                     </div>
 
                     <div class="dashboard-panel attendance-panel">
+
                         <div class="panel-header">
                             <h3>Përmbledhja e Mungesave</h3>
                         </div>
+
                         <div id="attendance-chart" class="chart-container">
                             <p>Të dhënat e mungesave do të shfaqen këtu.</p>
                         </div>
+
                     </div>
 
                 </section>
@@ -1134,33 +1185,42 @@
                 <section class="information-section">
 
                     <div class="dashboard-panel activity-panel">
+
                         <div class="panel-header">
                             <h3>Aktivitetet e Afërta</h3>
                         </div>
+
                         <div class="empty-state">
                             <p>
                                 Aktivitetet do të jenë të disponueshme
                                 në një fazë të ardhshme.
                             </p>
                         </div>
+
                     </div>
 
                     <div class="dashboard-panel classes-panel">
+
                         <div class="panel-header">
                             <h3>Klasat</h3>
                         </div>
+
                         <div id="classes-list" class="classes-list">
                             <p>Duke ngarkuar klasat...</p>
                         </div>
+
                     </div>
 
                     <div class="dashboard-panel calendar-panel">
+
                         <div class="panel-header">
                             <h3>Kalendari i Shkollës</h3>
                         </div>
+
                         <div id="school-calendar">
                             <p>Kalendari do të shfaqet këtu.</p>
                         </div>
+
                     </div>
 
                 </section>
@@ -1172,10 +1232,23 @@
                     </div>
 
                     <div class="quick-actions">
-                        <button type="button" disabled>Shto Nxënës</button>
-                        <button type="button" disabled>Shto Mësimdhënës</button>
-                        <button type="button" disabled>Shto Klasë</button>
-                        <button type="button" disabled>Shto Lëndë</button>
+
+                        <button type="button" disabled>
+                            Shto Nxënës
+                        </button>
+
+                        <button type="button" disabled>
+                            Shto Mësimdhënës
+                        </button>
+
+                        <button type="button" disabled>
+                            Shto Klasë
+                        </button>
+
+                        <button type="button" disabled>
+                            Shto Lëndë
+                        </button>
+
                     </div>
 
                 </section>

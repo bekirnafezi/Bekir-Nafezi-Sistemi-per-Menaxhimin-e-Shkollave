@@ -1,0 +1,691 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Control | Menaxhimi i Klasave</title>
+
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+    <script src="{% static 'shkolla/js/klasat.js' %}" defer></script>
+
+    <style>
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 265px minmax(0, 1fr);
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            height: 100%;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .sidebar-menu {
+            justify-content: flex-start;
+            gap: 7px;
+            padding-top: 8px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .topbar {
+            flex: 0 0 54px;
+            height: 54px;
+            min-height: 54px;
+        }
+
+        .classes-page {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            gap: 12px;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            padding: 17px 22px;
+            overflow: hidden;
+        }
+
+        .classes-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 0 0 auto;
+            gap: 14px;
+            min-width: 0;
+            min-height: 55px;
+        }
+
+        .classes-heading h1 {
+            margin: 0 0 5px;
+            color: #24194d;
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        .classes-heading p {
+            margin: 0;
+            color: #817397;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            min-height: 40px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: #7938e8;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .back-button:hover {
+            background: #6324c2;
+        }
+
+        .classes-summary {
+            display: flex;
+            align-items: center;
+            flex: 0 0 76px;
+            min-height: 76px;
+            gap: 14px;
+            padding: 12px 17px;
+            border-radius: 18px;
+            background: linear-gradient(
+                110deg,
+                #ffffff,
+                #eee1ff
+            );
+            box-shadow: 0 6px 20px rgba(76, 45, 142, 0.06);
+        }
+
+        .summary-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 46px;
+            width: 46px;
+            height: 46px;
+            border-radius: 13px;
+            background: #e4d0ff;
+            color: #7130cf;
+            font-size: 25px;
+        }
+
+        .summary-info {
+            min-width: 0;
+        }
+
+        .summary-info p {
+            margin: 0 0 2px;
+            color: #66577f;
+            font-size: 12px;
+        }
+
+        .summary-info strong {
+            display: block;
+            color: #281951;
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .class-create {
+            flex: 0 0 auto;
+            min-height: 0;
+            margin: 0;
+            border: 1px solid #e9ddfb;
+            border-radius: 17px;
+            background: white;
+            box-shadow: 0 6px 20px rgba(76, 45, 142, 0.06);
+            overflow: visible;
+        }
+
+        .class-create summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 44px;
+            padding: 10px 18px;
+            color: #7030cb;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .class-create summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .class-create summary:hover {
+            background: #faf7ff;
+            border-radius: 17px;
+        }
+
+        .class-create[open] summary {
+            border-bottom: 1px solid #eee7fb;
+        }
+
+        .class-create-arrow {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .class-create[open] .class-create-arrow {
+            transform: rotate(180deg);
+        }
+
+        .class-form {
+            margin: 0;
+            padding: 14px 18px 15px;
+        }
+
+        .class-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .class-field {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            gap: 7px;
+        }
+
+        .class-field label {
+            color: #302452;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .class-field input,
+        .class-field select {
+            width: 100%;
+            height: 41px;
+            min-width: 0;
+            padding: 9px 12px;
+            border: 1px solid #e3d7f5;
+            border-radius: 11px;
+            outline: none;
+            background: #faf8ff;
+            color: #302452;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .class-field input:focus,
+        .class-field select:focus {
+            border-color: #8c42e6;
+            box-shadow: 0 0 0 3px rgba(140, 66, 230, 0.1);
+        }
+
+        .class-form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .class-form-message {
+            flex: 1 1 auto;
+            margin: 0;
+            color: #75658f;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .save-class-button {
+            flex: 0 0 auto;
+            min-height: 35px;
+            padding: 9px 18px;
+            border: 0;
+            border-radius: 11px;
+            background: linear-gradient(
+                100deg,
+                #a345ed,
+                #682acb
+            );
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .save-class-button:hover {
+            filter: brightness(0.96);
+        }
+
+        .save-class-button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .classes-card {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            width: 100%;
+            min-width: 0;
+            min-height: 125px;
+            margin: 0;
+            padding: 16px 20px;
+            border: 1px solid #eee7fb;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 6px 20px rgba(76, 45, 142, 0.06);
+            overflow: hidden;
+        }
+
+        .classes-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 0 0 auto;
+            margin-bottom: 10px;
+        }
+
+        .classes-card-header h2 {
+            margin: 0;
+            color: #281951;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .classes-table-scroll {
+            flex: 1 1 0;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            overflow-x: auto;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #d4b5f5 transparent;
+        }
+
+        .classes-table {
+            width: 100%;
+            min-width: 470px;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        .classes-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .classes-table th {
+            padding: 12px 14px;
+            background: #f5efff;
+            color: #65439b;
+            font-size: 11px;
+            font-weight: 800;
+            text-align: left;
+        }
+
+        .classes-table th:first-child {
+            width: 15%;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .classes-table th:nth-child(2) {
+            width: 43%;
+        }
+
+        .classes-table th:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .classes-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f0eaf9;
+            color: #302452;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .classes-table tbody tr:hover {
+            background: #fcfaff;
+        }
+
+        .classes-status {
+            flex: 0 0 auto;
+            margin: 0;
+            padding: 8px;
+            color: #817397;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .classes-status:empty {
+            display: none;
+        }
+
+        @media (max-width: 1099px), (max-height: 580px) {
+
+            html,
+            body {
+                height: auto;
+                min-height: 100%;
+                overflow: auto;
+            }
+
+            .app-container {
+                display: block;
+                height: auto;
+                min-height: 100vh;
+                overflow: visible;
+            }
+
+            .sidebar {
+                height: auto;
+                min-height: 250px;
+            }
+
+            .main-content {
+                height: auto;
+                min-height: 100vh;
+                overflow: visible;
+            }
+
+            .classes-page {
+                height: auto;
+                min-height: 0;
+                overflow: visible;
+            }
+
+            .classes-card {
+                min-height: 220px;
+            }
+
+            .classes-table-scroll {
+                min-height: 125px;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .classes-page {
+                padding: 15px;
+            }
+
+            .classes-heading {
+                flex-wrap: wrap;
+            }
+
+            .back-button {
+                width: 100%;
+            }
+
+            .class-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .class-form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .classes-card {
+                padding: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <path
+                            d="M4 22 32 9l28 13-28 13L4 22Z"
+                            fill="#D7A6FF"
+                        />
+                        <path
+                            d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z"
+                            fill="#FFFFFF"
+                        />
+                        <path
+                            d="M59 23v19"
+                            stroke="#FFFFFF"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                        />
+                        <circle
+                            cx="59"
+                            cy="46"
+                            r="4"
+                            fill="#C679FF"
+                        />
+                    </svg>
+                </div>
+
+                <h1>School <span>Control</span></h1>
+                <p>Sistemi për Menaxhimin e Shkollave</p>
+
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Menuja kryesore">
+
+                <a href="/dashboard/" class="menu-item">
+                    <span class="menu-icon">⌂</span>
+                    <span>Paneli Kryesor</span>
+                </a>
+
+                <a href="/klasat/" class="menu-item active">
+                    <span class="menu-icon">▦</span>
+                    <span>Klasat</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>School Control</p>
+                <small>Menaxhim i thjeshtë dhe efikas</small>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+                    <h2>Menaxhimi i Klasave</h2>
+                </div>
+
+                <div class="topbar-right">
+                    <span>School Control</span>
+                </div>
+
+            </header>
+
+            <div class="classes-page">
+
+                <div class="classes-heading">
+
+                    <div>
+                        <h1>Klasat</h1>
+                        <p>
+                            Shikoni dhe menaxhoni klasat e regjistruara
+                            në sistemin shkollor.
+                        </p>
+                    </div>
+
+                    <a href="/dashboard/" class="back-button">
+                        ← Kthehu te Dashboard
+                    </a>
+
+                </div>
+
+                <div class="classes-summary">
+
+                    <div class="summary-icon">▦</div>
+
+                    <div class="summary-info">
+                        <p>Gjithsej klasa të regjistruara</p>
+                        <strong id="classes-count">—</strong>
+                    </div>
+
+                </div>
+
+                <details class="class-create" id="class-create-panel">
+
+                    <summary>
+                        <span>＋ Shto Klasë të Re</span>
+                        <span class="class-create-arrow">⌄</span>
+                    </summary>
+
+                    <form id="class-create-form" class="class-form">
+
+                        <div class="class-form-grid">
+
+                            <div class="class-field">
+
+                                <label for="class-name">
+                                    Emri i klasës
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="class-name"
+                                    name="emri"
+                                    maxlength="30"
+                                    placeholder="P.sh. Klasa 2/1"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="class-field">
+
+                                <label for="class-teacher">
+                                    Kujdestari i klasës
+                                </label>
+
+                                <select
+                                    id="class-teacher"
+                                    name="kujdestari"
+                                >
+                                    <option value="">
+                                        Pa kujdestar
+                                    </option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="class-form-actions">
+
+                            <p
+                                id="class-form-message"
+                                class="class-form-message"
+                                role="status"
+                                aria-live="polite"
+                            >
+                                Plotësoni të dhënat e klasës.
+                            </p>
+
+                            <button
+                                type="submit"
+                                id="save-class-button"
+                                class="save-class-button"
+                                disabled
+                            >
+                                Ruaj Klasën
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </details>
+
+                <section class="classes-card">
+
+                    <div class="classes-card-header">
+                        <h2>Lista e Klasave</h2>
+                    </div>
+
+                    <div class="classes-table-scroll">
+
+                        <table class="classes-table">
+
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Emri i klasës</th>
+                                    <th>Kujdestari</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="classes-table-body"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <p
+                        id="classes-status"
+                        class="classes-status"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Duke ngarkuar klasat...
+                    </p>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

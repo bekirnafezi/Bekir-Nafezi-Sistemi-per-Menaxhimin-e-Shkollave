@@ -7,3 +7,7 @@ def login_page(request):
 
 def dashboard_page(request):
     return render(request, "shkolla/dashboard.html")
+
+
+def klasat_page(request):
+    return render(request, "shkolla/klasat.html")

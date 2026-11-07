@@ -4,6 +4,7 @@ from django.urls import path
 from shkolla.frontend_views import (
     login_page,
     dashboard_page,
+    klasat_page,
 )
 
 from shkolla.views import (
@@ -26,14 +27,11 @@ from shkolla.views import (
     mungesa_detaje_api,
 )
 
-
 urlpatterns = [
-
     path('', login_page, name='home'),
-
     path('login/', login_page, name='login'),
-
     path('dashboard/', dashboard_page, name='dashboard'),
+    path('klasat/', klasat_page, name='klasat'),
 
     path('admin/', admin.site.urls),
 
@@ -138,5 +136,4 @@ urlpatterns = [
         mungesa_detaje_api,
         name='mungesa_detaje_api'
     ),
-
 ]
