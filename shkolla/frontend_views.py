@@ -11,3 +11,7 @@ def dashboard_page(request):
 
 def klasat_page(request):
     return render(request, "shkolla/klasat.html")
+
+
+def nxenesit_page(request):
+    return render(request, "shkolla/nxenesit.html")

@@ -5,7 +5,11 @@ from shkolla.frontend_views import (
     login_page,
     dashboard_page,
     klasat_page,
+    nxenesit_page,
 )
+
+from shkolla.student_registration import regjistro_nxenesin_api
+from shkolla.student_management import menaxho_nxenesin_api
 
 from shkolla.views import (
     login_api,
@@ -14,7 +18,6 @@ from shkolla.views import (
     klasat_api,
     klasa_detaje_api,
     nxenesit_api,
-    nxenesi_detaje_api,
     mesimdhenesit_api,
     mesimdhenesi_detaje_api,
     lendet_api,
@@ -32,6 +35,7 @@ urlpatterns = [
     path('login/', login_page, name='login'),
     path('dashboard/', dashboard_page, name='dashboard'),
     path('klasat/', klasat_page, name='klasat'),
+    path('nxenesit/', nxenesit_page, name='nxenesit'),
 
     path('admin/', admin.site.urls),
 
@@ -72,8 +76,14 @@ urlpatterns = [
     ),
 
     path(
+        'api/nxenesit/regjistro/',
+        regjistro_nxenesin_api,
+        name='regjistro_nxenesin_api'
+    ),
+
+    path(
         'api/nxenesit/<int:nxenesi_id>/',
-        nxenesi_detaje_api,
+        menaxho_nxenesin_api,
         name='nxenesi_detaje_api'
     ),
 
