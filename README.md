@@ -1,122 +1,198 @@
 # School Control
 
-## Sistemi per Menaxhimin e Shkollave Fillore
+## Sistemi për Menaxhimin e Shkollave Fillore
 
-School Control eshte nje aplikacion per menaxhimin
-digjital te shkollave fillore.
+**School Control** është një aplikacion për menaxhimin digjital të shkollave fillore.
 
-Projekti zhvillohet ne kuader te lendes
-Projekt - Praktike Profesionale.
+Qëllimi i projektit është të lehtësojë menaxhimin e të dhënave të shkollës, duke përfshirë klasat, nxënësit, mësimdhënësit, lëndët, angazhimet, notat dhe mungesat.
+
+Projekti zhvillohet në kuadër të lëndës **Projekt – Praktikë Profesionale**.
 
 ## Informacionet e projektit
 
-Studenti: Bekir Nafezi
-
-Profesori: Prof. Ass. Dr. Endrit Fetahi
-
-Universiteti: Ukshin Hoti - Prizren
-
-Viti akademik: 2026/2027
+- **Studenti:** Bekir Nafezi
+- **Profesori:** Prof. Ass. Dr. Endrit Fetahi
+- **Universiteti:** Universiteti "Ukshin Hoti" – Prizren
+- **Viti akademik:** 2026/2027
+- **Emri i projektit:** School Control
 
 ## Teknologjitë e përdorura
 
-Për zhvillimin e projektit **School Control** janë përdorur këto teknologji:
+Për zhvillimin e projektit janë përdorur këto teknologji:
 
-* **Python** – Gjuha programuese për zhvillimin e sistemit.
-* **Django** – Framework për ndërtimin e backend-it.
-* **Django REST Framework** – Për krijimin dhe menaxhimin e API-ve REST.
-* **SQLite** – Databaza për ruajtjen e të dhënave.
-* **Django Token Authentication** – Për autentikimin e përdoruesve.
-* **Git** – Për menaxhimin e versioneve të projektit.
-* **GitHub** – Për ruajtjen e kodit dhe dokumentimin e progresit.
-* **Visual Studio Code** – Mjedisi i përdorur për zhvillimin e projektit.
-* **DB Browser for SQLite** – Për kontrollimin e tabelave dhe relacioneve të databazës.
-
-### Teknologjitë e planifikuara
-
-Në fazën e ardhshme të zhvillimit planifikohet përdorimi i:
-
-* HTML
-* CSS
-* JavaScript
-
-Këto teknologji do të përdoren për krijimin e ndërfaqes grafike të sistemit.
-
+- **Python** – Gjuha programuese për zhvillimin e sistemit.
+- **Django** – Framework për ndërtimin e backend-it.
+- **Django REST Framework** – Për krijimin dhe menaxhimin e API-ve REST.
+- **SQLite** – Databaza për ruajtjen e të dhënave.
+- **Django Token Authentication** – Për autentikimin e përdoruesve.
+- **HTML** – Për ndërtimin e strukturës së faqeve.
+- **CSS** – Për dizajnin dhe paraqitjen vizuale.
+- **JavaScript** – Për funksionalitetet interaktive dhe komunikimin me API.
+- **Git** – Për menaxhimin e versioneve të projektit.
+- **GitHub** – Për ruajtjen e kodit dhe dokumentimin e progresit.
+- **Visual Studio Code** – Mjedisi i zhvillimit të projektit.
+- **DB Browser for SQLite** – Për kontrollimin e databazës dhe relacioneve.
 
 ## Funksionalitetet e realizuara
 
-Gjatë fazës së dytë të zhvillimit të projektit **School Control** janë realizuar funksionalitetet kryesore të backend-it.
+Projekti është zhvilluar në disa faza, duke filluar nga planifikimi, krijimi i databazës dhe backend-it, deri te ndërtimi i ndërfaqes grafike.
 
-### Menaxhimi i të dhënave
+### 1. Backend dhe databaza
 
-* Menaxhimi i klasave (CRUD).
-* Menaxhimi i nxënësve (CRUD).
-* Menaxhimi i mësimdhënësve (CRUD).
-* Menaxhimi i lëndëve (CRUD).
-* Menaxhimi i angazhimeve të mësimdhënësve (CRUD).
-* Menaxhimi i notave të nxënësve (CRUD).
-* Menaxhimi i mungesave të nxënësve (CRUD).
+Janë krijuar 8 modele kryesore:
 
-### Autentikimi dhe autorizimi
+1. Perdorues
+2. Klasa
+3. Mesimdhenesi
+4. Nxenesi
+5. Lenda
+6. Angazhimi
+7. Nota
+8. Mungesa
 
-* Identifikimi i përdoruesve me email dhe fjalëkalim.
-* Autentikimi me token.
-* Përcaktimi i tri roleve: drejtor, mësimdhënës dhe nxënës.
-* Kufizimi i qasjes në API-të administrative sipas rolit.
-* Endpoint për marrjen e të dhënave të profilit.
+Janë realizuar:
 
-### API dhe databaza
+- Krijimi i modeleve dhe relacioneve ndërmjet tyre.
+- Krijimi dhe zbatimi i migrimeve të databazës.
+- Menaxhimi i klasave (CRUD).
+- Menaxhimi i nxënësve (CRUD).
+- Menaxhimi i mësimdhënësve (CRUD).
+- Menaxhimi i lëndëve (CRUD).
+- Menaxhimi i angazhimeve (CRUD).
+- Menaxhimi i notave (CRUD).
+- Menaxhimi i mungesave (CRUD).
+- Implementimi i API-ve REST.
+- Validimi dhe filtrimi i të dhënave.
+- Krijimi i endpoint-it bazë për statistika.
 
-* Krijimi i 8 modeleve kryesore në Django.
-* Krijimi i relacioneve ndërmjet modeleve.
-* Përdorimi i databazës SQLite.
-* Implementimi i 17 endpoint-eve API.
-* Endpoint bazë për statistika.
-* Filtrimi i notave dhe mungesave sipas nxënësit.
-* Validimi i të dhënave gjatë regjistrimit dhe ndryshimit.
+Gjatë fazës së backend-it janë dokumentuar gjithsej **17 endpoint-e API**.
 
-### Testimi dhe dokumentimi
+### 2. Autentikimi dhe autorizimi
 
-* Testimi i operacioneve GET, POST, PATCH dhe DELETE.
-* Testimi i autentikimit dhe autorizimit.
-* Testimi i validimeve dhe filtrimeve.
-* Kontrollimi i migrimeve të databazës.
-* Dokumentimi i API-ve në dosjen `docs/`.
-* Përgatitja e fotografive të databazës dhe testimeve.
+Janë implementuar:
 
-## Funksionalitetet e planifikuara
+- Identifikimi i përdoruesve me email dhe fjalëkalim.
+- Autentikimi me token.
+- Përcaktimi i tri roleve: drejtor, mësimdhënës dhe nxënës.
+- Kufizimi i qasjes në API sipas rolit të përdoruesit.
+- Marrja e të dhënave të profilit të përdoruesit.
 
-Në fazën e ardhshme të projektit planifikohet:
+### 3. Ndërfaqja grafike – Frontend
 
-* Krijimi i ndërfaqes grafike me HTML, CSS dhe JavaScript.
-* Krijimi i faqeve të identifikimit dhe paneleve të përdoruesve.
-* Lidhja e frontend-it me API-të ekzistuese.
-* Zhvillimi i ndërfaqeve për drejtorin, mësimdhënësin dhe nxënësin.
-* Zgjerimi i statistikave dhe paraqitja e raporteve.
-* Testimi i sistemit të plotë me ndërfaqe grafike.
+Në fazën e tretë të zhvillimit ka filluar realizimi i ndërfaqes grafike me HTML, CSS dhe JavaScript.
 
-Këto funksionalitete do të zhvillohen në fazat e ardhshme të projektit.
+Deri tani janë krijuar këto faqe:
 
+**Faqja e identifikimit (Login)**
 
+- Formulari për identifikimin e përdoruesit.
+- Lidhja me sistemin e autentikimit.
+- Përdorimi i token-it për komunikim me API.
 
-## Statusi i projektit
+**Dashboard**
 
-Projekti **School Control – Sistemi për Menaxhimin e Shkollave** është në fazën e dytë të zhvillimit, e cila përfshin databazën, backend-in dhe API-të.
+- Paneli kryesor i sistemit.
+- Paraqitja e informacioneve dhe statistikave kryesore.
+- Menuja anësore për navigim ndërmjet moduleve.
+
+**Menaxhimi i Klasave**
+
+- Shfaqja e klasave.
+- Regjistrimi i klasave të reja.
+- Ndryshimi i të dhënave të klasave.
+- Fshirja e klasave sipas kufizimeve të sistemit.
+
+**Menaxhimi i Nxënësve**
+
+- Regjistrimi i nxënësve të rinj.
+- Shfaqja e nxënësve të regjistruar.
+- Kërkimi i shpejtë.
+- Lista e plotë me ndarje në faqe.
+- Ndryshimi i klasës së nxënësit.
+- Fshirja e nxënësve.
+
+**Menaxhimi i Mësimdhënësve**
+
+- Regjistrimi i mësimdhënësve.
+- Shfaqja dhe kërkimi i mësimdhënësve.
+- Lista e plotë me ndarje në faqe.
+- Ndryshimi i të dhënave të mësimdhënësve.
+- Fshirja me kontroll të lidhjeve ekzistuese.
+
+**Menaxhimi i Lëndëve**
+
+- Regjistrimi i lëndëve të reja.
+- Shfaqja e lëndëve nga databaza.
+- Kërkimi i shpejtë.
+- Lista e plotë me ndarje në faqe.
+- Ndryshimi i emrit të lëndës.
+- Fshirja e lëndëve.
+- Mbrojtja nga fshirja e lëndëve që kanë angazhime të lidhura.
+
+### 4. Dizajni dhe navigimi
+
+Ndërfaqja grafike është krijuar me një dizajn të përbashkët për modulet e sistemit.
+
+Janë realizuar:
+
+- Menuja anësore e navigimit.
+- Përdorimi i ngjyrave dhe elementeve të njëjta në faqe.
+- Tabelat për shfaqjen e të dhënave.
+- Formularët për regjistrim dhe ndryshim.
+- Dritaret për shfaqjen e listave të plota.
+- Kërkimi i të dhënave pa rifreskim të faqes.
+- Lidhja e faqeve kryesore me njëra-tjetrën.
+
+## Testimi dhe dokumentimi
+
+Gjatë zhvillimit janë kryer testime për të kontrolluar funksionimin e sistemit.
 
 Deri tani janë realizuar:
 
-* Konfigurimi i projektit me Python dhe Django.
-* Krijimi i databazës SQLite.
-* Krijimi i 8 modeleve kryesore dhe relacioneve ndërmjet tyre.
-* Krijimi dhe zbatimi i migrimeve.
-* Implementimi i autentikimit me token.
-* Përcaktimi i roleve: drejtor, mësimdhënës dhe nxënës.
-* Implementimi i API-ve CRUD për klasat, nxënësit, mësimdhënësit, lëndët, angazhimet, notat dhe mungesat.
-* Krijimi i gjithsej 17 endpoint-eve API.
-* Implementimi i validimeve dhe filtrimit të notave dhe mungesave sipas nxënësit.
-* Testimi i funksionaliteteve kryesore dhe kontrollimi i autorizimit.
-* Përgatitja e dokumentimit teknik në dosjen `docs/`.
+- Testimi i operacioneve GET, POST, PATCH dhe DELETE.
+- Testimi i autentikimit dhe autorizimit.
+- Testimi i validimeve të të dhënave.
+- Kontrollimi i migrimeve të databazës.
+- Testimi i regjistrimit dhe ndryshimit të të dhënave.
+- Testimi i kërkimit dhe shfaqjes së listave.
+- Testimi i fshirjes dhe i kufizimeve për të dhënat e lidhura.
+- Kontrollimi i navigimit ndërmjet faqeve.
+- Dokumentimi teknik në dosjen `docs/`.
 
-**Faza aktuale:** Backend-i dhe API-të kryesore janë zhvilluar dhe testuar. Po përgatitet Raporti Teknik 2.
+## Funksionalitetet në zhvillim
 
-**Faza e ardhshme:** Zhvillimi i ndërfaqes grafike (frontend) dhe lidhja e saj me backend-in ekzistues.
+Në vazhdim të fazës së tretë planifikohet:
+
+- Ndërtimi i ndërfaqes për menaxhimin e angazhimeve.
+- Ndërtimi i ndërfaqes për menaxhimin e notave.
+- Ndërtimi i ndërfaqes për menaxhimin e mungesave.
+- Zhvillimi i faqeve të përshtatura për mësimdhënësit dhe nxënësit.
+- Përmirësimi i statistikave dhe raporteve.
+- Testimi i plotë i sistemit përmes ndërfaqes grafike.
+- Përmirësimi i dizajnit dhe funksionaliteteve sipas nevojës.
+
+## Statusi i projektit
+
+Projekti **School Control – Sistemi për Menaxhimin e Shkollave Fillore** është aktualisht në **fazën e tretë të zhvillimit**.
+
+**Faza 1 – Planifikimi dhe analiza**
+
+Janë përcaktuar kërkesat, funksionalitetet dhe struktura e përgjithshme e sistemit.
+
+**Faza 2 – Databaza, Backend dhe API**
+
+Janë zhvilluar modelet, databaza, autentikimi, autorizimi dhe API-të kryesore të sistemit.
+
+**Faza 3 – Frontend dhe integrimi**
+
+Është krijuar ndërfaqja grafike dhe ka filluar lidhja e faqeve me API-të ekzistuese.
+
+Deri tani janë realizuar faqet Login, Dashboard, Klasat, Nxënësit, Mësimdhënësit dhe Lëndët.
+
+Zhvillimi vazhdon me modulet e tjera të sistemit.
+
+## Qëllimi përfundimtar
+
+Qëllimi është krijimi i një sistemi funksional dhe të lehtë për përdorim, i cili mundëson menaxhimin më të organizuar të informacioneve të shkollës.
+
+Projekti zhvillohet gradualisht, me testime dhe përditësime të rregullta në GitHub.
