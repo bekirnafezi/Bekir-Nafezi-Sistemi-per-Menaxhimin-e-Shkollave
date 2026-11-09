@@ -15,3 +15,7 @@ def klasat_page(request):
 
 def nxenesit_page(request):
     return render(request, "shkolla/nxenesit.html")
+
+def mesimdhenesit_page(request):
+    from django.shortcuts import render
+    return render(request, "shkolla/mesimdhenesit.html")

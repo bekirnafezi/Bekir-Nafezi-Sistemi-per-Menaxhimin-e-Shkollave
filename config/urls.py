@@ -6,10 +6,14 @@ from shkolla.frontend_views import (
     dashboard_page,
     klasat_page,
     nxenesit_page,
+    mesimdhenesit_page,
 )
 
 from shkolla.student_registration import regjistro_nxenesin_api
 from shkolla.student_management import menaxho_nxenesin_api
+
+from shkolla.teacher_registration import regjistro_mesimdhenesin_api
+from shkolla.teacher_management import menaxho_mesimdhenesin_api
 
 from shkolla.views import (
     login_api,
@@ -19,7 +23,6 @@ from shkolla.views import (
     klasa_detaje_api,
     nxenesit_api,
     mesimdhenesit_api,
-    mesimdhenesi_detaje_api,
     lendet_api,
     lenda_detaje_api,
     angazhimet_api,
@@ -36,6 +39,7 @@ urlpatterns = [
     path('dashboard/', dashboard_page, name='dashboard'),
     path('klasat/', klasat_page, name='klasat'),
     path('nxenesit/', nxenesit_page, name='nxenesit'),
+    path('mesimdhenesit/', mesimdhenesit_page, name='mesimdhenesit'),
 
     path('admin/', admin.site.urls),
 
@@ -94,8 +98,14 @@ urlpatterns = [
     ),
 
     path(
+        'api/mesimdhenesit/regjistro/',
+        regjistro_mesimdhenesin_api,
+        name='regjistro_mesimdhenesin_api'
+    ),
+
+    path(
         'api/mesimdhenesit/<int:mesimdhenesi_id>/',
-        mesimdhenesi_detaje_api,
+        menaxho_mesimdhenesin_api,
         name='mesimdhenesi_detaje_api'
     ),
 
