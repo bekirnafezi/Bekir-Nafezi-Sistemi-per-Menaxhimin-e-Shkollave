@@ -1,0 +1,802 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Control | Menaxhimi i Lëndëve</title>
+
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+
+    <style>
+
+        .students-page {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            gap: 15px;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .students-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 0 0 auto;
+            gap: 16px;
+        }
+
+        .students-heading h1 {
+            margin: 0 0 6px;
+            color: #24194d;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .students-heading p {
+            margin: 0;
+            color: #817397;
+            font-size: 12px;
+        }
+
+        .students-back-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 11px 18px;
+            border-radius: 12px;
+            background: #7938e8;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .students-back-button:hover {
+            background: #6324c2;
+        }
+
+        .students-summary {
+            display: flex;
+            align-items: center;
+            flex: 0 0 85px;
+            gap: 16px;
+            padding: 15px 20px;
+            border-radius: 19px;
+            background: linear-gradient(
+                110deg,
+                #ffffff,
+                #eee1ff
+            );
+            box-shadow: 0 7px 22px rgba(76, 45, 142, 0.07);
+        }
+
+        .students-summary-icon {
+            display: grid;
+            place-items: center;
+            flex: 0 0 52px;
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            background: #e4d0ff;
+            color: #7130cf;
+        }
+
+        .students-summary-icon svg {
+            width: 29px;
+            height: 29px;
+        }
+
+        .students-summary-info p {
+            margin: 0 0 4px;
+            color: #66577f;
+            font-size: 12px;
+        }
+
+        .students-summary-info strong {
+            color: #281951;
+            font-size: 29px;
+            font-weight: 800;
+        }
+
+        .students-table-card {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 0;
+            min-width: 0;
+            min-height: 0;
+            padding: 22px;
+            border: 1px solid #eee7fb;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 7px 22px rgba(76, 45, 142, 0.07);
+            overflow: hidden;
+        }
+
+        .students-table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex: 0 0 auto;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .students-table-header h2 {
+            margin: 0;
+            color: #281951;
+            font-size: 19px;
+            font-weight: 800;
+        }
+
+        .students-table-description {
+            color: #817397;
+            font-size: 12px;
+        }
+
+        .students-table-scroll {
+            flex: 1 1 0;
+            width: 100%;
+            min-width: 0;
+            min-height: 0;
+            overflow-x: auto;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #d4b5f5 transparent;
+        }
+
+        .students-table {
+            width: 100%;
+            min-width: 620px;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        .students-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .students-table th {
+            padding: 15px;
+            background: #f5efff;
+            color: #65439b;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .students-table th:first-child {
+            width: 10%;
+            border-radius: 11px 0 0 11px;
+        }
+
+        .students-table th:nth-child(2) {
+            width: 20%;
+        }
+
+        .students-table th:nth-child(3) {
+            width: 20%;
+        }
+
+        .students-table th:nth-child(4) {
+            width: 30%;
+        }
+
+        .students-table th:last-child {
+            width: 20%;
+            border-radius: 0 11px 11px 0;
+        }
+
+        .students-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0eaf9;
+            color: #302452;
+            font-size: 12px;
+        }
+
+        .students-table tbody tr:hover {
+            background: #fcfaff;
+        }
+
+        .students-status {
+            flex: 0 0 auto;
+            margin: 0;
+            padding: 14px 8px;
+            color: #817397;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .students-status:empty {
+            display: none;
+        }
+
+        .students-add-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 39px;
+            padding: 10px 17px;
+            border: none;
+            border-radius: 11px;
+            background: #7938e8;
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .students-add-button:hover {
+            background: #6324c2;
+        }
+
+        .student-modal {
+            width: min(570px, calc(100% - 32px));
+            max-height: 85vh;
+            max-height: 85dvh;
+            margin: auto;
+            padding: 0;
+            border: 1px solid #e9def8;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 18px 55px rgba(30, 16, 72, 0.22);
+            color: #281951;
+            overflow-y: auto;
+        }
+
+        .student-modal::backdrop {
+            background: rgba(23, 13, 52, 0.45);
+        }
+
+        .student-modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 22px 24px 17px;
+            border-bottom: 1px solid #f0eaf9;
+        }
+
+        .student-modal-header h2 {
+            margin: 0 0 6px;
+            color: #24194d;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .student-modal-header p {
+            margin: 0;
+            color: #817397;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .student-close-button {
+            display: grid;
+            place-items: center;
+            flex: 0 0 33px;
+            width: 33px;
+            height: 33px;
+            border: none;
+            border-radius: 9px;
+            background: #f5efff;
+            color: #7130cf;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .student-close-button:hover {
+            background: #e9dcff;
+        }
+
+        .student-form {
+            padding: 22px 24px 24px;
+        }
+
+        .student-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .student-form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            min-width: 0;
+        }
+
+        .student-form-field.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .student-form-field label {
+            color: #302452;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .student-form-field input,
+        .student-form-field select {
+            box-sizing: border-box;
+            width: 100%;
+            min-width: 0;
+            min-height: 43px;
+            padding: 10px 12px;
+            border: 1px solid #e3d7f5;
+            border-radius: 11px;
+            outline: none;
+            background: #faf8ff;
+            color: #302452;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .student-form-field input:focus,
+        .student-form-field select:focus {
+            border-color: #8c42e6;
+            box-shadow: 0 0 0 3px rgba(140, 66, 230, 0.1);
+        }
+
+        .student-form-field input::placeholder {
+            color: #a295b4;
+        }
+
+        .student-form-note {
+            margin: 12px 0 0;
+            color: #817397;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .student-form-message {
+            margin: 16px 0 0;
+            color: #75658f;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .student-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .student-cancel-button {
+            min-height: 40px;
+            padding: 10px 18px;
+            border: 1px solid #e3d7f5;
+            border-radius: 11px;
+            background: white;
+            color: #66557f;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .student-save-button {
+            min-height: 40px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(
+                100deg,
+                #a345ed,
+                #682acb
+            );
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .student-save-button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1099px) {
+            .students-page {
+                height: auto;
+                min-height: 550px;
+                overflow: visible;
+            }
+
+            .students-table-card {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .students-page {
+                padding: 15px;
+            }
+
+            .students-heading {
+                flex-wrap: wrap;
+            }
+
+            .students-back-button {
+                width: 100%;
+            }
+
+            .students-table-card {
+                padding: 15px;
+            }
+
+            .students-table-header {
+                flex-wrap: wrap;
+            }
+
+            .student-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .student-form-field.full-width {
+                grid-column: auto;
+            }
+
+            .student-modal-header,
+            .student-form {
+                padding-left: 17px;
+                padding-right: 17px;
+            }
+        }
+
+    </style>
+
+
+    <style>
+        .students-table {
+            min-width: 540px;
+        }
+
+        .students-table th:first-child {
+            width: 10%;
+        }
+
+        .students-table th:nth-child(2) {
+            width: 25%;
+        }
+
+        .students-table th:nth-child(3) {
+            width: 25%;
+        }
+
+        .students-table th:last-child {
+            width: 40%;
+        }
+    </style>
+
+
+    <style>
+        .students-table {
+            min-width: 400px;
+        }
+
+        .students-table th:first-child {
+            width: 20%;
+        }
+
+        .students-table th:nth-child(2),
+        .students-table th:last-child {
+            width: 80%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                        <path d="M4 22 32 9l28 13-28 13L4 22Z" fill="#D7A6FF"/>
+                        <path d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z" fill="#FFFFFF"/>
+                        <path d="M59 23v19" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="59" cy="46" r="4" fill="#C679FF"/>
+                    </svg>
+                </div>
+
+                <h1>School <span>Control</span></h1>
+
+                <p>Sistemi për Menaxhimin e Shkollave</p>
+
+            </div>
+
+            <nav class="sidebar-menu" aria-label="Menuja kryesore">
+
+                <a href="{% url 'dashboard' %}" class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="m3 10 9-7 9 7"/>
+                            <path d="M5 9v12h14V9"/>
+                            <path d="M9 21v-7h6v7"/>
+                        </svg>
+                    </span>
+
+                    <span>Paneli Kryesor</span>
+
+                </a>
+
+                <span class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </span>
+
+                    <span>Përdoruesit</span>
+
+                </span>
+
+                <a href="{% url 'klasat' %}" class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="m12 2 9 5-9 5-9-5 9-5Z"/>
+                            <path d="m3 12 9 5 9-5"/>
+                            <path d="m3 17 9 5 9-5"/>
+                        </svg>
+                    </span>
+
+                    <span>Klasat</span>
+
+                </a>
+
+                <a href="{% url 'nxenesit' %}"
+                   class="menu-item"
+                   >
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="m2 9 10-5 10 5-10 5L2 9Z"/>
+                            <path d="M6 12v5c4 3 8 3 12 0v-5"/>
+                            <path d="M22 9v7"/>
+                        </svg>
+                    </span>
+
+                    <span>Nxënësit</span>
+
+                </a>
+
+                <a href="/mesimdhenesit/" class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="10" cy="7" r="4"/>
+                            <path d="M3 21v-3a6 6 0 0 1 12 0v3"/>
+                            <path d="M19 8v6"/>
+                            <path d="M16 11h6"/>
+                        </svg>
+                    </span>
+
+                    <span>Mësimdhënësit</span>
+
+                </a>
+
+                <a href="/lendet/" class="menu-item active" aria-current="page">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="1.9" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1"/>
+                            <path d="M12 6c3-2 6-2 9-1v15c-3-1-6-1 9 1"/>
+                            <path d="M12 6v15"/>
+                        </svg>
+                    </span>
+
+                    <span>Lëndët</span>
+
+                </a>
+
+                <span class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="16" rx="2"/>
+                            <path d="M7 3v4M17 3v4M3 10h18"/>
+                            <path d="m8 15 2 2 5-5"/>
+                        </svg>
+                    </span>
+
+                    <span>Angazhimet</span>
+
+                </span>
+
+                <span class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 20V11h4v9"/>
+                            <path d="M10 20V6h4v14"/>
+                            <path d="M16 20V3h4v17"/>
+                            <path d="M2 20h20"/>
+                        </svg>
+                    </span>
+
+                    <span>Notat</span>
+
+                </span>
+
+                <span class="menu-item">
+
+                    <span class="menu-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 3v9l6 3"/>
+                        </svg>
+                    </span>
+
+                    <span>Mungesat</span>
+
+                </span>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>School Control</p>
+                <small>Menaxhim i thjeshtë dhe efikas</small>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+                    <h2>Menaxhimi i Lëndëve</h2>
+                </div>
+
+                <div class="topbar-right">
+                    <span>School Control</span>
+                </div>
+
+            </header>
+
+            <div class="students-page">
+
+                <div class="students-heading">
+
+                    <div>
+
+                        <h1>Lëndët</h1>
+
+                        <p>
+                            Shikoni dhe menaxhoni lëndët
+                            e regjistruar në sistemin shkollor.
+                        </p>
+
+                    </div>
+
+                    <a href="{% url 'dashboard' %}"
+                       class="students-back-button">
+                        ← Kthehu te Dashboard
+                    </a>
+
+                </div>
+
+                <div class="students-summary">
+
+                    <div class="students-summary-icon">
+
+                        <svg viewBox="0 0 24 24"
+                             fill="currentColor"
+                             aria-hidden="true">
+                            <circle cx="9" cy="7" r="4"/>
+                            <circle cx="18" cy="8" r="3" opacity=".65"/>
+                            <path d="M1 20v-2a7 7 0 0 1 14 0v2H1Z"/>
+                            <path d="M16 14a5 5 0 0 1 7 5v1h-6v-2a9 9 0 0 0-1-4Z"
+                                  opacity=".65"/>
+                        </svg>
+
+                    </div>
+
+                    <div class="students-summary-info">
+
+                        <p>Gjithsej lëndë të regjistruara</p>
+
+                        <strong id="subjects-count">—</strong>
+
+                    </div>
+
+                </div>
+
+                <section class="students-table-card">
+
+                    <div class="students-table-header">
+
+                        <h2>Lista e Lëndëve</h2>
+
+                    </div>
+
+                    <div class="students-table-scroll">
+
+                        <table class="students-table">
+
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Emri i lëndës</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody id="subjects-table-body"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <p
+                        id="subjects-status"
+                        class="students-status"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        Duke ngarkuar lëndët...
+                    </p>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="{% static 'shkolla/js/lendet.js' %}?v=1858" defer></script>
+    <script src="{% static 'shkolla/js/lendet_regjistrimi.js' %}?v=1856" defer></script>
+</body>
+</html>

@@ -19,3 +19,9 @@ def nxenesit_page(request):
 def mesimdhenesit_page(request):
     from django.shortcuts import render
     return render(request, "shkolla/mesimdhenesit.html")
+
+
+
+def lendet_page(request):
+    from django.shortcuts import render
+    return render(request, "shkolla/lendet.html")

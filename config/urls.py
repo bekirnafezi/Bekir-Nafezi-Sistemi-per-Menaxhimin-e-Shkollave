@@ -33,7 +33,12 @@ from shkolla.views import (
     mungesa_detaje_api,
 )
 
+
+from shkolla.frontend_views import lendet_page
+
 urlpatterns = [
+    path('lendet/', lendet_page, name='lendet'),
+
     path('', login_page, name='home'),
     path('login/', login_page, name='login'),
     path('dashboard/', dashboard_page, name='dashboard'),
