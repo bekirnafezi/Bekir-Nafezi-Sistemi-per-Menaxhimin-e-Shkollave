@@ -7,6 +7,210 @@
     <title>School Control | Hyrje</title>
     <link rel="stylesheet" href="{% static 'shkolla/css/login.css' %}">
     <script src="{% static 'shkolla/js/login.js' %}" defer></script>
+<style id="sc-login-gold-final">
+
+:root {
+    --purple: #d6a03d;
+    --deep-purple: #a56a10;
+    --night: #092d42;
+    --text: #153b52;
+    --muted: #60839a;
+}
+
+.login-container {
+    background:
+        radial-gradient(
+            ellipse at 83% 9%,
+            rgba(255, 225, 164, 0.72),
+            transparent 43%
+        ),
+        radial-gradient(
+            ellipse at 70% 83%,
+            rgba(140, 196, 226, 0.65),
+            transparent 52%
+        ),
+        linear-gradient(
+            115deg,
+            #0a3047 0%,
+            #7db1ce 50%,
+            #e5f3fa 85%,
+            #fff4dc 100%
+        ) !important;
+}
+
+.dark-shape {
+    filter: drop-shadow(
+        15px 0 24px rgba(9, 45, 66, 0.18)
+    ) !important;
+}
+
+#panelColor stop:nth-child(1) {
+    stop-color: #061d2d !important;
+}
+
+#panelColor stop:nth-child(2) {
+    stop-color: #0c344b !important;
+}
+
+#panelColor stop:nth-child(3) {
+    stop-color: #164d65 !important;
+}
+
+#edgeColor stop:nth-child(1) {
+    stop-color: #f3c86e !important;
+}
+
+#edgeColor stop:nth-child(2) {
+    stop-color: #c58c26 !important;
+}
+
+.dark-shape path:nth-of-type(3) {
+    stroke: #e4b65d !important;
+}
+
+.bottom-ribbon {
+    background: linear-gradient(
+        0deg,
+        rgba(205, 162, 82, 0.78),
+        rgba(251, 229, 185, 0.54) 55%,
+        rgba(255, 248, 228, 0.10)
+    ) !important;
+}
+
+.corner-orb {
+    background: radial-gradient(
+        circle at 30% 30%,
+        #f9d98d,
+        #d4a13f 65%,
+        #a8731c
+    ) !important;
+}
+
+.ambient-light {
+    background: rgba(241, 191, 93, 0.25) !important;
+}
+
+.brand h1 span {
+    color: #f2bd55 !important;
+}
+
+.brand-logo path:first-child {
+    fill: #f0b84b !important;
+}
+
+.brand-logo circle {
+    fill: #f0b84b !important;
+}
+
+.brand p {
+    color: #e3f1f7 !important;
+}
+
+.brand-wave {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 14'%3E%3Cpath d='M3 7 C12 1 20 12 29 7 S47 2 56 7 S74 12 83 7 S92 4 97 7' fill='none' stroke='%23f1bd55' stroke-linecap='round' stroke-width='3'/%3E%3C/svg%3E") !important;
+}
+
+.feature {
+    color: #f5fbff !important;
+}
+
+.feature-icon {
+    background: rgba(230, 180, 80, 0.17) !important;
+    border-color: rgba(240, 195, 105, 0.25) !important;
+}
+
+.feature-icon svg {
+    color: #f4ce77 !important;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: #f0dfbd !important;
+    box-shadow:
+        0 22px 65px rgba(17, 52, 75, 0.18) !important;
+}
+
+.card-logo path:nth-of-type(1) {
+    fill: #d29a30 !important;
+}
+
+.card-logo path:nth-of-type(2) {
+    fill: #f1c871 !important;
+}
+
+.card-logo path:nth-of-type(3) {
+    stroke: #ae7419 !important;
+}
+
+.card-logo circle {
+    fill: #c48d29 !important;
+}
+
+.login-header h2 {
+    color: #123b53 !important;
+}
+
+.login-header p {
+    color: #61849a !important;
+}
+
+.form-group label {
+    color: #23485e !important;
+}
+
+.input-wrap input {
+    background: #fffdf8 !important;
+    border: 1px solid #e9d5ad !important;
+    color: #173b52 !important;
+    caret-color: #bb811c !important;
+}
+
+.input-wrap input::placeholder {
+    color: #9f8966 !important;
+}
+
+.input-wrap input:focus {
+    border-color: #d69c32 !important;
+    box-shadow:
+        0 0 0 4px rgba(214, 156, 50, 0.17) !important;
+}
+
+.input-icon {
+    color: #ad771d !important;
+}
+
+.login-button {
+    background: linear-gradient(
+        105deg,
+        #f3c661 0%,
+        #d79c2e 52%,
+        #aa6d0b 100%
+    ) !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 10px 23px rgba(172, 115, 19, 0.25) !important;
+}
+
+.login-button:not(:disabled):hover {
+    background: linear-gradient(
+        105deg,
+        #f5ce77,
+        #c78a22,
+        #935c08
+    ) !important;
+}
+
+.login-help {
+    color: #a87016 !important;
+}
+
+.login-help:hover {
+    color: #805109 !important;
+}
+
+</style>
 </head>
 <body>
     <main class="login-container">
