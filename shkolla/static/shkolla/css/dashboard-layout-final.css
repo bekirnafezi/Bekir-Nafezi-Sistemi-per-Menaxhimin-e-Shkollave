@@ -1,0 +1,277 @@
+@media (min-width: 1051px) {
+
+    .app-container > .sidebar::after {
+        content: "";
+        display: block !important;
+
+        position: absolute;
+        top: 20px;
+        right: 0;
+        bottom: 20px;
+        left: auto;
+
+        width: 1px;
+        height: auto;
+
+        border: none;
+        border-radius: 0;
+
+        background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(34, 150, 205, 0.35) 15%,
+            rgba(54, 185, 233, 0.88) 50%,
+            rgba(34, 150, 205, 0.35) 85%,
+            transparent 100%
+        ) !important;
+
+        box-shadow:
+            0 0 7px rgba(34, 169, 226, 0.34),
+            0 0 16px rgba(51, 183, 235, 0.12);
+
+        opacity: 1;
+        transform: none;
+        pointer-events: none;
+        z-index: 20;
+    }
+
+    .dashboard-content {
+        grid-template-columns:
+            minmax(0, 1.65fr)
+            minmax(0, 0.95fr) !important;
+
+        gap: clamp(26px, 4vw, 64px) !important;
+
+        padding:
+            clamp(26px, 3vw, 55px) !important;
+    }
+
+    .dashboard-content .statistics-section {
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        grid-template-rows:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        gap: 19px !important;
+
+        width: 100% !important;
+        height: clamp(390px, 55vh, 520px) !important;
+
+        min-height: 390px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        align-items: stretch !important;
+        justify-content: stretch !important;
+    }
+
+    .dashboard-content .information-section {
+        align-self: center !important;
+    }
+}
+
+.topbar-left h2 {
+    display: none !important;
+}
+
+#current-date {
+    display: none !important;
+}
+
+.dashboard-content .statistics-section::before {
+    content: none !important;
+    display: none !important;
+}
+
+.dashboard-content .statistics-section .stat-card {
+    position: relative !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    justify-content: space-between !important;
+    align-items: stretch !important;
+
+    flex: initial !important;
+
+    width: auto !important;
+    height: auto !important;
+    min-height: 165px !important;
+    min-width: 0 !important;
+
+    gap: 18px !important;
+    padding: 23px !important;
+    margin: 0 !important;
+
+    border: 1px solid rgba(
+        66, 167, 217, 0.38
+    ) !important;
+
+    border-radius: 21px !important;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.68),
+        rgba(232, 248, 255, 0.25)
+    ) !important;
+
+    box-shadow:
+        0 0 12px rgba(78, 186, 232, 0.08),
+        inset 0 0 12px rgba(255, 255, 255, 0.26)
+        !important;
+
+    overflow: hidden !important;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.dashboard-content .statistics-section .stat-card::before,
+.dashboard-content .statistics-section .stat-card::after {
+    display: none !important;
+}
+
+.dashboard-content .statistics-section .stat-card:hover {
+    transform: translateY(-3px) !important;
+
+    border-color: rgba(
+        27, 146, 206, 0.65
+    ) !important;
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.85),
+        rgba(221, 244, 255, 0.58)
+    ) !important;
+
+    box-shadow:
+        0 0 20px rgba(42, 171, 232, 0.14),
+        inset 0 0 12px rgba(255, 255, 255, 0.42)
+        !important;
+}
+
+.dashboard-content .statistics-section .stat-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex: 0 0 57px !important;
+
+    width: 57px !important;
+    height: 57px !important;
+
+    border: none !important;
+    border-radius: 17px !important;
+
+    background: rgba(
+        208, 238, 252, 0.72
+    ) !important;
+
+    color: #1688BB !important;
+
+    box-shadow: none !important;
+}
+
+.dashboard-content .statistics-section .stat-info {
+    display: flex !important;
+
+    flex: 0 0 auto !important;
+
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+
+    width: 100% !important;
+    min-width: 0 !important;
+
+    gap: 12px !important;
+}
+
+.dashboard-content .statistics-section .stat-info p {
+    margin: 0 !important;
+
+    color: #285B79 !important;
+
+    font-size: clamp(
+        14px,
+        1.2vw,
+        17px
+    ) !important;
+
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+}
+
+.dashboard-content .statistics-section .stat-info h3 {
+    margin: 0 !important;
+
+    color: #147CA9 !important;
+
+    font-size: clamp(
+        34px,
+        3vw,
+        44px
+    ) !important;
+
+    line-height: 1 !important;
+    font-weight: 800 !important;
+}
+
+.dashboard-content .information-section .activity-panel {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 1050px) {
+
+    .dashboard-content .statistics-section {
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr)) !important;
+
+        grid-template-rows: auto !important;
+
+        gap: 15px !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .dashboard-content .statistics-section .stat-card {
+        min-height: 175px !important;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .dashboard-content .statistics-section {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dashboard-content .statistics-section .stat-card {
+        min-height: 155px !important;
+    }
+
+    .dashboard-content .statistics-section .stat-info h3 {
+        font-size: 35px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .dashboard-content .statistics-section .stat-card {
+        transition: none !important;
+    }
+
+    .dashboard-content .statistics-section .stat-card:hover {
+        transform: none !important;
+    }
+}

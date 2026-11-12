@@ -1,0 +1,180 @@
+
+body:has(.dashboard-content) {
+    --sc-navy: #0c3045;
+    --sc-deep-navy: #08283b;
+    --sc-teal: #075b79;
+    --sc-gold: #e8a93e;
+    --sc-text: #143b55;
+}
+
+body:has(.dashboard-content) .sidebar {
+    background: linear-gradient(
+        160deg,
+        #092b3f 0%,
+        #10394c 50%,
+        #08283b 100%
+    ) !important;
+
+    color: #ffffff !important;
+
+    border-color: rgba(255,255,255,0.12) !important;
+}
+
+body:has(.dashboard-content) .sidebar h1,
+body:has(.dashboard-content) .sidebar h2,
+body:has(.dashboard-content) .sidebar h3 {
+    color: #ffffff !important;
+}
+
+body:has(.dashboard-content) .sidebar h1 span,
+body:has(.dashboard-content) .sidebar h2 span {
+    color: #e8a93e !important;
+}
+
+body:has(.dashboard-content) .sidebar p {
+    color: rgba(255,255,255,0.82) !important;
+}
+
+body:has(.dashboard-content) .dashboard-content {
+    background-image:
+        linear-gradient(
+            120deg,
+            rgba(255,255,255,0.33),
+            rgba(246,235,217,0.27)
+        ),
+        url("../images/school-corridor.jpg") !important;
+
+    background-position: center center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+body:has(.dashboard-content) .sc-corridor-stat {
+    background: linear-gradient(
+        145deg,
+        rgba(255,255,255,0.98),
+        rgba(255,250,244,0.95)
+    ) !important;
+
+    border-color: rgba(255,255,255,0.85) !important;
+
+    box-shadow:
+        0 8px 25px rgba(15,42,56,0.15),
+        0 2px 8px rgba(15,42,56,0.06) !important;
+}
+
+body:has(.dashboard-content) .sc-corridor-stat-0 {
+    --sc-card-accent: #12699b;
+    --sc-card-tint: #e4f3fd;
+}
+
+body:has(.dashboard-content) .sc-corridor-stat-1 {
+    --sc-card-accent: #b47a17;
+    --sc-card-tint: #fff0d5;
+}
+
+body:has(.dashboard-content) .sc-corridor-stat-2 {
+    --sc-card-accent: #287b45;
+    --sc-card-tint: #e1f3e4;
+}
+
+body:has(.dashboard-content) .sc-corridor-stat-3 {
+    --sc-card-accent: #7436a1;
+    --sc-card-tint: #f0e2fb;
+}
+
+body:has(.dashboard-content) .sc-corridor-number {
+    color: var(--sc-card-accent) !important;
+}
+
+body:has(.dashboard-content) .sc-corridor-icon {
+    background: var(--sc-card-tint) !important;
+    color: var(--sc-card-accent) !important;
+}
+
+body:has(.dashboard-content) .sc-corridor-icon svg {
+    color: var(--sc-card-accent) !important;
+}
+
+body:has(.dashboard-content)
+.dashboard-content .information-section .activity-panel {
+    background: rgba(255,253,249,0.97) !important;
+
+    border-color: rgba(255,255,255,0.9) !important;
+
+    box-shadow:
+        0 9px 28px rgba(15,42,56,0.16) !important;
+}
+
+body:has(.dashboard-content)
+.sc-reports-panel {
+    background: rgba(255,253,249,0.97) !important;
+
+    border-color: rgba(255,255,255,0.9) !important;
+
+    box-shadow:
+        0 6px 19px rgba(15,42,56,0.12) !important;
+}
+
+body:has(.dashboard-content)
+.sc-decisions-add {
+    background: linear-gradient(
+        135deg,
+        #0e6686,
+        #07445f
+    ) !important;
+
+    color: #ffffff !important;
+
+    border-color: #0c5b78 !important;
+
+    box-shadow:
+        0 6px 16px rgba(9,65,90,0.20) !important;
+}
+
+body:has(.dashboard-content)
+.sc-decisions-view {
+    background: rgba(255,253,249,0.98) !important;
+
+    color: #153b54 !important;
+
+    border-color: rgba(255,255,255,0.9) !important;
+
+    box-shadow:
+        0 6px 19px rgba(15,42,56,0.12) !important;
+}
+
+body:has(.dashboard-content)
+.sc-decisions-view span {
+    color: #b47a17 !important;
+}
+
+body:has(.dashboard-content)
+.sc-corridor-primary {
+    background: linear-gradient(
+        135deg,
+        #0e6686,
+        #06415c
+    ) !important;
+
+    border-color: #0c5b78 !important;
+    color: #ffffff !important;
+
+    box-shadow:
+        0 4px 12px rgba(9,65,90,0.20) !important;
+}
+
+body:has(.dashboard-content)
+.sc-reports-count {
+    background: #e1f1f9 !important;
+    color: #0e6287 !important;
+}
+
+body:has(.dashboard-content)
+.sc-corridor-stat,
+body:has(.dashboard-content)
+.dashboard-content .information-section .activity-panel,
+body:has(.dashboard-content)
+.sc-reports-panel {
+    backdrop-filter: blur(4px);
+}

@@ -1,0 +1,165 @@
+@media (min-width: 1051px) {
+
+    .dashboard-content {
+        align-items: start !important;
+        align-content: start !important;
+        overflow-y: auto !important;
+    }
+
+    .dashboard-content .information-section {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-self: start !important;
+        gap: 16px !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
+
+    .dashboard-content .information-section .activity-panel {
+        flex: 0 0 auto !important;
+        height: clamp(390px, 55vh, 520px) !important;
+        min-height: 0 !important;
+    }
+
+    .dashboard-content .information-section::before {
+        top: 0 !important;
+        bottom: auto !important;
+        height: clamp(390px, 55vh, 520px) !important;
+    }
+}
+
+.sc-reports-panel {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    min-height: 180px;
+    max-height: 270px;
+    padding: 17px 18px;
+    border: 1px solid rgba(66, 167, 217, 0.38);
+    border-radius: 19px;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.86),
+        rgba(231, 247, 255, 0.45)
+    );
+    box-shadow: 0 0 14px rgba(65, 175, 224, 0.06);
+}
+
+.sc-reports-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.sc-reports-header h3 {
+    margin: 0;
+    color: #153F5D;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.sc-reports-count {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid #D2ECFA;
+    border-radius: 20px;
+    background: #EBF8FF;
+    color: #237EAA;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+.sc-reports-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 3px;
+}
+
+.sc-report-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 12px;
+    border-left: 2px solid #5EB9E1;
+    border-radius: 0 10px 10px 0;
+    background: rgba(240, 250, 255, 0.8);
+}
+
+.sc-report-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sc-report-name {
+    flex: 1 1 120px;
+    min-width: 0;
+    color: #214D6B;
+    font-size: 12px;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.sc-report-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.sc-report-badge.held {
+    background: #DDF5E9;
+    color: #168057;
+}
+
+.sc-report-badge.cancelled {
+    background: #FFE8ED;
+    color: #B93C54;
+}
+
+.sc-report-date {
+    color: #668BA2;
+    font-size: 11px;
+}
+
+.sc-report-reason {
+    margin: 2px 0 0;
+    color: #A34C60;
+    font-size: 11px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.sc-reports-message {
+    margin: 0;
+    padding: 15px 4px;
+    color: #668BA2;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (max-width: 1050px) {
+
+    .dashboard-content .information-section {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        height: auto !important;
+    }
+
+    .sc-reports-panel {
+        max-height: 300px;
+    }
+}

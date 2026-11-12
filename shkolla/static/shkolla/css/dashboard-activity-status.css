@@ -1,0 +1,213 @@
+.sc-activity-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap;
+    gap: 10px !important;
+}
+
+.sc-activity-item-content {
+    flex: 1 1 120px;
+}
+
+.sc-activity-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: auto;
+}
+
+.sc-activity-held-button,
+.sc-activity-cancel-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-size: 21px;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sc-activity-held-button {
+    background: #E0F7ED;
+    color: #16875A;
+    border-color: #BCE9D3;
+}
+
+.sc-activity-held-button:hover {
+    background: #C8F0DE;
+    transform: translateY(-1px);
+}
+
+.sc-activity-cancel-button {
+    background: #FFF0F1;
+    color: #CA4156;
+    border-color: #F7D5DC;
+}
+
+.sc-activity-cancel-button:hover {
+    background: #FFE0E4;
+    transform: translateY(-1px);
+}
+
+.sc-activity-held-button:focus-visible,
+.sc-activity-cancel-button:focus-visible {
+    outline: 2px solid #1688BB;
+    outline-offset: 2px;
+}
+
+.sc-activity-cancel-dialog:not([open]) {
+    display: none;
+}
+
+.sc-activity-cancel-dialog[open] {
+    box-sizing: border-box;
+    width: min(490px, calc(100% - 30px));
+    max-width: none;
+    max-height: calc(100dvh - 35px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid #C8E8F8;
+    border-radius: 19px;
+    background: white;
+    color: #194C6C;
+    box-shadow: 0 20px 65px rgba(13, 66, 101, 0.2);
+    overflow-y: auto;
+}
+
+.sc-activity-cancel-dialog::backdrop {
+    background: rgba(15, 50, 77, 0.43);
+}
+
+.sc-cancel-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 23px 25px;
+    background: #F3FAFF;
+}
+
+.sc-cancel-header h2 {
+    margin: 0 0 7px;
+    color: #174B6C;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.sc-cancel-header p {
+    margin: 0;
+    color: #64849B;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.sc-cancel-close {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: #E4F4FD;
+    color: #187DB1;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+#sc-cancel-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px 25px;
+}
+
+#sc-cancel-form label {
+    color: #2C5E7C;
+    font-size: 13px;
+    font-weight: 750;
+}
+
+#sc-cancel-reason {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 115px;
+    padding: 12px;
+    border: 1px solid #C7E4F5;
+    border-radius: 11px;
+    outline: none;
+    resize: vertical;
+    background: #F8FCFF;
+    color: #214F6D;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#sc-cancel-reason:focus {
+    border-color: #2C9BCF;
+    box-shadow: 0 0 0 3px rgba(44, 155, 207, 0.11);
+}
+
+#sc-cancel-message {
+    margin: 0;
+    color: #C23B56;
+    font-size: 12px;
+}
+
+#sc-cancel-message:empty {
+    display: none;
+}
+
+.sc-cancel-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.sc-cancel-back,
+.sc-cancel-confirm {
+    min-height: 41px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.sc-cancel-back {
+    border: 1px solid #CEE5F3;
+    background: white;
+    color: #4D7994;
+}
+
+.sc-cancel-confirm {
+    border: 1px solid #E6AAB5;
+    background: #D84D65;
+    color: white;
+}
+
+.sc-cancel-confirm:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sc-activity-held-button,
+    .sc-activity-cancel-button {
+        transition: none;
+    }
+
+    .sc-activity-held-button:hover,
+    .sc-activity-cancel-button:hover {
+        transform: none;
+    }
+}

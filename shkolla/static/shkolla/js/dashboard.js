@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             text-align: center;
             font-size: 12px;
             font-weight: 800;
-            color: #281951;
+            color: #173F5D;
             text-transform: capitalize;
             white-space: nowrap;
         }
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             border: none;
             border-radius: 7px;
             background: transparent;
-            color: #6b2fc6;
+            color: #1687BE;
             font-size: 22px;
             font-weight: 700;
             line-height: 1;
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
         .school-calendar-arrow:hover {
-            background: #ebdeff;
+            background: #E0F3FE;
         }
 
         .school-calendar-weekdays {
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         .school-calendar-weekday {
             text-align: center;
-            color: #75658f;
+            color: #648298;
             font-size: 10px;
             font-weight: 750;
         }
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             height: 17px;
             max-height: 100%;
             border-radius: 50%;
-            color: #302452;
+            color: #214C68;
             font-size: 10px;
             font-weight: 650;
             line-height: 1;
@@ -122,13 +122,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         .school-calendar-date.is-saturday,
         .school-calendar-date.is-sunday {
-            color: #a05ac0;
+            color: #298EB8;
         }
 
         .school-calendar-date.is-today {
             color: white;
-            background: linear-gradient(135deg, #a34cf0, #6925c8);
-            box-shadow: 0 2px 6px rgba(111, 48, 199, 0.23);
+            background: linear-gradient(135deg, #40B6E9, #177EBA);
+            box-shadow: 0 2px 6px rgba(24, 135, 190, 0.23);
             font-weight: 800;
         }
 
@@ -157,13 +157,13 @@ document.addEventListener("DOMContentLoaded", async function () {
             justify-content: space-between;
             align-items: center;
             gap: 8px;
-            color: #776794;
+            color: #67869A;
             font-size: 10px;
             font-weight: 600;
         }
 
         .grades-visual-header strong {
-            color: #6f2acc;
+            color: #1688BE;
             font-size: 12px;
         }
 
@@ -205,8 +205,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: #fbf8ff;
-            color: #25194d;
+            background: #F5FBFF;
+            color: #173E5A;
         }
 
         .attendance-donut-center strong {
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         .attendance-donut-center span {
             margin-top: 3px;
             font-size: 9px;
-            color: #776794;
+            color: #67869A;
         }
 
         .attendance-legend {
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             align-items: center;
             gap: 7px;
             font-size: 11px;
-            color: #40335f;
+            color: #315C75;
         }
 
         .attendance-legend-dot {
@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
 
         .attendance-legend-text strong {
-            color: #26194d;
+            color: #194762;
             font-size: 12px;
         }
 
@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             width: 100%;
             height: 100%;
             padding: 12px;
-            color: #81749b;
+            color: #67869B;
             text-align: center;
             font-size: 12px;
             line-height: 1.5;
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     function showMessage(text, isError = false) {
         message.textContent = text;
-        message.style.color = isError ? "#b42336" : "#74668f";
+        message.style.color = isError ? "#b42336" : "#628198";
     }
 
     function clearSession() {
@@ -744,9 +744,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             return `
                 <line x1="45" y1="${y}" x2="667" y2="${y}"
-                      stroke="#ddcff5" stroke-dasharray="4 5"/>
+                      stroke="#D5EAF6" stroke-dasharray="4 5"/>
                 <text x="29" y="${y + 4}" text-anchor="middle"
-                      fill="#8d80a6" font-size="11">${value}</text>
+                      fill="#7392A5" font-size="11">${value}</text>
             `;
         }).join("");
 
@@ -754,7 +754,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             return `
                 <text x="${xPosition(index)}" y="168"
-                      text-anchor="middle" fill="#635582"
+                      text-anchor="middle" fill="#567B93"
                       font-size="11" font-weight="600">${name}</text>
             `;
         }).join("");
@@ -776,7 +776,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             points += `
                 <circle cx="${x}" cy="${y}" r="5"
-                        fill="#7938e8"
+                        fill="#168FC8"
                         stroke="white"
                         stroke-width="2"/>
             `;
@@ -802,7 +802,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <path d="M${previousX} ${previousY}
                              L${x} ${y}"
                           fill="none"
-                          stroke="#7938e8"
+                          stroke="#168FC8"
                           stroke-width="3.5"
                           stroke-linecap="round"/>
                 `;
@@ -851,10 +851,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                                         x1="0" y1="0"
                                         x2="0" y2="1">
                             <stop offset="0%"
-                                  stop-color="#9b59f1"
+                                  stop-color="#48B9E9"
                                   stop-opacity=".38"/>
                             <stop offset="100%"
-                                  stop-color="#9b59f1"
+                                  stop-color="#48B9E9"
                                   stop-opacity=".02"/>
                         </linearGradient>
                     </defs>
@@ -914,8 +914,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 <div class="attendance-donut"
                      style="background: conic-gradient(
-                         #7630d9 0 ${withPercentage}%,
-                         #d9a3f3 ${withPercentage}% 100%
+                         #168FC8 0 ${withPercentage}%,
+                         #B3E2F7 ${withPercentage}% 100%
                      );">
 
                     <div class="attendance-donut-center">
@@ -930,7 +930,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div class="attendance-legend-row">
 
                         <span class="attendance-legend-dot"
-                              style="background:#7630d9"></span>
+                              style="background:#168FC8"></span>
 
                         <div class="attendance-legend-text">
                             <span>Me arsyetim</span>
@@ -942,7 +942,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <div class="attendance-legend-row">
 
                         <span class="attendance-legend-dot"
-                              style="background:#d9a3f3"></span>
+                              style="background:#B3E2F7"></span>
 
                         <div class="attendance-legend-text">
                             <span>Pa arsyetim</span>

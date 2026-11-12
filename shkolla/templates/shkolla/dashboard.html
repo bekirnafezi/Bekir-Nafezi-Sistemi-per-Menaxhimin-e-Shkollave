@@ -9,7 +9,7 @@
     <title>School Control | Paneli Kryesor</title>
 
     <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
-    <script src="{% static 'shkolla/js/dashboard.js' %}" defer></script>
+    <script src="{% static 'shkolla/js/dashboard.js' %}?v=1879" defer></script>
 
     <style>
 
@@ -819,6 +819,64 @@
 
     </style>
 
+    <link rel="stylesheet" href="{% static 'shkolla/css/school-control-modern.css' %}?v=1876">
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-sky-blue.css' %}?v=1880">
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-minimal.css' %}?v=18711">
+    <script src="{% static 'shkolla/js/dashboard-minimal.js' %}?v=18711" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-layout-final.css' %}?v=18712">
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-activities.css' %}?v=18714">
+    <script src="{% static 'shkolla/js/dashboard-activities.js' %}?v=18724" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-activity-status.css' %}?v=18723">
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-reports.css' %}?v=18724">
+    <script src="{% static 'shkolla/js/dashboard-reports.js' %}?v=18724" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-reports-compact.css' %}?v=18725">
+    <script src="{% static 'shkolla/js/dashboard-reports-compact.js' %}?v=18725" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-reports-window.css' %}?v=18727">
+    <script src="{% static 'shkolla/js/dashboard-reports-window.js' %}?v=18727" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-decisions.css' %}?v=18733">
+    <script src="{% static 'shkolla/js/dashboard-decisions.js' %}?v=18733" defer></script>
+<link rel="stylesheet" href="{% static 'shkolla/css/dashboard-corridor-theme.css' %}?v=18734">
+<script src="{% static 'shkolla/js/dashboard-corridor-theme.js' %}?v=18734" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-corridor-refined.css' %}?v=18736">
+    <script src="{% static 'shkolla/js/dashboard-corridor-refined.js' %}?v=18735" defer></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard-gold-reference.css' %}?v=1873587">
+    <style>
+@media screen and (min-width: 1051px) {
+
+    html:has(.dashboard-content),
+    body:has(.dashboard-content) {
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+
+    body:has(.dashboard-content) .app-container {
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+
+    body:has(.dashboard-content)
+    .app-container > .main-content {
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    body:has(.dashboard-content)
+    .app-container > .main-content > .dashboard-content {
+        min-height: 0 !important;
+        overflow: clip !important;
+        scrollbar-width: none !important;
+        padding-bottom: 10px !important;
+    }
+
+    body:has(.dashboard-content)
+    .dashboard-content::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+    }
+
+}
+</style>
 </head>
 
 <body>

@@ -1,0 +1,245 @@
+
+@media (min-width: 1050px) {
+    .topbar,
+    .welcome-section,
+    .dashboard-content {
+        border-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .welcome-section {
+        background: linear-gradient(
+            110deg,
+            #F5FCFF 0%,
+            #E5F5FE 42%,
+            #D8EFFC 100%
+        ) !important;
+    }
+
+    .welcome-section::before {
+        background: linear-gradient(
+            90deg,
+            rgba(246,252,255,0.98) 0%,
+            rgba(239,249,255,0.96) 40%,
+            rgba(224,244,255,0.42) 68%,
+            transparent 100%
+        ) !important;
+    }
+
+    .welcome-section::after {
+        background: rgba(100,190,230,0.07) !important;
+    }
+}
+
+.topbar-left h2,
+.welcome-text h2,
+.panel-header h3,
+.quick-actions-header h3,
+#school-calendar .school-calendar-month {
+    color: #173F5D !important;
+}
+
+.welcome-text h2 span {
+    color: #1687BE !important;
+}
+
+.welcome-text p,
+.stat-info p {
+    color: #52738A !important;
+}
+
+.welcome-decoration::before {
+    opacity: 0.5;
+}
+
+.welcome-decoration::after {
+    background: linear-gradient(
+        90deg,
+        #8BD5F4,
+        #238CC2
+    ) !important;
+}
+
+.dashboard-content .stat-card,
+.dashboard-content .dashboard-panel,
+.dashboard-content .quick-actions-section {
+    border: 1px solid rgba(60,157,208,0.22) !important;
+    box-shadow: none !important;
+}
+
+.dashboard-content .students-card {
+    background: linear-gradient(
+        130deg,
+        #FFFFFF,
+        #E9F8FF
+    ) !important;
+}
+
+.dashboard-content .students-card .stat-icon {
+    background: #DCF2FF !important;
+    color: #1689C3 !important;
+}
+
+.dashboard-content .students-card::after {
+    background: #BCE9FA !important;
+}
+
+.dashboard-content .teachers-card {
+    background: linear-gradient(
+        130deg,
+        #FFFFFF,
+        #EDF9FF
+    ) !important;
+}
+
+.dashboard-content .teachers-card .stat-icon {
+    background: #E4F5FC !important;
+    color: #278BAF !important;
+}
+
+.dashboard-content .teachers-card::after {
+    background: #D3F0FA !important;
+}
+
+.dashboard-content .classes-card {
+    background: linear-gradient(
+        130deg,
+        #FFFFFF,
+        #E6F6FF
+    ) !important;
+}
+
+.dashboard-content .classes-card .stat-icon {
+    background: #D9F0FF !important;
+    color: #237FC2 !important;
+}
+
+.dashboard-content .classes-card::after {
+    background: #C0E8FC !important;
+}
+
+.dashboard-content .subjects-card {
+    background: linear-gradient(
+        130deg,
+        #FFFFFF,
+        #EEF9FF
+    ) !important;
+}
+
+.dashboard-content .subjects-card .stat-icon {
+    background: #DDF3FD !important;
+    color: #2295BB !important;
+}
+
+.dashboard-content .subjects-card::after {
+    background: #CBEDF8 !important;
+}
+
+.dashboard-content .grades-panel,
+.dashboard-content .attendance-panel {
+    background: linear-gradient(
+        145deg,
+        #FFFFFF,
+        #F1FAFF
+    ) !important;
+}
+
+.dashboard-content .activities-panel,
+.dashboard-content .classes-panel,
+.dashboard-content .calendar-panel {
+    background: #FFFFFF !important;
+}
+
+.dashboard-content .dashboard-panel {
+    border: 1px solid rgba(56,155,208,0.24) !important;
+}
+
+#grades-chart .grades-visual-header strong {
+    color: #137DAF !important;
+}
+
+#grades-chart svg [stroke="#7938e8"] {
+    stroke: #168FC8 !important;
+}
+
+#grades-chart svg [fill="#7938e8"] {
+    fill: #168FC8 !important;
+}
+
+#school-calendar .school-calendar-arrow {
+    color: #177FB5 !important;
+}
+
+#school-calendar .school-calendar-arrow:hover {
+    background: #E1F4FF !important;
+}
+
+#school-calendar .school-calendar-weekday {
+    color: #63849B !important;
+}
+
+#school-calendar .school-calendar-date {
+    color: #234C66 !important;
+}
+
+#school-calendar .school-calendar-date.is-saturday,
+#school-calendar .school-calendar-date.is-sunday {
+    color: #298BB7 !important;
+}
+
+#school-calendar .school-calendar-date.is-today {
+    color: #FFFFFF !important;
+
+    background: linear-gradient(
+        135deg,
+        #40B6E9,
+        #177EBA
+    ) !important;
+
+    box-shadow: 0 2px 8px rgba(
+        24,135,190,0.24
+    ) !important;
+}
+
+.quick-actions-section {
+    background: rgba(255,255,255,0.9) !important;
+}
+
+.quick-actions button {
+    color: #177EAF !important;
+    border-color: #D8EEF9 !important;
+}
+
+.quick-actions button:not(:disabled):hover {
+    background: #E6F6FF !important;
+}
+
+.chart-container p {
+    border-color: #D4EAF7 !important;
+    background: #F1FAFF !important;
+    color: #63839A !important;
+}
+
+
+:root {
+    --sc-light-side-line: rgba(32, 153, 211, 0.48);
+    --sc-light-side-glow: rgba(35, 169, 228, 0.25);
+}
+
+.dashboard-content .stat-card,
+.dashboard-content .dashboard-panel,
+.dashboard-content .quick-actions-section {
+    border: none !important;
+
+    border-left: 1px solid var(--sc-light-side-line) !important;
+    border-right: 1px solid var(--sc-light-side-line) !important;
+
+    border-top: none !important;
+    border-bottom: none !important;
+
+    box-shadow:
+        inset 6px 0 12px -9px var(--sc-light-side-glow),
+        inset -6px 0 12px -9px var(--sc-light-side-glow) !important;
+
+    outline: none !important;
+}
