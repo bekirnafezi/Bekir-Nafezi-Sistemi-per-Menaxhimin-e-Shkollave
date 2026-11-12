@@ -162,3 +162,57 @@ urlpatterns = [
         name='mungesa_detaje_api'
     ),
 ]
+
+from shkolla.aktivitetet_api import aktivitetet_api
+
+urlpatterns += [
+    path("api/aktivitetet/", aktivitetet_api, name="aktivitetet_api"),
+]
+
+
+from shkolla.aktivitetet_api import (
+    aktivitet_detaje_api,
+    aktivitetet_raportet_api,
+)
+
+urlpatterns += [
+    path(
+        "api/aktivitetet/raportet/",
+        aktivitetet_raportet_api,
+        name="aktivitetet_raportet_api",
+    ),
+    path(
+        "api/aktivitetet/<int:aktivitet_id>/",
+        aktivitet_detaje_api,
+        name="aktivitet_detaje_api",
+    ),
+]
+
+from shkolla.vendimet_api import (
+    vendimet_api,
+    vendimet_personat_api,
+)
+
+urlpatterns += [
+    path(
+        "api/vendimet/",
+        vendimet_api,
+        name="vendimet_api",
+    ),
+    path(
+        "api/vendimet/personat/",
+        vendimet_personat_api,
+        name="vendimet_personat_api",
+    ),
+]
+
+
+from shkolla.vendimet_api import vendim_detaje_api
+
+urlpatterns += [
+    path(
+        "api/vendimet/<int:vendim_id>/",
+        vendim_detaje_api,
+        name="vendim_detaje_api",
+    ),
+]

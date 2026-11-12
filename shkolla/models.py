@@ -206,3 +206,7 @@ class Mungesa(models.Model):
 
     def __str__(self):
         return f"{self.nxenesi} - {self.angazhimi.lenda} - {self.data}"
+
+from .aktivitetet_model import Aktivitet
+
+from .vendimet_model import Vendim
