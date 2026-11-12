@@ -1,0 +1,688 @@
+:root {
+    --sc-navy: #092d42;
+    --sc-blue: #116f92;
+    --sc-gold: #dba43c;
+    --sc-gold-dark: #a66c12;
+    --sc-light: #eaf4fb;
+}
+
+body {
+    background: #eaf4fb !important;
+    color: #153b52;
+}
+
+.app-container:has(> .sidebar + .main-content) {
+    background: #eaf4fb !important;
+}
+
+.sidebar {
+    background: linear-gradient(
+        160deg,
+        #09283c 0%,
+        #123f55 52%,
+        #08283b 100%
+    ) !important;
+
+    color: #ffffff !important;
+}
+
+.sidebar::before,
+.sidebar::after {
+    display: none !important;
+}
+
+.sidebar-brand {
+    border-color: rgba(221, 174, 80, 0.20) !important;
+}
+
+.sidebar-brand .brand-icon {
+    background: rgba(255, 255, 255, 0.13) !important;
+}
+
+.sidebar-brand .brand-icon svg path:first-child {
+    fill: #e7ae43 !important;
+}
+
+.sidebar-brand .brand-icon svg circle {
+    fill: #e7ae43 !important;
+}
+
+.sidebar-brand h1 {
+    color: #ffffff !important;
+}
+
+.sidebar-brand h1 span {
+    color: #e9ad43 !important;
+}
+
+.sidebar-brand p {
+    color: #d3e7f3 !important;
+}
+
+.sidebar-bottom {
+    border-color: rgba(221, 174, 80, 0.16) !important;
+}
+
+.sidebar-bottom p {
+    color: #ffffff !important;
+}
+
+.sidebar-bottom small {
+    color: #78a6c0 !important;
+}
+
+.main-content {
+    background: linear-gradient(
+        135deg,
+        #f2f8fc 0%,
+        #e7f3fb 55%,
+        #dcecf7 100%
+    ) !important;
+}
+
+.topbar {
+    background: rgba(246, 250, 253, 0.92) !important;
+    border-bottom-color: rgba(211, 169, 88, 0.25) !important;
+}
+
+.topbar-left,
+.topbar-left h2,
+.topbar-right {
+    color: #123b55 !important;
+}
+
+.students-heading h1,
+.classes-heading h1,
+.students-table-header h2,
+.classes-card-header h2 {
+    color: #123b55 !important;
+}
+
+.students-heading p,
+.classes-heading p,
+.students-table-description,
+.students-status,
+.classes-status {
+    color: #64839a !important;
+}
+
+.students-summary,
+.classes-summary {
+    background: linear-gradient(
+        110deg,
+        #ffffff 0%,
+        #e4f2fb 75%,
+        #fff3db 100%
+    ) !important;
+
+    box-shadow: 0 7px 22px rgba(24, 79, 112, 0.07) !important;
+}
+
+.students-summary-icon,
+.summary-icon {
+    background: #fff0d0 !important;
+    color: #b77a12 !important;
+}
+
+.students-summary-info p,
+.summary-info p {
+    color: #54758d !important;
+}
+
+.students-summary-info strong,
+.summary-info strong {
+    color: #b67b12 !important;
+}
+
+.students-table-card,
+.classes-card {
+    border-color: #d9e9f3 !important;
+    background: #ffffff !important;
+    box-shadow: 0 7px 22px rgba(24, 79, 112, 0.07) !important;
+}
+
+.students-table th,
+.classes-table th {
+    background: #e5f2fb !important;
+    color: #155c7d !important;
+}
+
+.students-table td,
+.classes-table td {
+    color: #29475e !important;
+    border-bottom-color: #e6eef4 !important;
+}
+
+.students-table tbody tr:hover,
+.classes-table tbody tr:hover {
+    background: #f4faff !important;
+}
+
+.students-table-scroll,
+.classes-table-scroll {
+    scrollbar-color: #a4c9dd transparent !important;
+}
+
+.students-back-button,
+.back-button {
+    background: linear-gradient(
+        135deg,
+        #137a9c,
+        #07516d
+    ) !important;
+    color: #ffffff !important;
+}
+
+.students-back-button:hover,
+.back-button:hover {
+    background: #06445e !important;
+}
+
+.students-add-button,
+.student-save-button,
+.save-class-button {
+    background: linear-gradient(
+        135deg,
+        #efbd50,
+        #b77a0e
+    ) !important;
+
+    color: #ffffff !important;
+}
+
+.students-add-button:hover,
+.student-save-button:hover,
+.save-class-button:hover {
+    filter: brightness(0.95);
+}
+
+.class-create {
+    border-color: #d9e9f3 !important;
+    background: #ffffff !important;
+    color: #b47b16 !important;
+}
+
+.class-create-arrow {
+    color: #b47b16 !important;
+}
+
+.student-modal {
+    border-color: #d9e9f3 !important;
+    color: #153b52 !important;
+}
+
+.student-modal-header {
+    border-bottom-color: #e3edf4 !important;
+}
+
+.student-modal-header h2 {
+    color: #123b55 !important;
+}
+
+.student-modal-header p,
+.student-form-note,
+.student-form-message,
+.class-form-message {
+    color: #66849a !important;
+}
+
+.student-form-field label,
+.class-field label {
+    color: #254b64 !important;
+}
+
+.student-form-field input,
+.student-form-field select,
+.class-field input,
+.class-field select {
+    background: #f7fbff !important;
+    border-color: #d7e7f1 !important;
+    color: #254b64 !important;
+}
+
+.student-form-field input:focus,
+.student-form-field select:focus,
+.class-field input:focus,
+.class-field select:focus {
+    border-color: #d5a03a !important;
+    box-shadow: 0 0 0 3px rgba(213, 160, 58, 0.12) !important;
+}
+
+.student-close-button {
+    background: #e8f4fb !important;
+    color: #126b90 !important;
+}
+
+.student-cancel-button {
+    border-color: #d7e7f1 !important;
+    color: #315771 !important;
+}
+
+@media (min-width: 1100px) {
+
+    .app-container:has(> .sidebar + .main-content) {
+        grid-template-columns: 225px minmax(0, 1fr) !important;
+    }
+
+    .sidebar {
+        width: 225px !important;
+        flex: 0 0 225px !important;
+        overflow: visible !important;
+    }
+
+    .sidebar-menu .menu-item {
+        color: #d3e7f3 !important;
+        background: transparent !important;
+    }
+
+    .sidebar-menu .menu-item::before {
+        background: #e8f4fb !important;
+        box-shadow: 0 0 0 6px rgba(43, 151, 194, 0.13) !important;
+    }
+
+    .sidebar-menu .menu-item::after {
+        background: linear-gradient(
+            90deg,
+            #207da8,
+            #4bb0d7,
+            rgba(75, 176, 215, 0.08)
+        ) !important;
+    }
+
+    .sidebar-menu .menu-item.active::before,
+    .sidebar-menu .menu-item:hover::before,
+    .sidebar-menu .menu-item:focus-visible::before {
+        background: #f0bb52 !important;
+        box-shadow: 0 0 13px rgba(237, 177, 64, 0.5) !important;
+    }
+
+    .sidebar-menu .menu-item.active::after,
+    .sidebar-menu .menu-item:hover::after,
+    .sidebar-menu .menu-item:focus-visible::after {
+        background: linear-gradient(
+            90deg,
+            #c98c1d,
+            #f7d27d
+        ) !important;
+
+        box-shadow: 0 0 12px rgba(236, 175, 59, 0.40) !important;
+    }
+
+    .sidebar-menu .menu-item > span:last-child {
+        border-color: rgba(231, 179, 77, 0.65) !important;
+
+        background: linear-gradient(
+            135deg,
+            #103d56,
+            #185b79
+        ) !important;
+
+        color: #ffffff !important;
+    }
+
+    .sidebar-menu .menu-item:not(a) {
+        opacity: 0.58 !important;
+    }
+}
+
+@media (max-width: 1099px) {
+
+    .sidebar .menu-item.active {
+        background: linear-gradient(
+            100deg,
+            #b87c17,
+            #e6b34f
+        ) !important;
+
+        color: #ffffff !important;
+    }
+
+    .sidebar .menu-item {
+        color: #e6f1f7;
+    }
+
+    .sidebar .menu-item:hover {
+        background: rgba(236, 179, 65, 0.16) !important;
+    }
+}
+
+:root {
+    --sc-gold-override-18735835: 1;
+    --sc-gold-main: #c58b20;
+    --sc-gold-dark: #95600d;
+    --sc-gold-light: #fff1d4;
+    --sc-gold-hover: #ffe5ae;
+}
+
+.class-create summary,
+.class-create-arrow {
+    color: #a66d13 !important;
+}
+
+.class-create summary:hover {
+    background: #fff7e7 !important;
+}
+
+.class-create[open] summary {
+    border-bottom-color: #efdaad !important;
+}
+
+.summary-icon,
+.students-summary-icon {
+    background: #fff0cf !important;
+    color: #b77d13 !important;
+}
+
+.summary-info strong,
+.students-summary-info strong {
+    color: #ad7417 !important;
+}
+
+.students-add-button,
+.student-save-button,
+.save-class-button,
+.teacher-save-button,
+.subject-save-button {
+    background: linear-gradient(
+        135deg,
+        #efbd50,
+        #b77a0e
+    ) !important;
+
+    color: #ffffff !important;
+    border-color: #b77a0e !important;
+}
+
+.students-add-button:hover,
+.student-save-button:hover,
+.save-class-button:hover,
+.teacher-save-button:hover,
+.subject-save-button:hover {
+    background: linear-gradient(
+        135deg,
+        #f4cb73,
+        #a66b0d
+    ) !important;
+}
+
+.student-edit-button,
+.teacher-edit-button,
+.subject-edit-button,
+.class-edit-button {
+    background: #fff0d2 !important;
+    color: #9b650e !important;
+    border-color: #edcf91 !important;
+}
+
+.student-edit-button:hover,
+.teacher-edit-button:hover,
+.subject-edit-button:hover,
+.class-edit-button:hover {
+    background: #ffdfa0 !important;
+    color: #835108 !important;
+}
+
+.student-all-button,
+.teacher-list-button,
+.subject-list-button {
+    background: #fff2d8 !important;
+    color: #9b650e !important;
+    border-color: #eccd90 !important;
+}
+
+.student-all-button:hover,
+.teacher-list-button:hover,
+.subject-list-button:hover {
+    background: #ffe6b3 !important;
+}
+
+.student-close-button,
+#close-all-students,
+#close-teachers-list,
+#close-teacher-edit,
+#close-subjects-list,
+#close-subject-edit {
+    background: #fff1d7 !important;
+    color: #a66d13 !important;
+}
+
+.student-close-button:hover,
+#close-all-students:hover,
+#close-teachers-list:hover,
+#close-teacher-edit:hover,
+#close-subjects-list:hover,
+#close-subject-edit:hover {
+    background: #ffe5ae !important;
+}
+
+.students-list-modal-footer button,
+.teachers-modal-footer button,
+.subjects-modal-footer button {
+    background: #fff1d6 !important;
+    color: #96600e !important;
+    border-color: #e9cc94 !important;
+}
+
+.students-list-modal-footer button:hover,
+.teachers-modal-footer button:hover,
+.subjects-modal-footer button:hover {
+    background: #ffe5b0 !important;
+}
+
+.student-cancel-button,
+.teacher-cancel-button,
+.subject-cancel-button,
+.class-cancel-button {
+    color: #986819 !important;
+    border-color: #e9d4ae !important;
+}
+
+.student-modal-header h2,
+.students-list-modal-header h2,
+.teachers-modal-header h2,
+.teacher-edit-header h2,
+.subjects-modal-header h2,
+.subject-edit-header h2 {
+    color: #a66d13 !important;
+}
+
+.student-modal-header p,
+.students-list-modal-header p,
+.teachers-modal-header p,
+.teacher-edit-header p,
+.subjects-modal-header p,
+.subject-edit-header p {
+    color: #98713d !important;
+}
+
+.student-form-field label,
+.class-field label,
+.teacher-edit-field label,
+.subject-edit-field label {
+    color: #93621a !important;
+}
+
+.student-form-field input,
+.student-form-field select,
+.class-field input,
+.class-field select,
+.teacher-edit-field input,
+.subject-edit-field input,
+.student-search,
+.teacher-search,
+.subject-search {
+    background: #fffdf8 !important;
+    border-color: #ead5ad !important;
+    color: #624b28 !important;
+}
+
+.student-form-field input:focus,
+.student-form-field select:focus,
+.class-field input:focus,
+.class-field select:focus,
+.teacher-edit-field input:focus,
+.subject-edit-field input:focus,
+.student-search:focus,
+.teacher-search:focus,
+.subject-search:focus {
+    border-color: #d6a345 !important;
+    box-shadow: 0 0 0 3px rgba(214,163,69,0.15) !important;
+}
+
+.all-students-message,
+.teachers-list-message,
+.subjects-list-message {
+    color: #a66d13 !important;
+}
+
+.student-form-note,
+.student-form-message,
+.class-form-message {
+    color: #98713d !important;
+}
+
+.student-edit-button:focus-visible,
+.teacher-edit-button:focus-visible,
+.subject-edit-button:focus-visible,
+.class-action-button:focus-visible {
+    outline-color: #c58b20 !important;
+}
+
+.students-page .teacher-add-button,
+.students-page .subject-add-button {
+    background: linear-gradient(
+        135deg,
+        #efbd50,
+        #b77a0e
+    ) !important;
+
+    color: #ffffff !important;
+    border: 1px solid #b77a0e !important;
+
+    box-shadow: 0 5px 12px rgba(183, 122, 14, 0.20) !important;
+}
+
+.students-page .teacher-add-button:hover,
+.students-page .subject-add-button:hover {
+    background: linear-gradient(
+        135deg,
+        #e7ad3c,
+        #9f650b
+    ) !important;
+
+    color: #ffffff !important;
+}
+
+dialog.teacher-registration-modal[open],
+dialog.subject-registration-modal[open] {
+    border-color: #e9d2a5 !important;
+    color: #173b52 !important;
+}
+
+dialog.teacher-registration-modal::backdrop,
+dialog.subject-registration-modal::backdrop {
+    background: rgba(9, 35, 52, 0.48) !important;
+}
+
+.teacher-registration-header,
+.subject-registration-header {
+    border-bottom-color: #f1e2c5 !important;
+}
+
+.teacher-registration-header h2,
+.subject-registration-header h2 {
+    color: #b47a13 !important;
+}
+
+.teacher-registration-header p,
+.subject-registration-header p {
+    color: #967548 !important;
+}
+
+.teacher-close-button,
+#close-subject-form {
+    background: #fff0d1 !important;
+    color: #a66b0d !important;
+    border-color: #e9cf98 !important;
+}
+
+.teacher-close-button:hover,
+#close-subject-form:hover {
+    background: #ffe1a3 !important;
+    color: #875209 !important;
+}
+
+.teacher-form-field label,
+.subject-form-field label {
+    color: #95600d !important;
+}
+
+.teacher-form-field input,
+.subject-form-field input {
+    background: #fffdf8 !important;
+    border-color: #e8d3ab !important;
+    color: #173b52 !important;
+    caret-color: #b77a0e !important;
+}
+
+.teacher-form-field input::placeholder,
+.subject-form-field input::placeholder {
+    color: #ae9472 !important;
+}
+
+.teacher-form-field input:focus,
+.subject-form-field input:focus {
+    background: #ffffff !important;
+    border-color: #d79b2e !important;
+
+    box-shadow:
+        0 0 0 3px rgba(215, 155, 46, 0.18) !important;
+
+    outline: none !important;
+}
+
+.teacher-cancel-button,
+.subject-cancel-button {
+    background: #ffffff !important;
+    color: #9b660e !important;
+    border-color: #e9d3a8 !important;
+}
+
+.teacher-cancel-button:hover,
+.subject-cancel-button:hover {
+    background: #fff3dc !important;
+    color: #865508 !important;
+}
+
+.teacher-save-button,
+.subject-save-button {
+    background: linear-gradient(
+        135deg,
+        #efbd50 0%,
+        #d99b2b 55%,
+        #b77a0e 100%
+    ) !important;
+
+    color: #ffffff !important;
+    border-color: #b77a0e !important;
+
+    box-shadow:
+        0 5px 12px rgba(183, 122, 14, 0.20) !important;
+}
+
+.teacher-save-button:hover:not(:disabled),
+.subject-save-button:hover:not(:disabled) {
+    background: linear-gradient(
+        135deg,
+        #e8b03d,
+        #a56a0d
+    ) !important;
+}
+
+.teacher-save-button:focus-visible,
+.subject-save-button:focus-visible,
+.teacher-close-button:focus-visible,
+#close-subject-form:focus-visible {
+    outline: 3px solid rgba(215, 155, 46, 0.45) !important;
+    outline-offset: 2px !important;
+}
