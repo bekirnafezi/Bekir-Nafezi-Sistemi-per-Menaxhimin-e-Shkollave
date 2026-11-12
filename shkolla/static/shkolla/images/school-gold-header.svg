@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="118"
+     height="64"
+     viewBox="0 0 118 64">
+
+    <defs>
+        <linearGradient id="gold"
+                        x1="0"
+                        y1="0"
+                        x2="1"
+                        y2="1">
+
+            <stop offset="0%"
+                  stop-color="#ffe19d"/>
+
+            <stop offset="48%"
+                  stop-color="#d69a26"/>
+
+            <stop offset="100%"
+                  stop-color="#9f6513"/>
+
+        </linearGradient>
+    </defs>
+
+    <path
+        d="M12 10 Q27 2 43 12 V51 Q26 43 10 50 Z
+           M43 12 Q59 2 75 10 V50 Q58 43 43 51 Z"
+        fill="none"
+        stroke="url(#gold)"
+        stroke-width="4"
+        stroke-linejoin="round"
+    />
+
+    <path
+        d="M16 19 Q29 13 39 21
+           M16 28 Q28 22 39 30
+           M47 21 Q60 14 70 18
+           M47 30 Q60 23 70 27"
+        fill="none"
+        stroke="#b87b17"
+        stroke-width="2"
+        stroke-linecap="round"
+    />
+
+    <path
+        d="M84 28 L101 16 116 28 V52 H84 Z"
+        fill="url(#gold)"
+    />
+
+    <path
+        d="M81 28 L101 11 119 28"
+        fill="none"
+        stroke="#a87318"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+
+    <path
+        d="M98 52 V36 H105 V52"
+        fill="#fff0c8"
+    />
+
+    <path
+        d="M89 33 H95 V39 H89 Z
+           M108 33 H114 V39 H108 Z"
+        fill="#fff0c8"
+    />
+
+</svg>
