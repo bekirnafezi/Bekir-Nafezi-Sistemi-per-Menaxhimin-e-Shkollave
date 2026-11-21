@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -15,7 +16,6 @@ class MenaxheriPerdoruesve(BaseUserManager):
         perdoruesi = self.model(email=email, **extra_fields)
         perdoruesi.set_password(password)
         perdoruesi.save(using=self._db)
-
         return perdoruesi
 
     def create_superuser(self, email, password=None, **extra_fields):
@@ -57,7 +57,9 @@ class Perdorues(AbstractUser):
     def __str__(self):
         return self.email
 
+
 class Klasa(models.Model):
+
     emri = models.CharField(max_length=30, unique=True)
 
     kujdestari = models.ForeignKey(
@@ -73,6 +75,7 @@ class Klasa(models.Model):
 
 
 class Mesimdhenesi(models.Model):
+
     perdorues = models.OneToOneField(
         Perdorues,
         on_delete=models.CASCADE,
@@ -82,7 +85,9 @@ class Mesimdhenesi(models.Model):
     def __str__(self):
         return self.perdorues.email
 
+
 class Nxenesi(models.Model):
+
     perdorues = models.OneToOneField(
         Perdorues,
         on_delete=models.CASCADE,
@@ -98,13 +103,17 @@ class Nxenesi(models.Model):
     def __str__(self):
         return f"{self.perdorues.first_name} {self.perdorues.last_name}"
 
+
 class Lenda(models.Model):
+
     emri = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.emri
 
+
 class Angazhimi(models.Model):
+
     mesimdhenesi = models.ForeignKey(
         Mesimdhenesi,
         on_delete=models.PROTECT,
@@ -134,7 +143,9 @@ class Angazhimi(models.Model):
     def __str__(self):
         return f"{self.mesimdhenesi} - {self.lenda} - {self.klasa}"
 
+
 class Nota(models.Model):
+
     nxenesi = models.ForeignKey(
         Nxenesi,
         on_delete=models.PROTECT,
@@ -148,12 +159,22 @@ class Nota(models.Model):
     )
 
     vleresimi = models.PositiveSmallIntegerField(
-    validators=[
-        MinValueValidator(1),
-        MaxValueValidator(5)
-    ]
-)
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(5)
+        ]
+    )
+
     data = models.DateField()
+
+    regjistruar_nga = models.ForeignKey(
+        Perdorues,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="notat_e_regjistruara"
+    )
+
     class Meta:
         constraints = [
             models.CheckConstraint(
@@ -164,6 +185,7 @@ class Nota(models.Model):
                 name="nota_vleresimi_nga_1_ne_5"
             )
         ]
+
     def clean(self):
         super().clean()
 
@@ -175,8 +197,16 @@ class Nota(models.Model):
 
     def __str__(self):
         return f"{self.nxenesi} - {self.vleresimi} - {self.angazhimi.lenda}"
-        
+
+
 class Mungesa(models.Model):
+
+    STATUSI = [
+        ("ne_shqyrtim", "Ne shqyrtim"),
+        ("e_arsyeshme", "E arsyeshme"),
+        ("e_paarsyeshme", "E paarsyeshme")
+    ]
+
     nxenesi = models.ForeignKey(
         Nxenesi,
         on_delete=models.PROTECT,
@@ -191,9 +221,51 @@ class Mungesa(models.Model):
 
     data = models.DateField()
 
-    arsyetimi = models.TextField(
+    ora_mesimore = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(10)
+        ]
+    )
+
+    statusi = models.CharField(
+        max_length=20,
+        choices=STATUSI,
+        default="ne_shqyrtim"
+    )
+
+    arsyetimi = models.TextField(blank=True)
+
+    regjistruar_nga = models.ForeignKey(
+        Perdorues,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="mungesat_e_regjistruara"
+    )
+
+    arsyetuar_nga = models.ForeignKey(
+        Perdorues,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="mungesat_e_arsyetuara"
+    )
+
+    data_arsyetimit = models.DateTimeField(
+        null=True,
         blank=True
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["nxenesi", "data", "ora_mesimore"],
+                name="mungesa_unike_per_ore"
+            )
+        ]
 
     def clean(self):
         super().clean()
@@ -204,9 +276,67 @@ class Mungesa(models.Model):
                     "Nxenesi nuk i perket klases se ketij angazhimi."
                 )
 
+        if self.statusi == "e_arsyeshme" and not self.arsyetimi.strip():
+            raise ValidationError(
+                "Mungesa e arsyeshme duhet te kete arsyetim."
+            )
+
     def __str__(self):
-        return f"{self.nxenesi} - {self.angazhimi.lenda} - {self.data}"
+        return f"{self.nxenesi} - Ora {self.ora_mesimore} - {self.data}"
+
+
+class NdryshimEvidence(models.Model):
+
+    LLOJET = [
+        ("nota", "Nota"),
+        ("mungesa", "Mungesa")
+    ]
+
+    VEPRIMET = [
+        ("krijim", "Krijim"),
+        ("ndryshim", "Ndryshim"),
+        ("fshirje", "Fshirje")
+    ]
+
+    lloji = models.CharField(
+        max_length=20,
+        choices=LLOJET
+    )
+
+    rekordi_id = models.PositiveIntegerField()
+
+    veprimi = models.CharField(
+        max_length=20,
+        choices=VEPRIMET
+    )
+
+    perdoruesi = models.ForeignKey(
+        Perdorues,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="ndryshimet_e_evidences"
+    )
+
+    arsyeja = models.TextField(blank=True)
+
+    para = models.JSONField(
+        default=dict,
+        blank=True
+    )
+
+    pas = models.JSONField(
+        default=dict,
+        blank=True
+    )
+
+    koha = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-koha", "-id"]
+
+    def __str__(self):
+        return f"{self.lloji} - {self.veprimi} - {self.rekordi_id}"
+
 
 from .aktivitetet_model import Aktivitet
-
 from .vendimet_model import Vendim

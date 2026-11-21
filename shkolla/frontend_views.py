@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 
 
@@ -16,12 +17,22 @@ def klasat_page(request):
 def nxenesit_page(request):
     return render(request, "shkolla/nxenesit.html")
 
+
 def mesimdhenesit_page(request):
-    from django.shortcuts import render
     return render(request, "shkolla/mesimdhenesit.html")
 
 
-
 def lendet_page(request):
-    from django.shortcuts import render
     return render(request, "shkolla/lendet.html")
+
+
+def angazhimet_page(request):
+    return render(request, "shkolla/angazhimet.html")
+
+
+def notat_page(request):
+    return render(request, "shkolla/evidenca.html", {"tipi": "notat"})
+
+
+def mungesat_page(request):
+    return render(request, "shkolla/evidenca.html", {"tipi": "mungesat"})

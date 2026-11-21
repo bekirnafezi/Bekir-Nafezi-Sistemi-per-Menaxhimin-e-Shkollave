@@ -1,0 +1,876 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Control | Evidenca</title>
+
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/school-control-modern.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/school-subpages-gold.css' %}">
+
+    <style>
+        [hidden] {
+            display: none !important;
+        }
+
+        .evidence-page {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 18px;
+            min-height: 0;
+            padding: 22px;
+            overflow: auto;
+        }
+
+        .evidence-heading,
+        .evidence-card-header,
+        .evidence-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .evidence-heading h1 {
+            margin: 0 0 6px;
+            color: #123b55;
+            font-size: 30px;
+        }
+
+        .evidence-heading p {
+            margin: 0;
+            color: #65849a;
+            font-size: 13px;
+        }
+
+        .evidence-back {
+            padding: 13px 19px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #137a9c, #07516d);
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .evidence-summary {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            padding: 19px 25px;
+            min-height: 90px;
+            border-radius: 20px;
+            background: linear-gradient(110deg, #fff, #e4f2fb 75%, #fff3db);
+        }
+
+        .evidence-summary-icon {
+            display: grid;
+            place-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: #fff0d0;
+            color: #b77a12;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .evidence-summary span {
+            display: block;
+            color: #54758d;
+            font-size: 13px;
+        }
+
+        .evidence-summary strong {
+            color: #b67b12;
+            font-size: 31px;
+        }
+
+        .evidence-card {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            min-height: 300px;
+            padding: 27px;
+            border-radius: 22px;
+            background: #fff;
+            border: 1px solid #d9e9f3;
+        }
+
+        .evidence-card-header {
+            margin-bottom: 20px;
+        }
+
+        .evidence-card-header h2 {
+            margin: 0;
+            color: #123b55;
+            font-size: 21px;
+        }
+
+        .evidence-search {
+            padding: 12px;
+            border: 1px solid #d7e7f1;
+            border-radius: 11px;
+            background: #f7fbff;
+            color: #234b64;
+        }
+
+        .evidence-primary {
+            padding: 12px 19px;
+            border: 0;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #efbd50, #b77a0e);
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .evidence-primary:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .evidence-table-wrap {
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
+        }
+
+        .evidence-table {
+            width: 100%;
+            min-width: 750px;
+            border-collapse: collapse;
+        }
+
+        .evidence-table th {
+            padding: 16px;
+            background: #e5f2fb;
+            color: #155c7d;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .evidence-table td {
+            padding: 16px;
+            border-bottom: 1px solid #e6eef4;
+            color: #29475e;
+            font-size: 12px;
+        }
+
+        .evidence-table tr:hover {
+            background: #f4faff;
+        }
+
+        .evidence-edit,
+        .evidence-delete {
+            padding: 9px 12px;
+            border: 0;
+            border-radius: 9px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .evidence-edit {
+            background: #fff0d2;
+            color: #98600d;
+        }
+
+        .evidence-delete {
+            margin-left: 7px;
+            background: #ffe9e9;
+            color: #b52929;
+        }
+
+        .evidence-message {
+            margin: 13px 0 0;
+            color: #58788e;
+            font-size: 13px;
+        }
+
+        .evidence-message.error {
+            color: #b52929;
+        }
+
+        .evidence-dialog {
+            width: min(560px, calc(100% - 28px));
+            max-height: 90vh;
+            padding: 0;
+            margin: auto;
+            border: 1px solid #e8d5ad;
+            border-radius: 22px;
+            background: white;
+            color: #123b55;
+            box-shadow: 0 20px 60px rgba(12, 45, 67, .22);
+            overflow: auto;
+        }
+
+        .evidence-dialog::backdrop {
+            background: rgba(9, 35, 52, .50);
+        }
+
+        .evidence-dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 23px 26px;
+            border-bottom: 1px solid #f1e2c5;
+        }
+
+        .evidence-dialog-header h2 {
+            margin: 0;
+            color: #a66d13;
+            font-size: 22px;
+        }
+
+        .evidence-close {
+            border: 0;
+            padding: 9px 14px;
+            border-radius: 11px;
+            background: #fff0d1;
+            color: #a66b0d;
+            cursor: pointer;
+        }
+
+        .evidence-form {
+            display: grid;
+            gap: 18px;
+            padding: 25px;
+        }
+
+        .evidence-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .evidence-field label {
+            color: #93621a;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .evidence-field select,
+        .evidence-field input,
+        .evidence-field textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ead5ad;
+            border-radius: 11px;
+            background: #fffdf8;
+            color: #234b64;
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .evidence-field select:focus,
+        .evidence-field input:focus,
+        .evidence-field textarea:focus {
+            outline: 2px solid #dba43c;
+            outline-offset: 2px;
+        }
+
+        .evidence-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 11px;
+        }
+
+        .evidence-cancel {
+            padding: 11px 18px;
+            border: 1px solid #e9d4ae;
+            border-radius: 11px;
+            background: white;
+            color: #986819;
+            cursor: pointer;
+        }
+
+        @media (max-width: 850px) {
+            .evidence-page {
+                padding: 15px;
+            }
+
+            .evidence-card {
+                padding: 16px;
+            }
+
+            .evidence-actions {
+                width: 100%;
+            }
+
+            .evidence-search {
+                flex: 1;
+                min-width: 130px;
+            }
+        }
+    </style>
+<script src="{% static 'shkolla/js/school-navigation.js' %}?v=1873584710" defer></script>
+<script src="{% static 'shkolla/js/evidenca-statistika.js' %}?v=1" defer></script>
+<script src="{% static 'shkolla/js/evidenca-korrigjime.js' %}?v=1" defer></script>
+</head>
+
+<body data-module="{{ tipi }}">
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M4 22 32 9l28 13-28 13L4 22Z" fill="#e7ae43"/>
+                    <path d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z" fill="#fff"/>
+                    <path d="M59 23v19" stroke="#fff" stroke-width="3"/>
+                    <circle cx="59" cy="46" r="4" fill="#e7ae43"/>
+                </svg>
+            </div>
+            <h1>School <span>Control</span></h1>
+            <p>Sistemi për Menaxhimin e Shkollave</p>
+        </div>
+
+        <nav class="sidebar-menu" aria-label="Menuja kryesore">
+            <a class="menu-item" href="{% url 'dashboard' %}">
+                <span class="menu-icon">⌂</span><span>Paneli Kryesor</span>
+            </a>
+            <span class="menu-item">
+                <span class="menu-icon">●</span><span>Përdoruesit</span>
+            </span>
+            <a class="menu-item" href="{% url 'klasat' %}">
+                <span class="menu-icon">▤</span><span>Klasat</span>
+            </a>
+            <a class="menu-item" href="{% url 'nxenesit' %}">
+                <span class="menu-icon">●</span><span>Nxënësit</span>
+            </a>
+            <a class="menu-item" href="{% url 'mesimdhenesit' %}">
+                <span class="menu-icon">●</span><span>Mësimdhënësit</span>
+            </a>
+            <a class="menu-item" href="{% url 'lendet' %}">
+                <span class="menu-icon">▤</span><span>Lëndët</span>
+            </a>
+            <a class="menu-item" href="/angazhimet/">
+                <span class="menu-icon">▣</span><span>Angazhimet</span>
+            </a>
+            <a class="menu-item {% if tipi == 'notat' %}active{% endif %}"
+               href="/notat/">
+                <span class="menu-icon">▥</span><span>Notat</span>
+            </a>
+            <a class="menu-item {% if tipi == 'mungesat' %}active{% endif %}"
+               href="/mungesat/">
+                <span class="menu-icon">◷</span><span>Mungesat</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>School Control</p>
+            <small>Menaxhim i thjeshtë dhe efikas</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <h2 id="evidence-top-title">Menaxhimi</h2>
+            </div>
+            <div class="topbar-right">
+                <span>School Control</span>
+            </div>
+        </header>
+
+        <div class="evidence-page">
+            <div class="evidence-heading">
+                <div>
+                    <h1 id="evidence-title"></h1>
+                    <p id="evidence-description"></p>
+                </div>
+                <a class="evidence-back" href="{% url 'dashboard' %}">
+                    ← Kthehu te Dashboard
+                </a>
+            </div>
+
+            <div class="evidence-summary">
+                <div class="evidence-summary-icon">▣</div>
+                <div>
+                    <span id="evidence-summary-label"></span>
+                    <strong id="evidence-count">—</strong>
+                </div>
+            </div>
+
+            <section class="evidence-card">
+                <div class="evidence-card-header">
+                    <h2 id="evidence-list-title"></h2>
+                    <div class="evidence-actions">
+                        <input type="search" id="evidence-search"
+                               class="evidence-search"
+                               placeholder="Kërko..."
+                               aria-label="Kërko në listë">
+                        <button type="button" id="evidence-add"
+                                class="evidence-primary"></button>
+                    </div>
+                </div>
+
+                <div class="evidence-table-wrap">
+                    <table class="evidence-table">
+                        <thead>
+                            <tr id="evidence-columns"></tr>
+                        </thead>
+                        <tbody id="evidence-body"></tbody>
+                    </table>
+                </div>
+
+                <p id="evidence-message" class="evidence-message"
+                   role="status" aria-live="polite"></p>
+            </section>
+        </div>
+    </main>
+</div>
+
+<dialog id="evidence-dialog" class="evidence-dialog"
+        aria-labelledby="evidence-dialog-title">
+    <div class="evidence-dialog-header">
+        <h2 id="evidence-dialog-title"></h2>
+        <button type="button" id="evidence-close"
+                class="evidence-close" aria-label="Mbyll">✕</button>
+    </div>
+
+    <form id="evidence-form" class="evidence-form">
+        <div class="evidence-field">
+            <label for="evidence-assignment">Angazhimi</label>
+            <select id="evidence-assignment" required></select>
+        </div>
+
+        <div class="evidence-field">
+            <label for="evidence-student">Nxënësi</label>
+            <select id="evidence-student" required></select>
+        </div>
+
+        <div class="evidence-field" id="evidence-grade-field">
+            <label for="evidence-grade">Vlerësimi</label>
+            <select id="evidence-grade">
+                <option value="">Zgjidh notën...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="evidence-field" id="evidence-date-field">
+            <label for="evidence-date">Data</label>
+            <input type="date" id="evidence-date">
+        </div>
+
+        <div class="evidence-field" id="evidence-reason-field">
+            <label for="evidence-reason">Arsyetimi</label>
+            <textarea id="evidence-reason" rows="3"
+                      placeholder="Shkruaj arsyetimin, nëse ka..."></textarea>
+        </div>
+
+        <p id="evidence-form-message" class="evidence-message"
+           role="status" aria-live="polite"></p>
+
+        <div class="evidence-form-actions">
+            <button type="button" id="evidence-cancel"
+                    class="evidence-cancel">Anulo</button>
+            <button type="submit" id="evidence-save"
+                    class="evidence-primary">Ruaj</button>
+        </div>
+    </form>
+</dialog>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const tipi = document.body.dataset.module;
+    const eshteNota = tipi === "notat";
+    const eshteMungesa = tipi === "mungesat";
+
+    if (!eshteNota && !eshteMungesa) return;
+
+    const token = sessionStorage.getItem("schoolControlToken");
+
+    if (!token) {
+        window.location.replace("/login/");
+        return;
+    }
+
+    const el = id => document.getElementById(id);
+    const titulli = eshteNota ? "Notat" : "Mungesat";
+    const njejes = eshteNota ? "Notë" : "Mungesë";
+
+    document.title = `School Control | ${titulli}`;
+    el("evidence-top-title").textContent = `Menaxhimi i ${titulli}`;
+    el("evidence-title").textContent = titulli;
+    el("evidence-description").textContent = eshteNota
+        ? "Menaxhoni notat e nxënësve sipas lëndëve dhe klasave."
+        : "Menaxhoni mungesat dhe arsyetimet e nxënësve.";
+
+    el("evidence-summary-label").textContent =
+        `Gjithsej ${eshteNota ? "nota" : "mungesa"} të regjistruara`;
+
+    el("evidence-list-title").textContent = `Lista e ${titulli}`;
+    el("evidence-add").textContent = `+ Shto ${njejes}`;
+
+    el("evidence-grade-field").hidden = !eshteNota;
+    el("evidence-date-field").hidden = eshteNota;
+    el("evidence-reason-field").hidden = eshteNota;
+
+    el("evidence-grade").required = eshteNota;
+    el("evidence-date").required = eshteMungesa;
+
+    const kolonat = eshteNota
+        ? ["ID", "Nxënësi", "Angazhimi", "Nota", "Data", "Veprimet"]
+        : ["ID", "Nxënësi", "Angazhimi", "Data", "Arsyetimi", "Veprimet"];
+
+    kolonat.forEach(kolona => {
+        const th = document.createElement("th");
+        th.textContent = kolona;
+        el("evidence-columns").appendChild(th);
+    });
+
+    let regjistrimet = [];
+    let nxenesit = [];
+    let angazhimet = [];
+    let mesimdhenesit = [];
+    let klasat = [];
+    let lendet = [];
+    let editingId = null;
+
+    const dialog = el("evidence-dialog");
+    const form = el("evidence-form");
+
+    function dataSot() {
+        const d = new Date();
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    function mesazhi(text, error = false) {
+        el("evidence-message").textContent = text;
+        el("evidence-message").classList.toggle("error", error);
+    }
+
+    function gabimiNgaApi(data) {
+        if (typeof data === "string") return data;
+        if (!data || typeof data !== "object") {
+            return "Operacioni nuk u realizua.";
+        }
+
+        return Object.values(data)
+            .flat(Infinity)
+            .map(value => String(value))
+            .join(" ") || "Operacioni nuk u realizua.";
+    }
+
+    async function api(url, method = "GET", data = null) {
+        const options = {
+            method,
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        };
+
+        if (data !== null) {
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(data);
+        }
+
+        const response = await fetch(url, options);
+
+        if (response.status === 401) {
+            sessionStorage.removeItem("schoolControlToken");
+            window.location.replace("/login/");
+            throw new Error("Sesioni ka përfunduar.");
+        }
+
+        if (response.status === 204) return null;
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            throw new Error(gabimiNgaApi(result));
+        }
+
+        return result;
+    }
+
+    function nxenesiEmri(id) {
+        const n = nxenesit.find(x => Number(x.id) === Number(id));
+        if (!n) return `ID ${id}`;
+        return [n.emri, n.mbiemri].filter(Boolean).join(" ") ||
+            n.email || `ID ${id}`;
+    }
+
+    function angazhimiEmri(id) {
+        const a = angazhimet.find(x => Number(x.id) === Number(id));
+        if (!a) return `ID ${id}`;
+
+        const m = mesimdhenesit.find(
+            x => Number(x.id) === Number(a.mesimdhenesi)
+        );
+        const k = klasat.find(x => Number(x.id) === Number(a.klasa));
+        const l = lendet.find(x => Number(x.id) === Number(a.lenda));
+
+        const mesimdhenesi = m
+            ? [m.emri, m.mbiemri].filter(Boolean).join(" ") || m.email
+            : `Mësimdhënësi ${a.mesimdhenesi}`;
+
+        return `${l ? l.emri : "Lënda"} – ${k ? k.emri : "Klasa"} – ${mesimdhenesi}`;
+    }
+
+    function mbushSelect(select, lista, etiketa) {
+        select.replaceChildren();
+
+        const opsioni = document.createElement("option");
+        opsioni.value = "";
+        opsioni.textContent = "Zgjidh...";
+        select.appendChild(opsioni);
+
+        lista.forEach(item => {
+            const option = document.createElement("option");
+            option.value = String(item.id);
+            option.textContent = etiketa(item);
+            select.appendChild(option);
+        });
+    }
+
+    function perditesoNxenesit(selectedId = "") {
+        const id = Number(el("evidence-assignment").value);
+        const a = angazhimet.find(x => Number(x.id) === id);
+
+        const lista = a
+            ? nxenesit.filter(x => Number(x.klasa) === Number(a.klasa))
+            : [];
+
+        mbushSelect(
+            el("evidence-student"),
+            lista,
+            n => nxenesiEmri(n.id)
+        );
+
+        el("evidence-student").value = selectedId
+            ? String(selectedId)
+            : "";
+    }
+
+    function shtoQelize(row, value) {
+        const td = document.createElement("td");
+        td.textContent = value == null ? "" : String(value);
+        row.appendChild(td);
+    }
+
+    function render() {
+        const term = el("evidence-search").value.trim().toLowerCase();
+
+        const filtered = regjistrimet.filter(item => {
+            const tekst = [
+                nxenesiEmri(item.nxenesi),
+                angazhimiEmri(item.angazhimi),
+                item.data,
+                eshteNota ? item.vleresimi : item.arsyetimi
+            ].join(" ").toLowerCase();
+
+            return tekst.includes(term);
+        });
+
+        el("evidence-count").textContent = regjistrimet.length;
+        const tbody = el("evidence-body");
+        tbody.replaceChildren();
+
+        if (!filtered.length) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 6;
+            cell.textContent = "Nuk u gjet asnjë regjistrim.";
+            cell.style.textAlign = "center";
+            row.appendChild(cell);
+            tbody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach(item => {
+            const row = document.createElement("tr");
+
+            shtoQelize(row, item.id);
+            shtoQelize(row, nxenesiEmri(item.nxenesi));
+            shtoQelize(row, angazhimiEmri(item.angazhimi));
+
+            if (eshteNota) {
+                shtoQelize(row, item.vleresimi);
+                shtoQelize(row, item.data);
+            } else {
+                shtoQelize(row, item.data);
+                shtoQelize(row, item.arsyetimi || "Pa arsyetim");
+            }
+
+            const actions = document.createElement("td");
+
+            const edit = document.createElement("button");
+            edit.type = "button";
+            edit.className = "evidence-edit";
+            edit.textContent = "Ndrysho";
+            edit.addEventListener("click", () => hapFormen(item));
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "evidence-delete";
+            remove.textContent = "Fshi";
+            remove.addEventListener("click", () => fshi(item.id));
+
+            actions.append(edit, remove);
+            row.appendChild(actions);
+            tbody.appendChild(row);
+        });
+    }
+
+    function hapFormen(item = null) {
+        editingId = item ? item.id : null;
+        form.reset();
+
+        el("evidence-dialog-title").textContent =
+            `${item ? "Ndrysho" : "Shto"} ${njejes}`;
+
+        el("evidence-save").textContent =
+            item ? "Ruaj Ndryshimin" : `Ruaj ${njejes}`;
+
+        el("evidence-form-message").textContent = "";
+        el("evidence-form-message").classList.remove("error");
+
+        mbushSelect(
+            el("evidence-assignment"),
+            angazhimet,
+            a => angazhimiEmri(a.id)
+        );
+
+        if (item) {
+            el("evidence-assignment").value = String(item.angazhimi);
+        }
+
+        perditesoNxenesit(item ? item.nxenesi : "");
+
+        el("evidence-grade").value = item && eshteNota
+            ? String(item.vleresimi)
+            : "";
+
+        el("evidence-date").value = item
+            ? item.data
+            : dataSot();
+
+        el("evidence-reason").value = item && eshteMungesa
+            ? item.arsyetimi || ""
+            : "";
+
+        dialog.showModal();
+    }
+
+    async function rifresko() {
+        regjistrimet = await api(`/api/${tipi}/`);
+        render();
+    }
+
+    async function fshi(id) {
+        if (!confirm(`A dëshiron ta fshish këtë ${njejes.toLowerCase()}?`)) {
+            return;
+        }
+
+        try {
+            await api(`/api/${tipi}/${id}/`, "DELETE");
+            await rifresko();
+            mesazhi("Regjistrimi u fshi me sukses.");
+        } catch (error) {
+            mesazhi(error.message, true);
+        }
+    }
+
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const save = el("evidence-save");
+        const formMessage = el("evidence-form-message");
+        const nxenesi = Number(el("evidence-student").value);
+        const angazhimi = Number(el("evidence-assignment").value);
+
+        if (!nxenesi || !angazhimi) {
+            formMessage.textContent = "Zgjidh angazhimin dhe nxënësin.";
+            formMessage.classList.add("error");
+            return;
+        }
+
+        const data = {
+            nxenesi,
+            angazhimi,
+            data: el("evidence-date").value || dataSot()
+        };
+
+        if (eshteNota) {
+            data.vleresimi = Number(el("evidence-grade").value);
+        } else {
+            data.arsyetimi = el("evidence-reason").value.trim();
+        }
+
+        save.disabled = true;
+        formMessage.classList.remove("error");
+        formMessage.textContent = "Duke ruajtur...";
+
+        try {
+            const url = editingId
+                ? `/api/${tipi}/${editingId}/`
+                : `/api/${tipi}/`;
+
+            await api(url, editingId ? "PATCH" : "POST", data);
+            await rifresko();
+            dialog.close();
+            mesazhi("Regjistrimi u ruajt me sukses.");
+        } catch (error) {
+            formMessage.textContent = error.message;
+            formMessage.classList.add("error");
+        } finally {
+            save.disabled = false;
+        }
+    });
+
+    el("evidence-assignment").addEventListener("change", () => {
+        perditesoNxenesit();
+    });
+
+    el("evidence-search").addEventListener("input", render);
+    el("evidence-add").addEventListener("click", () => hapFormen());
+    el("evidence-close").addEventListener("click", () => dialog.close());
+    el("evidence-cancel").addEventListener("click", () => dialog.close());
+
+    try {
+        [
+            nxenesit,
+            angazhimet,
+            mesimdhenesit,
+            klasat,
+            lendet,
+            regjistrimet
+        ] = await Promise.all([
+            api("/api/nxenesit/"),
+            api("/api/angazhimet/"),
+            api("/api/mesimdhenesit/"),
+            api("/api/klasat/"),
+            api("/api/lendet/"),
+            api(`/api/${tipi}/`)
+        ]);
+
+        render();
+
+        if (!nxenesit.length || !angazhimet.length) {
+            el("evidence-add").disabled = true;
+            mesazhi(
+                "Duhet të kesh nxënës dhe angazhime të regjistruara."
+            );
+        } else {
+            mesazhi("");
+        }
+    } catch (error) {
+        mesazhi(error.message, true);
+        el("evidence-add").disabled = true;
+    }
+});
+</script>
+</body>
+</html>

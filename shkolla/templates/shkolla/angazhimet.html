@@ -1,0 +1,747 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Control | Angazhimet</title>
+
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/school-control-modern.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/school-subpages-gold.css' %}">
+
+    <style>
+        .angazhimet-page {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 17px;
+            min-height: 0;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .angazhimet-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .angazhimet-heading h1 {
+            margin: 0 0 6px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #123b55;
+        }
+
+        .angazhimet-heading p {
+            margin: 0;
+            color: #65849a;
+            font-size: 12px;
+        }
+
+        .angazhimet-back {
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #137a9c, #07516d);
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .angazhimet-summary {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            min-height: 85px;
+            padding: 16px 22px;
+            border-radius: 19px;
+            background: linear-gradient(110deg, #fff, #e4f2fb 75%, #fff3db);
+            box-shadow: 0 7px 22px rgba(24, 79, 112, 0.07);
+        }
+
+        .angazhimet-symbol {
+            display: grid;
+            place-items: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: #fff0d0;
+            color: #b77a12;
+            font-size: 26px;
+        }
+
+        .angazhimet-summary span {
+            display: block;
+            color: #54758d;
+            font-size: 12px;
+        }
+
+        .angazhimet-summary strong {
+            color: #b67b12;
+            font-size: 30px;
+        }
+
+        .angazhimet-card {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            min-height: 0;
+            padding: 22px;
+            border: 1px solid #d9e9f3;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 7px 22px rgba(24, 79, 112, 0.07);
+        }
+
+        .angazhimet-card-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .angazhimet-card-header h2 {
+            margin: 0;
+            color: #123b55;
+            font-size: 20px;
+        }
+
+        .angazhimet-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .angazhimet-search {
+            min-height: 41px;
+            padding: 10px 13px;
+            border: 1px solid #d7e7f1;
+            border-radius: 11px;
+            background: #f7fbff;
+            color: #234b64;
+            outline-color: #dba43c;
+        }
+
+        .angazhimet-primary {
+            min-height: 41px;
+            padding: 10px 18px;
+            border: 0;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #efbd50, #b77a0e);
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .angazhimet-primary:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .angazhimet-table-wrap {
+            flex: 1;
+            min-height: 0;
+            overflow: auto;
+        }
+
+        .angazhimet-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .angazhimet-table th {
+            position: sticky;
+            top: 0;
+            padding: 15px;
+            background: #e5f2fb;
+            color: #155c7d;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .angazhimet-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e6eef4;
+            color: #29475e;
+            font-size: 12px;
+        }
+
+        .angazhimet-table tbody tr:hover {
+            background: #f4faff;
+        }
+
+        .angazhimet-edit,
+        .angazhimet-delete {
+            padding: 8px 12px;
+            border: 0;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .angazhimet-edit {
+            background: #fff0d2;
+            color: #98600d;
+        }
+
+        .angazhimet-delete {
+            margin-left: 7px;
+            background: #ffe9e9;
+            color: #b52929;
+        }
+
+        .angazhimet-message {
+            margin: 13px 0 0;
+            font-size: 12px;
+            color: #58788e;
+        }
+
+        .angazhimet-message.error {
+            color: #b52929;
+        }
+
+        .angazhimet-dialog {
+            width: min(520px, calc(100% - 28px));
+            max-height: 90vh;
+            max-height: 90dvh;
+            padding: 0;
+            margin: auto;
+            border: 1px solid #e8d5ad;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(12, 45, 67, .22);
+            color: #123b55;
+            overflow: auto;
+        }
+
+        .angazhimet-dialog::backdrop {
+            background: rgba(9, 35, 52, .5);
+        }
+
+        .angazhimet-dialog-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 24px;
+            border-bottom: 1px solid #f1e2c5;
+        }
+
+        .angazhimet-dialog-head h2 {
+            margin: 0;
+            color: #a66d13;
+            font-size: 21px;
+        }
+
+        .angazhimet-close {
+            border: 0;
+            background: #fff0d1;
+            color: #a66b0d;
+            border-radius: 10px;
+            padding: 7px 13px;
+            cursor: pointer;
+        }
+
+        .angazhimet-form {
+            display: grid;
+            gap: 17px;
+            padding: 24px;
+        }
+
+        .angazhimet-field {
+            display: grid;
+            gap: 7px;
+        }
+
+        .angazhimet-field label {
+            color: #93621a;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .angazhimet-field select {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #ead5ad;
+            border-radius: 11px;
+            background: #fffdf8;
+            color: #234b64;
+            font: inherit;
+            font-size: 13px;
+        }
+
+        .angazhimet-field select:focus {
+            outline: 2px solid #dba43c;
+            outline-offset: 2px;
+        }
+
+        .angazhimet-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .angazhimet-cancel {
+            padding: 10px 18px;
+            border: 1px solid #e9d4ae;
+            border-radius: 11px;
+            background: white;
+            color: #986819;
+            cursor: pointer;
+        }
+
+        @media (max-width: 850px) {
+            .angazhimet-page {
+                padding: 15px;
+                overflow: auto;
+            }
+
+            .angazhimet-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .angazhimet-card {
+                min-height: 350px;
+            }
+
+            .angazhimet-actions {
+                width: 100%;
+            }
+
+            .angazhimet-search {
+                flex: 1;
+                min-width: 140px;
+            }
+        }
+    </style>
+<script src="{% static 'shkolla/js/school-navigation.js' %}?v=1873584710" defer></script>
+</head>
+
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M4 22 32 9l28 13-28 13L4 22Z" fill="#e7ae43"/>
+                    <path d="M16 29v11c0 5 8 10 16 10s16-5 16-10V29l-16 8-16-8Z" fill="#fff"/>
+                    <path d="M59 23v19" stroke="#fff" stroke-width="3"/>
+                    <circle cx="59" cy="46" r="4" fill="#e7ae43"/>
+                </svg>
+            </div>
+            <h1>School <span>Control</span></h1>
+            <p>Sistemi për Menaxhimin e Shkollave</p>
+        </div>
+
+        <nav class="sidebar-menu" aria-label="Menuja kryesore">
+            <a class="menu-item" href="{% url 'dashboard' %}">
+                <span class="menu-icon">⌂</span><span>Paneli Kryesor</span>
+            </a>
+            <span class="menu-item">
+                <span class="menu-icon">●</span><span>Përdoruesit</span>
+            </span>
+            <a class="menu-item" href="{% url 'klasat' %}">
+                <span class="menu-icon">▤</span><span>Klasat</span>
+            </a>
+            <a class="menu-item" href="{% url 'nxenesit' %}">
+                <span class="menu-icon">●</span><span>Nxënësit</span>
+            </a>
+            <a class="menu-item" href="{% url 'mesimdhenesit' %}">
+                <span class="menu-icon">●</span><span>Mësimdhënësit</span>
+            </a>
+            <a class="menu-item" href="{% url 'lendet' %}">
+                <span class="menu-icon">▤</span><span>Lëndët</span>
+            </a>
+            <a class="menu-item active" href="/angazhimet/" aria-current="page">
+                <span class="menu-icon">▣</span><span>Angazhimet</span>
+            </a>
+            <span class="menu-item">
+                <span class="menu-icon">▥</span><span>Notat</span>
+            </span>
+            <span class="menu-item">
+                <span class="menu-icon">◷</span><span>Mungesat</span>
+            </span>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>School Control</p>
+            <small>Menaxhim i thjeshtë dhe efikas</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-left">
+                <h2>Menaxhimi i Angazhimeve</h2>
+            </div>
+            <div class="topbar-right">
+                <span>School Control</span>
+            </div>
+        </header>
+
+        <div class="angazhimet-page">
+            <div class="angazhimet-heading">
+                <div>
+                    <h1>Angazhimet</h1>
+                    <p>Menaxhoni angazhimet e mësimdhënësve në klasa dhe lëndë.</p>
+                </div>
+                <a href="{% url 'dashboard' %}" class="angazhimet-back">
+                    ← Kthehu te Dashboard
+                </a>
+            </div>
+
+            <div class="angazhimet-summary">
+                <div class="angazhimet-symbol">▣</div>
+                <div>
+                    <span>Gjithsej angazhime të regjistruara</span>
+                    <strong id="angazhimet-count">—</strong>
+                </div>
+            </div>
+
+            <section class="angazhimet-card">
+                <div class="angazhimet-card-header">
+                    <h2>Lista e Angazhimeve</h2>
+                    <div class="angazhimet-actions">
+                        <input type="search" id="angazhimet-search"
+                               class="angazhimet-search"
+                               placeholder="Kërko angazhime..."
+                               aria-label="Kërko angazhime">
+                        <button type="button" id="angazhimet-add"
+                                class="angazhimet-primary">
+                            + Shto Angazhim
+                        </button>
+                    </div>
+                </div>
+
+                <div class="angazhimet-table-wrap">
+                    <table class="angazhimet-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mësimdhënësi</th>
+                                <th>Klasa</th>
+                                <th>Lënda</th>
+                                <th>Veprimet</th>
+                            </tr>
+                        </thead>
+                        <tbody id="angazhimet-body"></tbody>
+                    </table>
+                </div>
+                <p id="angazhimet-message" class="angazhimet-message"
+                   role="status" aria-live="polite">Duke ngarkuar...</p>
+            </section>
+        </div>
+    </main>
+</div>
+
+<dialog id="angazhimet-dialog" class="angazhimet-dialog"
+        aria-labelledby="angazhimet-dialog-title">
+    <div class="angazhimet-dialog-head">
+        <h2 id="angazhimet-dialog-title">Shto Angazhim</h2>
+        <button type="button" id="angazhimet-close"
+                class="angazhimet-close" aria-label="Mbyll">✕</button>
+    </div>
+
+    <form id="angazhimet-form" class="angazhimet-form">
+        <div class="angazhimet-field">
+            <label for="angazhimet-teacher">Mësimdhënësi</label>
+            <select id="angazhimet-teacher" required></select>
+        </div>
+
+        <div class="angazhimet-field">
+            <label for="angazhimet-class">Klasa</label>
+            <select id="angazhimet-class" required></select>
+        </div>
+
+        <div class="angazhimet-field">
+            <label for="angazhimet-subject">Lënda</label>
+            <select id="angazhimet-subject" required></select>
+        </div>
+
+        <p id="angazhimet-form-message" class="angazhimet-message"
+           role="status" aria-live="polite"></p>
+
+        <div class="angazhimet-form-actions">
+            <button type="button" id="angazhimet-cancel"
+                    class="angazhimet-cancel">Anulo</button>
+            <button type="submit" id="angazhimet-save"
+                    class="angazhimet-primary">Ruaj Angazhimin</button>
+        </div>
+    </form>
+</dialog>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const token = sessionStorage.getItem("schoolControlToken");
+
+    if (!token) {
+        window.location.replace("/login/");
+        return;
+    }
+
+    const el = id => document.getElementById(id);
+    const tbody = el("angazhimet-body");
+    const dialog = el("angazhimet-dialog");
+    const form = el("angazhimet-form");
+    const message = el("angazhimet-message");
+    const formMessage = el("angazhimet-form-message");
+
+    let angazhimet = [];
+    let mesimdhenesit = [];
+    let klasat = [];
+    let lendet = [];
+    let editingId = null;
+
+    async function api(url, method = "GET", data = null) {
+        const options = {
+            method,
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        };
+
+        if (data !== null) {
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(data);
+        }
+
+        const response = await fetch(url, options);
+
+        if (response.status === 401) {
+            sessionStorage.removeItem("schoolControlToken");
+            window.location.replace("/login/");
+            throw new Error("Sesioni ka përfunduar.");
+        }
+
+        if (response.status === 204) return null;
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            const error = result.gabim ||
+                result.detail ||
+                result.non_field_errors ||
+                Object.values(result).flat().join(" ") ||
+                "Operacioni nuk u realizua.";
+
+            throw new Error(String(error));
+        }
+
+        return result;
+    }
+
+    function emriMesimdhenesit(id) {
+        const m = mesimdhenesit.find(x => Number(x.id) === Number(id));
+        if (!m) return `ID ${id}`;
+
+        return [m.emri, m.mbiemri].filter(Boolean).join(" ") ||
+            m.email || `ID ${id}`;
+    }
+
+    function emriKlases(id) {
+        const k = klasat.find(x => Number(x.id) === Number(id));
+        return k ? k.emri : `ID ${id}`;
+    }
+
+    function emriLendes(id) {
+        const l = lendet.find(x => Number(x.id) === Number(id));
+        return l ? l.emri : `ID ${id}`;
+    }
+
+    function setMessage(text, error = false) {
+        message.textContent = text;
+        message.classList.toggle("error", error);
+    }
+
+    function fillSelect(id, items, display) {
+        const select = el(id);
+        select.replaceChildren();
+
+        const placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Zgjidh...";
+        select.appendChild(placeholder);
+
+        items.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item.id;
+            option.textContent = display(item);
+            select.appendChild(option);
+        });
+    }
+
+    function render() {
+        const term = el("angazhimet-search").value.trim().toLowerCase();
+
+        const filtered = angazhimet.filter(a => {
+            const text = [
+                emriMesimdhenesit(a.mesimdhenesi),
+                emriKlases(a.klasa),
+                emriLendes(a.lenda)
+            ].join(" ").toLowerCase();
+
+            return text.includes(term);
+        });
+
+        tbody.replaceChildren();
+        el("angazhimet-count").textContent = angazhimet.length;
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = document.createElement("td");
+            cell.colSpan = 5;
+            cell.textContent = "Nuk u gjet asnjë angazhim.";
+            cell.style.textAlign = "center";
+            row.appendChild(cell);
+            tbody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach(a => {
+            const row = document.createElement("tr");
+
+            [
+                a.id,
+                emriMesimdhenesit(a.mesimdhenesi),
+                emriKlases(a.klasa),
+                emriLendes(a.lenda)
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            const actions = document.createElement("td");
+
+            const edit = document.createElement("button");
+            edit.type = "button";
+            edit.className = "angazhimet-edit";
+            edit.textContent = "Ndrysho";
+            edit.addEventListener("click", () => openForm(a));
+
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "angazhimet-delete";
+            remove.textContent = "Fshi";
+            remove.addEventListener("click", () => removeItem(a.id));
+
+            actions.append(edit, remove);
+            row.appendChild(actions);
+            tbody.appendChild(row);
+        });
+    }
+
+    function openForm(item = null) {
+        editingId = item ? item.id : null;
+        form.reset();
+
+        el("angazhimet-dialog-title").textContent =
+            item ? "Ndrysho Angazhimin" : "Shto Angazhim";
+
+        el("angazhimet-save").textContent =
+            item ? "Ruaj Ndryshimin" : "Ruaj Angazhimin";
+
+        formMessage.textContent = "";
+
+        if (item) {
+            el("angazhimet-teacher").value = item.mesimdhenesi;
+            el("angazhimet-class").value = item.klasa;
+            el("angazhimet-subject").value = item.lenda;
+        }
+
+        dialog.showModal();
+    }
+
+    async function refresh() {
+        angazhimet = await api("/api/angazhimet/");
+        render();
+    }
+
+    async function removeItem(id) {
+        if (!confirm("A dëshiron ta fshish këtë angazhim?")) return;
+
+        try {
+            await api(`/api/angazhimet/${id}/`, "DELETE");
+            await refresh();
+            setMessage("Angazhimi u fshi me sukses.");
+        } catch (error) {
+            setMessage(error.message, true);
+        }
+    }
+
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const save = el("angazhimet-save");
+        save.disabled = true;
+        formMessage.textContent = "Duke ruajtur...";
+
+        const data = {
+            mesimdhenesi: Number(el("angazhimet-teacher").value),
+            klasa: Number(el("angazhimet-class").value),
+            lenda: Number(el("angazhimet-subject").value)
+        };
+
+        try {
+            const method = editingId ? "PATCH" : "POST";
+            const url = editingId
+                ? `/api/angazhimet/${editingId}/`
+                : "/api/angazhimet/";
+
+            await api(url, method, data);
+            await refresh();
+            dialog.close();
+            setMessage("Angazhimi u ruajt me sukses.");
+        } catch (error) {
+            formMessage.textContent = error.message;
+            formMessage.classList.add("error");
+        } finally {
+            save.disabled = false;
+        }
+    });
+
+    el("angazhimet-add").addEventListener("click", () => openForm());
+    el("angazhimet-close").addEventListener("click", () => dialog.close());
+    el("angazhimet-cancel").addEventListener("click", () => dialog.close());
+    el("angazhimet-search").addEventListener("input", render);
+
+    try {
+        [mesimdhenesit, klasat, lendet, angazhimet] = await Promise.all([
+            api("/api/mesimdhenesit/"),
+            api("/api/klasat/"),
+            api("/api/lendet/"),
+            api("/api/angazhimet/")
+        ]);
+
+        fillSelect("angazhimet-teacher", mesimdhenesit,
+            m => [m.emri, m.mbiemri].filter(Boolean).join(" ") || m.email);
+
+        fillSelect("angazhimet-class", klasat, k => k.emri);
+        fillSelect("angazhimet-subject", lendet, l => l.emri);
+
+        if (!mesimdhenesit.length || !klasat.length || !lendet.length) {
+            el("angazhimet-add").disabled = true;
+            setMessage("Regjistro fillimisht mësimdhënës, klasa dhe lëndë.");
+        } else {
+            setMessage("");
+        }
+
+        render();
+    } catch (error) {
+        setMessage(error.message, true);
+    }
+});
+</script>
+</body>
+</html>

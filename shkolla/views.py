@@ -720,7 +720,7 @@ def notat_api(request):
         if serializer.is_valid():
 
             # Ruajme noten me daten aktuale
-            serializer.save(data=timezone.now())
+            serializer.save(data=timezone.localdate())
 
             return Response(
                 serializer.data,
@@ -902,3 +902,4 @@ def mungesa_detaje_api(request, mungesa_id):
         return Response(
             status=status.HTTP_204_NO_CONTENT
         )
+from .evidenca_api import notat_api, nota_detaje_api, mungesat_api, mungesa_detaje_api

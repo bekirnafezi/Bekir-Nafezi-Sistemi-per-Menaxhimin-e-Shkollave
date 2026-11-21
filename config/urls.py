@@ -34,10 +34,11 @@ from shkolla.views import (
 )
 
 
-from shkolla.frontend_views import lendet_page
+from shkolla.frontend_views import lendet_page, angazhimet_page
 
 urlpatterns = [
     path('lendet/', lendet_page, name='lendet'),
+    path('angazhimet/', angazhimet_page, name='angazhimet'),
 
     path('', login_page, name='home'),
     path('login/', login_page, name='login'),
@@ -215,4 +216,20 @@ urlpatterns += [
         vendim_detaje_api,
         name="vendim_detaje_api",
     ),
+]
+
+
+from shkolla.frontend_views import notat_page, mungesat_page
+
+urlpatterns += [
+    path("notat/", notat_page, name="notat"),
+    path("mungesat/", mungesat_page, name="mungesat"),
+]
+from shkolla.evidenca_statistika import statistikat_notave, statistikat_mungesave
+
+urlpatterns += [
+    path("api/statistika/notat/", statistikat_notave, name="statistikat_notave"),
+]
+urlpatterns += [
+    path("api/statistika/mungesat/", statistikat_mungesave, name="statistikat_mungesave"),
 ]
