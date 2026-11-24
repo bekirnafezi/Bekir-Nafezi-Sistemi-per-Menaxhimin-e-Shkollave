@@ -1,45 +1,36 @@
+
 # School Control
 
 ## Sistemi për Menaxhimin e Shkollave Fillore
 
-**School Control** është një aplikacion për menaxhimin digjital të shkollave fillore.
-
-Qëllimi i projektit është të lehtësojë menaxhimin e të dhënave të shkollës, duke përfshirë klasat, nxënësit, mësimdhënësit, lëndët, angazhimet, notat dhe mungesat.
-
-Projekti zhvillohet në kuadër të lëndës **Projekt – Praktikë Profesionale**.
+School Control është një aplikacion web për menaxhimin digjital të shkollave fillore. Sistemi mundëson organizimin e të dhënave të shkollës dhe komunikimin ndërmjet drejtorit, mësimdhënësve dhe nxënësve.
 
 ## Informacionet e projektit
 
-- **Studenti:** Bekir Nafezi
-- **Profesori:** Prof. Ass. Dr. Endrit Fetahi
-- **Universiteti:** Universiteti "Ukshin Hoti" – Prizren
-- **Viti akademik:** 2026/2027
-- **Emri i projektit:** School Control
+- Studenti: Bekir Nafezi
+- Profesori: Prof. Ass. Dr. Endrit Fetahi
+- Universiteti: Universiteti "Ukshin Hoti" – Prizren
+- Lënda: Projekt – Praktikë Profesionale
+- Viti akademik: 2026/2027
+- Emri i projektit: School Control
 
 ## Teknologjitë e përdorura
 
-Për zhvillimin e projektit janë përdorur këto teknologji:
+- Python
+- Django
+- Django REST Framework
+- SQLite
+- HTML
+- CSS
+- JavaScript
+- Pillow
+- Git dhe GitHub
+- Visual Studio Code
+- DB Browser for SQLite
 
-- **Python** – Gjuha programuese për zhvillimin e sistemit.
-- **Django** – Framework për ndërtimin e backend-it.
-- **Django REST Framework** – Për krijimin dhe menaxhimin e API-ve REST.
-- **SQLite** – Databaza për ruajtjen e të dhënave.
-- **Django Token Authentication** – Për autentikimin e përdoruesve.
-- **HTML** – Për ndërtimin e strukturës së faqeve.
-- **CSS** – Për dizajnin dhe paraqitjen vizuale.
-- **JavaScript** – Për funksionalitetet interaktive dhe komunikimin me API.
-- **Git** – Për menaxhimin e versioneve të projektit.
-- **GitHub** – Për ruajtjen e kodit dhe dokumentimin e progresit.
-- **Visual Studio Code** – Mjedisi i zhvillimit të projektit.
-- **DB Browser for SQLite** – Për kontrollimin e databazës dhe relacioneve.
+## Databaza dhe backend-i
 
-## Funksionalitetet e realizuara
-
-Projekti është zhvilluar në disa faza, duke filluar nga planifikimi, krijimi i databazës dhe backend-it, deri te ndërtimi i ndërfaqes grafike.
-
-### 1. Backend dhe databaza
-
-Janë krijuar 8 modele kryesore:
+Sistemi përdor databazën SQLite dhe përmban 14 modele:
 
 1. Perdorues
 2. Klasa
@@ -49,150 +40,162 @@ Janë krijuar 8 modele kryesore:
 6. Angazhimi
 7. Nota
 8. Mungesa
+9. NdryshimEvidence
+10. Aktivitet
+11. Vendim
+12. KerkeseMesimdhenesi
+13. KerkesaNxenesit
+14. NjoftimMesimdhenesi
 
-Janë realizuar:
+Janë realizuar API-të REST, relacionet ndërmjet modeleve, migrimet, validimi dhe filtrimi i të dhënave.
 
-- Krijimi i modeleve dhe relacioneve ndërmjet tyre.
-- Krijimi dhe zbatimi i migrimeve të databazës.
-- Menaxhimi i klasave (CRUD).
-- Menaxhimi i nxënësve (CRUD).
-- Menaxhimi i mësimdhënësve (CRUD).
-- Menaxhimi i lëndëve (CRUD).
-- Menaxhimi i angazhimeve (CRUD).
-- Menaxhimi i notave (CRUD).
-- Menaxhimi i mungesave (CRUD).
-- Implementimi i API-ve REST.
-- Validimi dhe filtrimi i të dhënave.
-- Krijimi i endpoint-it bazë për statistika.
+## Rolet dhe funksionalitetet
 
-Gjatë fazës së backend-it janë dokumentuar gjithsej **17 endpoint-e API**.
+### Drejtori
 
-### 2. Autentikimi dhe autorizimi
+- Regjistrimi dhe identifikimi në sistem.
+- Menaxhimi i profilit.
+- Shfaqja e statistikave në panelin kryesor.
+- Menaxhimi i klasave.
+- Menaxhimi i nxënësve.
+- Menaxhimi i mësimdhënësve.
+- Menaxhimi i lëndëve.
+- Caktimi i angazhimeve dhe kujdestarëve.
+- Kontrollimi i notave dhe mungesave.
+- Menaxhimi i aktiviteteve.
+- Publikimi i vendimeve dhe njoftimeve.
+- Shqyrtimi i kërkesave të mësimdhënësve.
+- Shfaqja e raporteve dhe statistikave.
 
-Janë implementuar:
+### Mësimdhënësi
 
-- Identifikimi i përdoruesve me email dhe fjalëkalim.
+- Identifikimi dhe menaxhimi i profilit.
+- Shfaqja e klasave dhe lëndëve të caktuara.
+- Menaxhimi i notave.
+- Menaxhimi i mungesave.
+- Menaxhimi i klasës kujdestare.
+- Pranimi i vendimeve nga drejtori.
+- Dërgimi i njoftimeve për nxënësit.
+- Dërgimi i kërkesave te drejtori.
+- Shqyrtimi i ankesave dhe kërkesave për leje nga nxënësit.
+
+### Nxënësi
+
+- Identifikimi me të dhënat personale, ID dhe fjalëkalim.
+- Shfaqja dhe ndryshimi i fotografisë së profilit.
+- Shfaqja e të dhënave të klasës dhe kujdestarit.
+- Shfaqja e notave sipas lëndëve.
+- Llogaritja e mesatares.
+- Shfaqja e mungesave dhe statuseve të tyre.
+- Pranimi i njoftimeve nga drejtori dhe mësimdhënësi.
+- Dërgimi i ankesave te kujdestari.
+- Dërgimi i kërkesave për leje.
+- Kontrollimi i statusit të kërkesave.
+- Sinjalizimi i njoftimeve dhe përgjigjeve të reja.
+- Pastrimi i njoftimeve nga pamja personale në shfletues.
+
+## Autentikimi dhe siguria
+
 - Autentikimi me token.
-- Përcaktimi i tri roleve: drejtor, mësimdhënës dhe nxënës.
-- Kufizimi i qasjes në API sipas rolit të përdoruesit.
-- Marrja e të dhënave të profilit të përdoruesit.
+- Ndarja e përdoruesve sipas roleve.
+- Kufizimi i qasjes sipas autorizimeve.
+- Validimi i të dhënave.
+- Mbrojtja e fjalëkalimeve.
+- Kontrollimi i fotografive gjatë ngarkimit.
+- Përjashtimi i databazës, fotografive private dhe skedarëve sekretë nga Git.
 
-### 3. Ndërfaqja grafike – Frontend
+## Dizajni i sistemit
 
-Në fazën e tretë të zhvillimit ka filluar realizimi i ndërfaqes grafike me HTML, CSS dhe JavaScript.
+Ndërfaqja grafike është zhvilluar me HTML, CSS dhe JavaScript.
 
-Deri tani janë krijuar këto faqe:
+Është përdorur një dizajn i përbashkët me ngjyrë të kaltër të errët dhe të artë.
 
-**Faqja e identifikimit (Login)**
+Sistemi përmban:
 
-- Formulari për identifikimin e përdoruesit.
-- Lidhja me sistemin e autentikimit.
-- Përdorimi i token-it për komunikim me API.
+- Panele të veçanta për secilin rol.
+- Menu navigimi.
+- Formularë për regjistrim dhe ndryshim.
+- Tabela dhe statistika.
+- Dritare për shfaqjen e të dhënave.
+- Fotografitë e profileve.
+- Numërues për njoftimet e reja.
+- Komunikim ndërmjet frontend-it dhe backend-it përmes API-ve.
 
-**Dashboard**
+## Instalimi i projektit
 
-- Paneli kryesor i sistemit.
-- Paraqitja e informacioneve dhe statistikave kryesore.
-- Menuja anësore për navigim ndërmjet moduleve.
+Krijimi i mjedisit virtual:
 
-**Menaxhimi i Klasave**
+    python -m venv .venv
 
-- Shfaqja e klasave.
-- Regjistrimi i klasave të reja.
-- Ndryshimi i të dhënave të klasave.
-- Fshirja e klasave sipas kufizimeve të sistemit.
+Aktivizimi në Windows:
 
-**Menaxhimi i Nxënësve**
+    .\.venv\Scripts\Activate.ps1
 
-- Regjistrimi i nxënësve të rinj.
-- Shfaqja e nxënësve të regjistruar.
-- Kërkimi i shpejtë.
-- Lista e plotë me ndarje në faqe.
-- Ndryshimi i klasës së nxënësit.
-- Fshirja e nxënësve.
+Instalimi i bibliotekave:
 
-**Menaxhimi i Mësimdhënësve**
+    python -m pip install -r requirements.txt
 
-- Regjistrimi i mësimdhënësve.
-- Shfaqja dhe kërkimi i mësimdhënësve.
-- Lista e plotë me ndarje në faqe.
-- Ndryshimi i të dhënave të mësimdhënësve.
-- Fshirja me kontroll të lidhjeve ekzistuese.
+Konfiguroni variablat e nevojshme të mjedisit, përfshirë SECRET_KEY dhe kodin e sigurt të regjistrimit të drejtorit.
 
-**Menaxhimi i Lëndëve**
+Kodi i regjistrimit konfigurohet përmes variablës SCHOOL_DIRECTOR_SIGNUP_CODE.
 
-- Regjistrimi i lëndëve të reja.
-- Shfaqja e lëndëve nga databaza.
-- Kërkimi i shpejtë.
-- Lista e plotë me ndarje në faqe.
-- Ndryshimi i emrit të lëndës.
-- Fshirja e lëndëve.
-- Mbrojtja nga fshirja e lëndëve që kanë angazhime të lidhura.
+Zbatimi i migrimeve:
 
-### 4. Dizajni dhe navigimi
+    python manage.py migrate
 
-Ndërfaqja grafike është krijuar me një dizajn të përbashkët për modulet e sistemit.
+Kontrollimi i sistemit:
 
-Janë realizuar:
+    python manage.py check
 
-- Menuja anësore e navigimit.
-- Përdorimi i ngjyrave dhe elementeve të njëjta në faqe.
-- Tabelat për shfaqjen e të dhënave.
-- Formularët për regjistrim dhe ndryshim.
-- Dritaret për shfaqjen e listave të plota.
-- Kërkimi i të dhënave pa rifreskim të faqes.
-- Lidhja e faqeve kryesore me njëra-tjetrën.
+Nisja e serverit:
 
-## Testimi dhe dokumentimi
+    python manage.py runserver
 
-Gjatë zhvillimit janë kryer testime për të kontrolluar funksionimin e sistemit.
+Sistemi hapet në adresën:
 
-Deri tani janë realizuar:
+http://127.0.0.1:8000/
 
-- Testimi i operacioneve GET, POST, PATCH dhe DELETE.
-- Testimi i autentikimit dhe autorizimit.
-- Testimi i validimeve të të dhënave.
-- Kontrollimi i migrimeve të databazës.
-- Testimi i regjistrimit dhe ndryshimit të të dhënave.
-- Testimi i kërkimit dhe shfaqjes së listave.
-- Testimi i fshirjes dhe i kufizimeve për të dhënat e lidhura.
-- Kontrollimi i navigimit ndërmjet faqeve.
-- Dokumentimi teknik në dosjen `docs/`.
+## Testimi
 
-## Funksionalitetet në zhvillim
+Gjatë zhvillimit janë realizuar testime manuale dhe automatike për:
 
-Në vazhdim të fazës së tretë planifikohet:
+- Autentikimin dhe autorizimin.
+- Operacionet CRUD.
+- Regjistrimin e përdoruesve.
+- Menaxhimin e klasave dhe lëndëve.
+- Regjistrimin e notave dhe mungesave.
+- Komunikimin ndërmjet roleve.
+- Dërgimin dhe pranimin e njoftimeve.
+- Kërkesat për leje dhe ankesat.
+- Ndryshimin e fotografive të profileve.
+- Navigimin ndërmjet faqeve.
 
-- Ndërtimi i ndërfaqes për menaxhimin e angazhimeve.
-- Ndërtimi i ndërfaqes për menaxhimin e notave.
-- Ndërtimi i ndërfaqes për menaxhimin e mungesave.
-- Zhvillimi i faqeve të përshtatura për mësimdhënësit dhe nxënësit.
-- Përmirësimi i statistikave dhe raporteve.
-- Testimi i plotë i sistemit përmes ndërfaqes grafike.
-- Përmirësimi i dizajnit dhe funksionaliteteve sipas nevojës.
+Ekzekutimi i testeve automatike:
+
+    python manage.py test shkolla.test_teacher_notices
+
+Tri testet automatike të njoftimeve kanë kaluar me sukses.
+
+## Fazat e zhvillimit
+
+### Faza 1 – Planifikimi dhe analiza
+
+Përcaktimi i kërkesave, funksionaliteteve dhe arkitekturës së sistemit.
+
+### Faza 2 – Databaza, Backend dhe API
+
+Krijimi i modeleve, relacioneve, migrimeve, autentikimit dhe API-ve.
+
+### Faza 3 – Frontend dhe integrimi
+
+Zhvillimi i ndërfaqes grafike, krijimi i tri paneleve, integrimi me backend-in dhe testimi i funksionaliteteve.
 
 ## Statusi i projektit
 
-Projekti **School Control – Sistemi për Menaxhimin e Shkollave Fillore** është aktualisht në **fazën e tretë të zhvillimit**.
+Funksionalitetet kryesore të tri paneleve janë realizuar dhe sistemi është në fazën e kontrollit përfundimtar dhe dokumentimit teknik.
 
-**Faza 1 – Planifikimi dhe analiza**
-
-Janë përcaktuar kërkesat, funksionalitetet dhe struktura e përgjithshme e sistemit.
-
-**Faza 2 – Databaza, Backend dhe API**
-
-Janë zhvilluar modelet, databaza, autentikimi, autorizimi dhe API-të kryesore të sistemit.
-
-**Faza 3 – Frontend dhe integrimi**
-
-Është krijuar ndërfaqja grafike dhe ka filluar lidhja e faqeve me API-të ekzistuese.
-
-Deri tani janë realizuar faqet Login, Dashboard, Klasat, Nxënësit, Mësimdhënësit dhe Lëndët.
-
-Zhvillimi vazhdon me modulet e tjera të sistemit.
+Dokumentimi i projektit ruhet në dosjen docs/.
 
 ## Qëllimi përfundimtar
 
-Qëllimi është krijimi i një sistemi funksional dhe të lehtë për përdorim, i cili mundëson menaxhimin më të organizuar të informacioneve të shkollës.
-
-Projekti zhvillohet gradualisht, me testime dhe përditësime të rregullta në GitHub.
+Qëllimi i School Control është të mundësojë menaxhimin më të organizuar të shkollave fillore dhe të lehtësojë komunikimin ndërmjet drejtorit, mësimdhënësve dhe nxënësve.
