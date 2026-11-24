@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>School Control | Hyr si Nxënës</title>
+<link rel="stylesheet" href="{% static 'shkolla/css/teacher-auth.css' %}?v=20261123-2">
+<link rel="stylesheet" href="{% static 'shkolla/css/student-portal.css' %}?v=20261124-1">
+<script defer src="{% static 'shkolla/js/student-portal.js' %}?v=20261124-1"></script>
+</head>
+<body data-student-page="login">
+<main class="auth-shell teacher-login-shell">
+<section class="auth-brand teacher-login-brand">
+<a class="brand" href="/"><span class="brand-mark">🎓</span><strong>SCHOOL <em>CONTROL</em></strong></a>
+<div class="teacher-brand-center"><h1>Mirë se vini në<br><span>School Control,</span><br>Nxënës!</h1><div class="teacher-right-arrow" aria-hidden="true"><svg viewBox="0 0 260 72" fill="none"><path d="M7 36H227M195 7L230 36 195 65" stroke="#f1bd54" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+</section>
+<section class="auth-right teacher-login-right"><div class="auth-card teacher-login-card student-login-card">
+<div class="auth-icon">🎓</div><p class="eyebrow">IDENTIFIKIMI I NXËNËSIT</p><h2>Hyr në llogarinë tënde</h2>
+<p class="auth-sub">Përdor të dhënat që janë regjistruar nga shkolla.</p>
+<form id="student-login-form">
+<div class="student-input-row"><div class="form-field"><label for="student-first">Emri</label><input id="student-first" name="emri" autocomplete="given-name" required></div>
+<div class="form-field"><label for="student-last">Mbiemri</label><input id="student-last" name="mbiemri" autocomplete="family-name" required></div></div>
+<div class="form-field"><label for="student-id">ID e nxënësit</label><input id="student-id" name="id_nxenesi" placeholder="NX-0001" required></div>
+<div class="form-field"><label for="student-password">Fjalëkalimi</label><input type="password" id="student-password" name="fjalekalimi" autocomplete="current-password" required></div>
+<p class="feedback" id="student-login-error" role="alert"></p>
+<button class="primary" type="submit">Hyr si Nxënës →</button>
+</form>
+<p class="auth-foot">ID-ja dhe fjalëkalimi merren nga shkolla. Fotografinë e shikon pas hyrjes.</p>
+<p class="auth-foot auth-back"><a href="/">← Kthehu te zgjedhja e rolit</a></p>
+</div></section>
+</main>
+</body></html>

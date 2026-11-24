@@ -323,3 +323,33 @@ urlpatterns += [
     path("api/drejtori/profili/", director_profile_api, name="director_profile_api"),
     path("api/drejtori/foto/", director_photo_api, name="director_photo_api"),
 ]
+
+from shkolla.student_portal import (
+    student_panel_page, student_login_api, student_me_api,
+    student_grades_api, student_absences_api, student_notices_api,
+)
+
+urlpatterns += [
+    path("nxenesi/klasa/", student_panel_page, {"section": "klasa"}, name="student_class"),
+    path("nxenesi/notat/", student_panel_page, {"section": "notat"}, name="student_grades"),
+    path("nxenesi/mungesat/", student_panel_page, {"section": "mungesat"}, name="student_absences"),
+    path("nxenesi/njoftimet/", student_panel_page, {"section": "njoftimet"}, name="student_notifications"),
+    path("nxenesi/aktivitetet/", student_panel_page, {"section": "aktivitetet"}, name="student_activities"),
+    path("api/nxenesi/hyr/", student_login_api, name="student_login_api"),
+    path("api/nxenesi/profili/", student_me_api, name="student_me_api"),
+    path("api/nxenesi/notat/", student_grades_api, name="student_grades_api"),
+    path("api/nxenesi/mungesat/", student_absences_api, name="student_absences_api"),
+    path("api/nxenesi/njoftimet/", student_notices_api, name="student_notices_api"),
+]
+
+from shkolla.student_requests import requests_api, inbox_page
+urlpatterns += [path("api/komunikimi-nxenesit/", requests_api), path("kerkesat-e-nxenesve/", inbox_page)]
+
+from shkolla.teacher_notices_api import teacher_notices_api
+
+urlpatterns += [
+    path("api/mesimdhenesi/njoftimet/", teacher_notices_api, name="teacher_notices_api"),
+]
+
+from shkolla.student_photo_api import student_photo_api
+urlpatterns += [path("api/nxenesi/foto/", student_photo_api, name="student_photo_api")]

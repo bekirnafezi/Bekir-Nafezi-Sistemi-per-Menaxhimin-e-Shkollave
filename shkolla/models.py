@@ -350,3 +350,7 @@ from .aktivitetet_model import Aktivitet
 from .vendimet_model import Vendim
 
 from .teacher_portal_models import KerkeseMesimdhenesi
+
+from .student_request_model import KerkesaNxenesit
+
+from .teacher_notice_model import NjoftimMesimdhenesi

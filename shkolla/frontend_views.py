@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 
 
 def login_page(request):
+    if request.GET.get("role") == "nxenes":
+        from .student_portal import student_login_page
+        return student_login_page(request)
     if request.GET.get("role") == "drejtor":
         return render(request, "shkolla/director_login.html")
     if request.GET.get("role") == "mesimdhenes":

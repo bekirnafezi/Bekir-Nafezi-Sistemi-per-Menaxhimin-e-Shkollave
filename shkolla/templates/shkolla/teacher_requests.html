@@ -2,6 +2,7 @@
 {% load static %}
 {% block page_title %}Kërkesat e Mësimdhënësit{% endblock %}
 {% block portal_content %}
+<a class="btn gold" href="/kerkesat-e-nxenesve/">Kërkesat e nxënësve →</a>
 <div class="request-type-grid"><button class="request-type" data-open-request="perjashtim" type="button"><span class="request-emblem">⚖</span><span><strong>Propozim mase disiplinore</strong><small>Propozo masë ose përjashtim të përkohshëm të nxënësit. Vetëm Drejtori vendos.</small></span><b>→</b></button><button class="request-type" data-open-request="leje" type="button"><span class="request-emblem">▤</span><span><strong>Kërkesë për leje</strong><small>Kërko leje për ditë të caktuara dhe shpjego arsyen.</small></span><b>→</b></button><button class="request-type" data-open-request="sqarim" type="button"><span class="request-emblem">✉</span><span><strong>Kërkesë për sqarim</strong><small>Dërgo pyetje, sqarime ose kërkesa të tjera zyrtare.</small></span><b>→</b></button></div>
 <section class="surface fill"><div class="surface-title"><div><h2>Kërkesat e mia</h2><p>Gjendja dhe përgjigjet e Drejtorit.</p></div><button class="btn subtle" id="requests-refresh" type="button">↻ Rifresko</button></div><div class="table-scroll"><table><thead><tr><th>Data</th><th>Lloji</th><th>Titulli</th><th>Statusi</th><th>Përgjigjja e Drejtorit</th><th>Veprime</th></tr></thead><tbody id="requests-table"><tr><td colspan="6">Duke ngarkuar kërkesat...</td></tr></tbody></table></div></section>
 <script defer src="{% static 'shkolla/js/teacher-requests-enhanced.js' %}?v=20261123-1"></script>

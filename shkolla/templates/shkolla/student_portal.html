@@ -1,0 +1,83 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="sq">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#082c5a">
+<title>School Control | Paneli i Nxënësit</title>
+<link rel="stylesheet" href="{% static 'shkolla/css/teacher-portal-v2.css' %}?v=20261123-1">
+<link rel="stylesheet" href="{% static 'shkolla/css/student-portal.css' %}?v=20261124-1">
+{% if section == 'njoftimet' %}<style>
+body[data-student-page="njoftimet"] .student-notices-layout {display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:16px;flex:1;min-height:0;width:100%;}
+.student-notices-layout > .surface {display:flex;flex-direction:column;min-height:0;overflow:hidden;}
+.student-notices-layout .surface-title {flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.student-notices-layout .notice-preview {min-height:0;flex:1;overflow:hidden;display:flex;align-items:center;padding:12px 18px;box-sizing:border-box;}
+.notice-preview .student-notice {width:100%;min-width:0;margin:0;box-sizing:border-box;}
+.notice-preview .student-notice h3 {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0 0 5px;}
+.notice-preview .student-notice p {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;margin:8px 0 0;}
+.notice-preview .student-notice small {display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.notice-preview .student-content-center {width:100%;overflow:hidden;min-height:0;}
+.student-notice-history {display:grid;gap:12px;}
+.student-notice-history .student-notice {overflow-wrap:anywhere;}
+.student-notice-history .student-notice p {white-space:pre-wrap;overflow-wrap:anywhere;}
+@media(max-width:980px), (max-height:700px){body[data-student-page="njoftimet"] .student-notices-layout {grid-template-rows:auto auto;height:auto;overflow:visible;}.student-notices-layout > .surface {min-height:185px;max-height:none;}.student-notices-layout .notice-preview {min-height:90px;}}
+</style>{% endif %}
+<script defer src="{% static 'shkolla/js/student-portal.js' %}?v=20261124-clear1"></script><script defer src="{% static 'shkolla/js/student-profile-photo.js' %}?v=1"></script><style id="student-profile-pencil-style">
+body[data-student-page] .portal-profile {position:relative;}
+body[data-student-page] .student-profile-pencil {position:absolute;top:11px;right:11px;z-index:5;width:32px;height:32px;display:grid;place-items:center;box-sizing:border-box;padding:0;border:1px solid #e9c66f99;border-radius:10px;color:#ffdc87;background:#ffffff13;font:inherit;font-size:17px;line-height:1;cursor:pointer;}
+body[data-student-page] .student-profile-pencil:hover,body[data-student-page] .student-profile-pencil:focus-visible {background:#ffffff38;outline:2px solid #f3d184;}
+</style>
+<style id="student-avatar-fit-style">
+body[data-student-page] .portal-profile .portrait-shell {position:relative;overflow:hidden;}
+body[data-student-page] .portal-profile .portrait-shell #student-avatar {position:absolute !important;inset:0 !important;display:block !important;width:100% !important;height:100% !important;min-width:0 !important;min-height:0 !important;max-width:none !important;max-height:none !important;margin:0 !important;padding:0 !important;object-fit:cover !important;object-position:50% 50% !important;transform:none !important;border-radius:50%;}
+body[data-student-page] .portal-profile .portrait-shell #student-avatar[hidden],body[data-student-page] #student-avatar-fallback[hidden],body[data-student-page] #student-photo-preview[hidden],body[data-student-page] #student-photo-preview-fallback[hidden] {display:none !important;}
+body[data-student-page] #student-photo-preview:not([hidden]) {display:block;min-width:0;min-height:0;object-fit:cover;object-position:50% 50%;}
+</style>
+<style id="student-unread-style">
+body[data-student-page] .portal-nav .portal-tab {position:relative;}
+body[data-student-page] .portal-nav .student-unread-badge {position:absolute;top:3px;right:7px;z-index:3;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;border:2px solid #fff;border-radius:999px;background:#dc2626;color:#fff;font-family:inherit;font-size:11px;font-weight:800;line-height:1;pointer-events:none;}
+body[data-student-page] .portal-nav .student-unread-badge[hidden] {display:none!important;}
+</style>
+<style id="student-clear-style">
+body[data-student-page] .student-clear-actions {display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;}
+body[data-student-page] .student-clear-button {background:#fff;color:#a52626;border:1px solid #e7bcbc;box-shadow:none;white-space:nowrap;}
+body[data-student-page] .student-clear-button:hover:not(:disabled) {background:#fff0f0;}
+body[data-student-page] .student-clear-button:disabled {opacity:.45;cursor:default;}
+</style>
+</head>
+<body data-student-page="{{ section }}">
+<header class="portal-top"><a class="portal-logo" href="/nxenesi/klasa/"><span class="portal-logo-mark">🎓</span><span>SCHOOL <b>CONTROL</b></span></a>
+<div class="portal-top-right"><span class="portal-date" id="student-date"></span><button class="portal-logout" id="student-logout" type="button">⏻ Dil nga sistemi</button></div></header>
+<div class="portal-layout"><aside class="portal-profile">
+<button id="student-edit-profile" class="student-profile-pencil" type="button" title="Edito profilin" aria-label="Edito profilin">✎</button>
+<div class="portal-profile-top"></div>
+<div class="portrait-shell"><div class="portrait-fallback" id="student-avatar-fallback">🎓</div><img id="student-avatar" alt="Fotografia e nxënësit" hidden></div>
+<h2 id="student-profile-name">Nxënësi</h2><div class="profile-role">Nxënës</div>
+<p class="profile-subject">Klasa: <strong id="student-profile-class">—</strong></p>
+<div class="profile-tutor">✦ ID <span id="student-profile-id">—</span></div>
+<div class="profile-line"></div><div class="profile-contact"><span>✉</span><span id="student-profile-email">—</span></div>
+<div class="profile-foot"><span class="profile-deco">✦</span><span>SCHOOL CONTROL</span></div>
+</aside>
+<div class="portal-workspace"><nav class="portal-nav" aria-label="Menuja e nxënësit">
+<a class="portal-tab {% if section == 'klasa' %}active{% endif %}" href="/nxenesi/klasa/"><span class="tab-icon">▣</span> Klasa</a>
+<a class="portal-tab {% if section == 'notat' %}active{% endif %}" href="/nxenesi/notat/"><span class="tab-icon">★</span> Notat</a>
+<a class="portal-tab {% if section == 'mungesat' %}active{% endif %}" href="/nxenesi/mungesat/"><span class="tab-icon">◷</span> Mungesat</a>
+<a class="portal-tab {% if section == 'njoftimet' %}active{% endif %}" href="/nxenesi/njoftimet/"><span class="tab-icon">▤</span> Njoftimet</a>
+<a class="portal-tab {% if section == 'aktivitetet' %}active{% endif %}" href="/nxenesi/aktivitetet/"><span class="tab-icon">✉</span> Aktivitetet</a>
+</nav>
+<main class="portal-content student-main"><p class="portal-message" id="student-alert" role="alert"></p><div id="student-page-content" class="student-body"></div></main></div></div>
+<dialog id="student-modal" class="portal-dialog student-modal"><div class="dialog-top"><h2 id="student-modal-title">Detajet</h2><button type="button" id="student-close" aria-label="Mbyll">✕</button></div><div class="dialog-inner" id="student-modal-content"></div></dialog>
+<dialog id="student-photo-dialog" class="portal-dialog" style="width:min(440px,calc(100vw - 32px));max-height:90vh;overflow:auto;box-sizing:border-box;">
+<div class="dialog-top"><h2>Edito profilin</h2><button type="button" id="student-photo-close" aria-label="Mbyll">✕</button></div>
+<div class="dialog-inner" style="padding:20px;">
+<form id="student-photo-form" style="display:grid;gap:14px;">
+<div style="width:112px;height:112px;margin:auto;border:4px solid #efbf59;border-radius:50%;overflow:hidden;background:#e8f1fa;display:grid;place-items:center;">
+<img id="student-photo-preview" alt="Pamja e fotografisë" hidden style="width:100%;height:100%;object-fit:cover;">
+<span id="student-photo-preview-fallback" style="font-size:44px;">🎓</span></div>
+<label for="student-photo-input" style="font-weight:bold;color:#103d6d;">Fotografia e profilit</label>
+<input id="student-photo-input" name="foto" type="file" accept="image/jpeg,image/png,image/webp" required style="max-width:100%;">
+<small style="color:#58728e;">JPG, PNG ose WebP · maksimumi 3 MB</small>
+<p id="student-photo-error" role="alert" style="color:#a32626;margin:0;"></p>
+<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;"><button type="button" class="btn" id="student-photo-cancel">Anulo</button><button type="submit" class="btn gold" id="student-photo-save">Ruaj fotografinë</button></div>
+</form></div></dialog>
+</body></html>
+

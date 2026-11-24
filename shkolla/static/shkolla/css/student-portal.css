@@ -1,0 +1,44 @@
+.student-input-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.student-login-card .auth-sub{margin-bottom:15px}
+.student-login-card form{gap:10px}
+.student-login-card .form-field input{height:40px}
+.student-login-card .primary{margin-top:1px}
+.student-body{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0;min-width:0}
+.student-main{overflow:hidden}
+.student-body .surface{flex:1}
+.student-dashboard-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(100deg,#07315f,#0d5390);border:2px solid var(--gold);border-radius:18px;color:white;padding:20px 26px}
+.student-dashboard-banner .small{font-size:11px;color:#f6d37a;letter-spacing:1.5px;font-weight:800}
+.student-dashboard-banner h1{font-size:28px;margin:6px 0 0;color:white}
+.student-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.student-summary .summary-card{padding:19px 22px;min-height:132px;border:1px solid #d6e5f4;border-radius:17px;background:linear-gradient(140deg,#fff,#eff6ff);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.summary-card span{font-size:13px;color:#61819d}.summary-card strong{font-size:29px;color:#ba811f}
+.student-body .surface-title{padding:20px 22px}
+.student-body .surface-title h2{font-size:22px}
+.student-content-center{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;text-align:center;flex:1;color:#5a7793;padding:30px}
+.student-content-center strong{font-size:21px;color:#17436f}
+.student-info-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:min(100%,800px);text-align:left}
+.student-info-list>div{border:1px solid #d9e7f2;border-radius:12px;padding:18px;background:#f4f9ff}
+.student-info-list small{display:block;color:#7591a9;margin-bottom:8px}
+.student-info-list b{color:#0e3d6c;font-size:18px}
+.student-records{display:grid;gap:11px;padding:18px;overflow:auto;align-content:start}
+.student-record{border:1px solid #dde9f3;border-radius:12px;padding:15px 17px;background:linear-gradient(100deg,#fff,#f5faff);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.student-record h3{margin:0 0 5px;font-size:16px;color:#104376}.student-record small{color:#7190a8}
+.student-record p{margin:6px 0 0;font-size:13px;color:#506f8a}
+.student-stats4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.student-modal{width:min(920px,96vw);max-height:82dvh;overflow:hidden;border:0;border-radius:19px;padding:0;box-shadow:0 20px 70px #021e455f}
+.student-modal::backdrop{background:#06285496;backdrop-filter:blur(3px)}
+.student-modal .dialog-inner{max-height:calc(82dvh - 72px);overflow:auto;padding:13px 18px 22px}
+.student-modal .dialog-top{display:flex;justify-content:space-between;align-items:center;background:#07346c;color:white;padding:14px 18px}
+.student-modal .dialog-top h2{color:white;margin:0;font-size:20px}
+.student-modal .dialog-top button{border:0;border-radius:10px;background:#f6c65d;color:#07315b;font-size:22px;width:33px;height:33px}
+.student-modal table{min-width:640px;width:100%;border-collapse:collapse}
+.student-modal th,.student-modal td{border-bottom:1px solid #e1eaf4;text-align:left;padding:12px;font-size:13px}
+.student-modal th{background:#e8f3fe;color:#0c477f}
+.student-notice{border:1px solid #d8e5f1;border-radius:14px;padding:16px;background:#fff}
+.student-notice h3{margin:0 0 6px;color:#103b69}
+.student-notice small{color:#7c91a9}
+.student-notice p{font-size:13px;line-height:1.6;white-space:pre-wrap}
+.portal-nav{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media(max-width:900px){.student-summary,.student-stats4{grid-template-columns:repeat(2,minmax(0,1fr))}.student-main{overflow:auto}.student-info-list{grid-template-columns:1fr}}
+@media(max-width:760px){.student-input-row{grid-template-columns:1fr}.student-dashboard-banner h1{font-size:22px}.portal-nav{grid-template-columns:repeat(5,minmax(128px,1fr));overflow-x:auto}.student-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.student-stats4{grid-template-columns:repeat(2,minmax(0,1fr))}.student-summary .summary-card{padding:12px;min-height:100px}}

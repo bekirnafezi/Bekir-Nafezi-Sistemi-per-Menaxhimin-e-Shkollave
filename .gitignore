@@ -1,12 +1,18 @@
-# Ambienti virtual
 .venv/
-
-# Skedaret e perkohshem te Python
 __pycache__/
 *.pyc
-
-# Databaza lokale
 db.sqlite3
-
-# Skedaret me te dhena sekrete
 .env
+/media/
+
+media/director_profiles/
+/private_student_photos/
+
+.env
+.env.*
+!.env.example
+/private_student_photos/
+/INSTALO_*.py
+/RREGULLO_*.py
+/*_payload/
+/*.zip

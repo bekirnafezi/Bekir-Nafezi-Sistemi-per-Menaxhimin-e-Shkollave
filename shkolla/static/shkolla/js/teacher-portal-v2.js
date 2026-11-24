@@ -471,6 +471,46 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     }
+    async function openStudentNotice() {
+        try {
+            const data = await api('/api/mesimdhenesi/njoftimet/');
+            const classes = data.klasat || [];
+            if (!classes.length) {
+                openDialog('Dërgo njoftim', '<p>Nuk ke klasa të caktuara.</p>');
+                return;
+            }
+            openDialog('Dërgo njoftim te nxënësit', `<form class="dialog-form" id="student-notice-form"><label for="notice-class">Klasa</label><select id="notice-class" required>${classes.map(c=>`<option value="${c.id}">${esc(c.emri)}</option>`).join('')}</select><label for="notice-recipient">Marrësi</label><select id="notice-recipient" required></select><label for="notice-title">Titulli</label><input id="notice-title" required minlength="3" maxlength="200"><label for="notice-content">Përmbajtja</label><textarea id="notice-content" rows="5" required minlength="5" maxlength="3000"></textarea><button type="submit" class="btn gold">Dërgo njoftimin</button></form>`);
+            function fillRecipients() {
+                const selected = classes.find(c=>String(c.id)===$('notice-class').value);
+                $('notice-recipient').innerHTML = '<option value="">Zgjidh marrësin</option><option value="all">Të gjithë nxënësit e klasës</option>'+(selected?.nxenesit||[]).map(n=>`<option value="${n.id}">${esc(n.emri)} · ${esc(n.identifikuesi)}</option>`).join('');
+            }
+            fillRecipients();
+            $('notice-class').addEventListener('change',fillRecipients);
+            $('student-notice-form').addEventListener('submit',async event=>{
+                event.preventDefault();
+                const button = event.target.querySelector('button[type="submit"]');
+                button.disabled = true;
+                dialogError('');
+                try {
+                    const recipient = $('notice-recipient').value;
+                    await api('/api/mesimdhenesi/njoftimet/','POST',{
+                        klasa:Number($('notice-class').value), nxenesi:recipient==='all'?null:Number(recipient),
+                        titulli:$('notice-title').value, permbajtja:$('notice-content').value
+                    });
+                    dialog.close();
+                    setMessage('Njoftimi u dërgua me sukses.');
+                } catch(err) {dialogError(err.message);}
+                finally {button.disabled=false;}
+            });
+        } catch(err) {setMessage(err.message);}
+    }
+    async function showSentStudentNotices() {
+        try {
+            const data = await api('/api/mesimdhenesi/njoftimet/');
+            const rows = data.njoftimet || [];
+            openDialog('Njoftimet e dërguara', rows.length ? rows.map(n=>`<article style="padding:12px 0;border-bottom:1px solid #dbe7f2"><strong>${esc(n.titulli)}</strong><p class="dialog-meta">${esc(n.marresi)} · ${formatDate(n.data)}</p><div class="dialog-detail" style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(n.permbajtja)}</div></article>`).join('') : '<p>Nuk ke dërguar ende njoftime.</p>');
+        } catch(err) {setMessage(err.message);}
+    }
     function renderDecisions() {
         $('decision-unread-count').textContent = String(getNewDecisions().length);
         const list = $('decision-list');
@@ -587,6 +627,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (page==='vendimet') {
             renderDecisions();
             $('decision-refresh').addEventListener('click',refreshDecisions);
+            $('send-student-notice').addEventListener('click',openStudentNotice);
+            $('sent-student-notices').addEventListener('click',showSentStudentNotices);
         }
         if (page==='kerkesat') {
             await refreshRequests();
