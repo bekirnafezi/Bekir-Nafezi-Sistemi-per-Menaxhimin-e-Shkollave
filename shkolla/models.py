@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -81,6 +80,15 @@ class Mesimdhenesi(models.Model):
         on_delete=models.CASCADE,
         related_name="profili_mesimdhenesit"
     )
+
+    identifikuesi = models.CharField(max_length=35, unique=True, null=True, blank=True)
+    telefoni = models.CharField(max_length=30, blank=True)
+    lenda_preferuar = models.ForeignKey(
+        "Lenda", on_delete=models.SET_NULL, null=True, blank=True,
+        related_name="mesimdhenesit_e_regjistruar"
+    )
+    foto = models.FileField(upload_to="mesimdhenesit/", null=True, blank=True)
+    miratuar = models.BooleanField(default=True)
 
     def __str__(self):
         return self.perdorues.email
@@ -340,3 +348,5 @@ class NdryshimEvidence(models.Model):
 
 from .aktivitetet_model import Aktivitet
 from .vendimet_model import Vendim
+
+from .teacher_portal_models import KerkeseMesimdhenesi

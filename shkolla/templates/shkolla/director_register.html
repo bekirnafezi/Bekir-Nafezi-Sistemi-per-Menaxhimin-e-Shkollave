@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f2f6fc">
+    <title>School Control | Regjistrohu si Drejtor</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/teacher-auth.css' %}?v=20261123-2">
+    <script src="{% static 'shkolla/js/director-auth.js' %}?v=20261124-2" defer></script>
+</head>
+<body data-page="director-register">
+    <main class="register-shell">
+        <section class="register-stage">
+            <div class="auth-card register-card">
+                <div class="register-header">
+                    <div class="auth-icon" aria-hidden="true">🎓</div>
+                    <p class="eyebrow">KRIJIMI I LLOGARISË SË DREJTORIT</p>
+                    <h1>Regjistrohu si Drejtor</h1>
+                    <p class="auth-sub">Llogaria aktivizohet menjëherë, pa miratim. Kërkohet kodi i sigurt i regjistrimit.</p>
+                </div>
+                <form id="director-register-form" class="register-form">
+                    {% csrf_token %}
+                    <div class="form-field">
+                        <label for="emri">Emri</label>
+                        <input id="emri" name="emri" required maxlength="150" autocomplete="given-name">
+                    </div>
+                    <div class="form-field">
+                        <label for="mbiemri">Mbiemri</label>
+                        <input id="mbiemri" name="mbiemri" required maxlength="150" autocomplete="family-name">
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="drejtori@shkolla.com">
+                    </div>
+                    <div class="form-field">
+                        <label for="kodi">Kodi i regjistrimit</label>
+                        <input id="kodi" name="kodi" type="password" required autocomplete="off" placeholder="Kodi i sigurt nga konfigurimi">
+                    </div>
+                    <div class="form-field">
+                        <label for="fjalekalimi">Fjalëkalimi</label>
+                        <input id="fjalekalimi" name="fjalekalimi" type="password" minlength="8" required autocomplete="new-password">
+                    </div>
+                    <div class="form-field">
+                        <label for="perserit_fjalekalimin">Përsërit fjalëkalimin</label>
+                        <input id="perserit_fjalekalimin" name="perserit_fjalekalimin" type="password" minlength="8" required autocomplete="new-password">
+                    </div>
+                    <p class="feedback" id="auth-message" role="status" aria-live="polite"></p>
+                    <button class="primary" type="submit">Krijo llogarinë si Drejtor →</button>
+                </form>
+                <p class="auth-foot register-foot">Ke llogari? <a href="/login/?role=drejtor">Hyr këtu</a> <span aria-hidden="true">·</span> <a href="/">Kthehu te rolet</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

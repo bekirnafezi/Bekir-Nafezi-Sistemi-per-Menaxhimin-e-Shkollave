@@ -1,5 +1,7 @@
+from shkolla.login_role_redirect import zgjedh_rolin_nese_mungon
 from django.contrib import admin
 from django.urls import path
+from shkolla.director_grades import director_grades_page, director_grades_data_api
 
 from shkolla.frontend_views import (
     login_page,
@@ -34,14 +36,16 @@ from shkolla.views import (
 )
 
 
-from shkolla.frontend_views import lendet_page, angazhimet_page
+from shkolla.frontend_views import lendet_page, angazhimet_page, zgjedh_rolin_page
+
+from shkolla.director_absences import director_absences_page, director_absences_data_api
 
 urlpatterns = [
     path('lendet/', lendet_page, name='lendet'),
     path('angazhimet/', angazhimet_page, name='angazhimet'),
 
-    path('', login_page, name='home'),
-    path('login/', login_page, name='login'),
+    path('', zgjedh_rolin_page, name='home'),
+    path("login/", zgjedh_rolin_nese_mungon(login_page), name="login"),
     path('dashboard/', dashboard_page, name='dashboard'),
     path('klasat/', klasat_page, name='klasat'),
     path('nxenesit/', nxenesit_page, name='nxenesit'),
@@ -222,8 +226,8 @@ urlpatterns += [
 from shkolla.frontend_views import notat_page, mungesat_page
 
 urlpatterns += [
-    path("notat/", notat_page, name="notat"),
-    path("mungesat/", mungesat_page, name="mungesat"),
+    path("notat/", director_grades_page, name="notat"),
+    path("mungesat/", director_absences_page, name="mungesat"),
 ]
 from shkolla.evidenca_statistika import statistikat_notave, statistikat_mungesave
 
@@ -232,4 +236,90 @@ urlpatterns += [
 ]
 urlpatterns += [
     path("api/statistika/mungesat/", statistikat_mungesave, name="statistikat_mungesave"),
+]
+from shkolla.frontend_views import teacher_register_page, teacher_dashboard_page, director_requests_page
+from shkolla.teacher_portal_api import (
+    secure_login_api, teacher_public_subjects, teacher_signup_api,
+    teacher_dashboard_api, teacher_photo_api, teacher_requests_api,
+    director_teacher_requests_api, director_teacher_approval_api,
+)
+
+urlpatterns += [
+    path("mesimdhenesi/regjistrohu/", teacher_register_page, name="teacher_register"),
+    path("mesimdhenesi/panel/", teacher_dashboard_page, name="teacher_dashboard"),
+    path("drejtori/kerkesat/", director_requests_page, name="director_requests"),
+    path("api/mesimdhenesi/lendet/", teacher_public_subjects),
+    path("api/mesimdhenesi/regjistrohu/", teacher_signup_api),
+    path("api/mesimdhenesi/panel/", teacher_dashboard_api),
+    path("api/mesimdhenesi/foto/", teacher_photo_api),
+    path("api/mesimdhenesi/kerkesat/", teacher_requests_api),
+    path("api/drejtori/kerkesat/", director_teacher_requests_api),
+    path("api/drejtori/mesimdhenesit/<int:pk>/mirato/", director_teacher_approval_api),
+]
+
+urlpatterns.insert(0, path("api/auth/login/", secure_login_api, name="secure_login_api"))
+
+
+from shkolla.teacher_portal_pages import (
+    teacher_classes_page,
+    teacher_grades_page,
+    teacher_tutor_page,
+    teacher_decisions_page,
+    teacher_requests_page,
+)
+
+urlpatterns += [
+    path("mesimdhenesi/klasat/", teacher_classes_page, name="teacher_classes"),
+    path("mesimdhenesi/notat/", teacher_grades_page, name="teacher_grades"),
+    path("mesimdhenesi/klasa-ime/", teacher_tutor_page, name="teacher_tutor"),
+    path("mesimdhenesi/vendimet/", teacher_decisions_page, name="teacher_decisions"),
+    path("mesimdhenesi/kerkesat/", teacher_requests_page, name="teacher_requests"),
+]
+
+from shkolla.lendet_ligjeruesit_api import lendet_ligjeruesit_api
+
+urlpatterns += [
+    path("api/lendet/ligjeruesit/", lendet_ligjeruesit_api, name="lendet_ligjeruesit_api"),
+]
+
+from shkolla.teacher_profile_api import teacher_profile_api
+
+urlpatterns += [
+    path("api/mesimdhenesi/profili/", teacher_profile_api, name="teacher_profile_api"),
+]
+
+from shkolla.director_auth import director_register_page, director_register_api
+
+urlpatterns += [
+    path("drejtori/regjistrohu/", director_register_page, name="director_register"),
+    path("api/drejtori/regjistrohu/", director_register_api, name="director_register_api"),
+]
+
+from shkolla.director_login_entry import director_login_entry
+
+urlpatterns += [
+    path("drejtori/hyrje/", director_login_entry, name="director_login_entry"),
+]
+
+from shkolla.angazhimet_bulk_api import angazhimet_bulk_api
+
+urlpatterns += [
+    path("api/angazhimet/ne-grup/", angazhimet_bulk_api, name="angazhimet_bulk_api"),
+]
+
+
+
+urlpatterns += [
+    path("api/drejtori/notat-pasqyra/", director_grades_data_api, name="director_grades_data_api"),
+]
+
+urlpatterns += [
+    path("api/drejtori/mungesat-pasqyra/", director_absences_data_api, name="director_absences_data_api"),
+]
+
+from shkolla.director_profile_api import director_profile_api, director_photo_api
+
+urlpatterns += [
+    path("api/drejtori/profili/", director_profile_api, name="director_profile_api"),
+    path("api/drejtori/foto/", director_photo_api, name="director_photo_api"),
 ]

@@ -1,0 +1,93 @@
+html, body { width:100%; height:100%; margin:0; overflow:hidden; }
+*, *::before, *::after { box-sizing:border-box; }
+body.director-fix-v3 .main-content > .director-grades-page {
+    display:flex !important;
+    flex:1 1 0 !important;
+    flex-direction:column !important;
+    gap:17px !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    min-height:0 !important;
+    background:transparent !important;
+}
+.director-grades-page .grades-stats {
+    flex:0 0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+}
+.director-grades-page .grades-stat {
+    padding:17px 18px 15px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    min-width:0;
+    min-height:120px;
+    border:1px solid #d4e6f6;
+    border-radius:21px;
+    background:linear-gradient(140deg,#fff,#f0f7ff);
+    box-shadow:0 6px 17px #2e608b13;
+}
+.director-grades-page .grades-stat span { color:#4d7392; font:600 13px 'Segoe UI',Arial,sans-serif; }
+.director-grades-page .grades-stat strong { color:#bc8114; font:850 clamp(26px,2.2vw,38px) 'Segoe UI',Arial,sans-serif; line-height:1.08; }
+.director-grades-page .grades-stat small { color:#7793ab; font:12px 'Segoe UI',Arial,sans-serif; }
+.director-grades-page .grades-card {
+    display:flex;
+    flex-direction:column;
+    flex:1 1 0;
+    min-height:0;
+    overflow:hidden;
+    padding:23px 24px 17px;
+    border-radius:27px;
+    border:1px solid #d5e5f1;
+    background:linear-gradient(145deg,#fff,#f7fbff);
+    box-shadow:0 9px 22px #1c4c7417;
+}
+.director-grades-page .grades-card-header { display:flex; flex:0 0 auto; justify-content:space-between; align-items:center; gap:18px; }
+.director-grades-page .grades-card-header h1 { margin:0 0 5px; color:#082f5e; font:850 clamp(21px,1.9vw,29px) 'Segoe UI',Arial,sans-serif; }
+.director-grades-page .grades-card-header p { margin:0; color:#7896af; font:13px 'Segoe UI',Arial,sans-serif; }
+.director-grades-page .grades-gold-button { padding:12px 17px; min-height:44px; flex:0 0 auto; border:1px solid #e9b552; border-radius:13px; background:linear-gradient(115deg,#ffe4a0,#e9ac36); color:#082e59; font:800 13px 'Segoe UI',Arial,sans-serif; cursor:pointer; }
+.director-grades-page button:hover, .grades-modal button:hover { filter:brightness(1.04); }
+.director-grades-page button:focus-visible, .director-grades-page select:focus-visible, .grades-modal button:focus-visible { outline:3px solid #e9ad34; outline-offset:2px; }
+.director-grades-page .grades-filters { display:flex; flex:0 0 auto; align-items:end; gap:12px; margin:21px 0 17px; flex-wrap:wrap; }
+.director-grades-page .grades-filters label { display:flex; flex-direction:column; gap:7px; color:#19486f; font:800 13px 'Segoe UI',Arial,sans-serif; flex:1 1 230px; max-width:370px; }
+.director-grades-page .grades-filters select { height:44px; width:100%; min-width:0; padding:0 11px; border:1px solid #dfc490; border-radius:12px; background:#fffdfa; color:#123b61; font:14px 'Segoe UI',Arial,sans-serif; }
+.director-grades-page .grades-reset-button { height:44px; padding:0 16px; border:1px solid #d1e5f3; border-radius:12px; background:#eef7ff; color:#185079; font:700 13px 'Segoe UI',Arial,sans-serif; cursor:pointer; }
+.director-grades-page .grades-preview-wrapper { flex:1 1 auto; min-height:0; overflow:hidden; }
+.grades-table { width:100%; table-layout:fixed; border-collapse:collapse; font:14px 'Segoe UI',Arial,sans-serif; color:#163e64; }
+.grades-table th { padding:15px 12px; background:#e2f2fe; color:#0a446d; font-weight:800; text-align:left; font-size:13px; }
+.grades-table th:first-child { border-radius:12px 0 0 12px; }
+.grades-table th:last-child { border-radius:0 12px 12px 0; }
+.grades-table td { padding:13px 12px; border-bottom:1px solid #dcebf6; overflow-wrap:anywhere; }
+.grades-table tbody tr:nth-child(even) { background:#f2f9ff; }
+.grades-table tbody tr:hover { background:#eaf5ff; }
+.grades-table th:nth-child(1){width:22%} .grades-table th:nth-child(2){width:12%} .grades-table th:nth-child(3){width:20%} .grades-table th:nth-child(4){width:10%} .grades-table th:nth-child(5){width:15%} .grades-table th:nth-child(6){width:21%}
+.grades-table .grades-empty { text-align:center; color:#6d8ca7; padding:25px; }
+.grades-table .grade-mark { display:inline-flex; align-items:center; justify-content:center; min-width:36px; min-height:31px; padding:4px 10px; border-radius:10px; border:1px solid #e2b963; background:#ffefcb; color:#97620c; font-weight:850; }
+.director-grades-page .grades-status { margin:10px 0 0; color:#6d8ca7; font:12px 'Segoe UI',Arial,sans-serif; flex:0 0 auto; }
+.director-grades-page .grades-status.error { color:#bd3751; }
+.grades-modal { width:min(1110px,94vw); max-width:94vw; max-height:86dvh; padding:0; border:1px solid #d7b16d; border-radius:22px; box-shadow:0 28px 85px #081e395c; color:#0a345e; background:#fff; }
+.grades-modal::backdrop { background:#09264bab; }
+.grades-modal[open] { display:flex; flex-direction:column; }
+.grades-modal .grades-modal-head { flex:0 0 auto; display:flex; justify-content:space-between; align-items:center; gap:14px; padding:20px 23px; background:linear-gradient(110deg,#082c5c,#12528b); color:#fff; }
+.grades-modal .grades-modal-head h2 { margin:0 0 4px; color:#fff; font:850 24px 'Segoe UI',Arial,sans-serif; }
+.grades-modal .grades-modal-head p { margin:0; color:#b7d9f8; font:13px 'Segoe UI',Arial,sans-serif; }
+.grades-modal .grades-close-button { border:1px solid #ffffff70; border-radius:10px; background:#fff1; color:#fff; min-width:39px; min-height:39px; font:800 20px Arial,sans-serif; cursor:pointer; }
+.grades-modal .grades-modal-summary { flex:0 0 auto; padding:12px 24px; background:#fff9ec; color:#94600f; font:700 13px 'Segoe UI',Arial,sans-serif; }
+.grades-modal .grades-modal-table-wrapper { min-height:0; overflow-y:auto; padding:14px 21px 19px; }
+.grades-modal .grades-table th { position:sticky; top:0; }
+@media (max-width:1070px) {
+    .director-grades-page .grades-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .director-grades-page .grades-stat { min-height:104px; }
+    body.director-fix-v3 .main-content > .director-grades-page { overflow-y:auto !important; }
+}
+@media (max-width:680px) {
+    html,body { height:auto; overflow:auto; }
+    .director-grades-page .grades-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .director-grades-page .grades-card-header { align-items:stretch; flex-direction:column; }
+    .director-grades-page .grades-gold-button { align-self:stretch; }
+    .director-grades-page .grades-filters label { max-width:none; }
+    .director-grades-page .grades-card { min-height:390px; }
+    .grades-table { min-width:720px; }
+    .director-grades-page .grades-preview-wrapper { overflow-x:auto; }
+}

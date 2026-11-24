@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#082c5a">
+  <title>School Control | {% block page_title %}Mësimdhënësi{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'shkolla/css/teacher-portal-v2.css' %}?v=20261123-tutor-kornizat">
+  <script defer src="{% static 'shkolla/js/teacher-portal-v2.js' %}?v=20261123-tutor-dialogs"></script>
+  <script defer src="{% static 'shkolla/js/teacher-profile-edit.js' %}?v=20261123-1"></script>
+</head>
+<body data-teacher-page="{{ section }}">
+<header class="portal-top">
+  <a class="portal-logo" href="{% url 'teacher_dashboard' %}" aria-label="School Control - Paneli kryesor"><span class="portal-logo-mark">🎓</span><span>SCHOOL <b>CONTROL</b></span></a>
+  <div class="portal-top-right"><span class="portal-date" id="portal-date"></span><button class="portal-logout" id="portal-logout" type="button">⏻ <span>Dil nga sistemi</span></button></div>
+</header>
+<div class="portal-layout">
+  <aside class="portal-profile" aria-label="Profili i mësimdhënësit">
+    <div class="portal-profile-top"></div>
+    <div class="portrait-shell"><div class="portrait-fallback" id="portrait-fallback">👨‍🏫</div><img id="portal-photo" alt="Fotografia e mësimdhënësit" hidden></div>
+    <h2 id="profile-name">Mësimdhënësi</h2>
+    <div class="profile-role">Mësimdhënës</div>
+    <p class="profile-subject">Lënda: <strong id="profile-subject">—</strong></p>
+    <div class="profile-tutor" id="profile-tutor" hidden>✦ Kujdestar i klasës <span id="profile-tutor-class"></span></div>
+    <div class="profile-line"></div>
+    <div class="profile-contact"><span aria-hidden="true">✉</span><span id="profile-email">—</span></div>
+    <div class="profile-contact"><span aria-hidden="true">☎</span><span id="profile-phone">—</span></div>
+    <div class="profile-foot"><span class="profile-deco" aria-hidden="true">✦</span><span id="profile-identifier">SCHOOL CONTROL</span></div>
+  </aside>
+  <div class="portal-workspace">
+    <nav class="portal-nav" aria-label="Menytë e mësimdhënësit">
+      <a class="portal-tab {% if section == 'klasat' %}active{% endif %}" href="{% url 'teacher_classes' %}"><span class="tab-icon">▣</span> Klasat</a>
+      <a class="portal-tab {% if section == 'notat' %}active{% endif %}" href="{% url 'teacher_grades' %}"><span class="tab-icon">✎</span> Shto nota</a>
+      <a class="portal-tab {% if section == 'klasa-ime' %}active{% endif %}" href="{% url 'teacher_tutor' %}"><span class="tab-icon">★</span> Klasa ime</a>
+      <a class="portal-tab {% if section == 'vendimet' %}active{% endif %}" href="{% url 'teacher_decisions' %}"><span class="tab-icon">▤</span> Vendimet e Drejtorit <span class="notification-badge" id="notification-badge" hidden></span></a>
+      <a class="portal-tab {% if section == 'kerkesat' %}active{% endif %}" href="{% url 'teacher_requests' %}"><span class="tab-icon">✉</span> Kërkesa <span class="notification-badge" id="request-badge" hidden></span></a>
+    </nav>
+    <main class="portal-content" id="portal-content">
+      <p id="portal-message" class="portal-message" role="status" aria-live="polite"></p>
+      {% block portal_content %}{% endblock %}
+    </main>
+  </div>
+</div>
+<dialog class="portal-dialog" id="portal-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><h2 id="dialog-title">Detajet</h2><button type="button" id="dialog-close" aria-label="Mbyll">✕</button></div><div class="dialog-inner" id="dialog-inner"></div><p id="dialog-error" class="dialog-error" role="status"></p></dialog>
+</body>
+</html>

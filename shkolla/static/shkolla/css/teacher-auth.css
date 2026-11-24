@@ -1,0 +1,138 @@
+
+:root {
+    --navy: #082b55;
+    --deep: #031c3d;
+    --gold: #e3ad42;
+    --gold-light: #f7cf73;
+    --ink: #103b62;
+}
+
+* { box-sizing: border-box; }
+html, body { width: 100%; min-height: 100%; margin: 0; }
+body { font-family: "Segoe UI", Arial, sans-serif; color: var(--ink); background: #edf3fa; }
+a { color: #a46d0d; font-weight: 700; }
+
+.auth-shell { height: 100vh; height: 100dvh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.auth-brand {
+    position: relative;
+    min-width: 0;
+    height: 100%;
+    background: linear-gradient(150deg,#061d3c 0%,#103b6e 55%,#214f80 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(24px, 3.2vw, 54px);
+    overflow: hidden;
+}
+.auth-brand::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .18;
+    background: radial-gradient(circle at 92% 75%, #8ab9e8, transparent 47%);
+}
+.auth-brand::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    width: 88%; height: 34%;
+    right: -30%; top: 0;
+    border: 2px solid rgba(244, 199, 104, .24);
+    border-radius: 0 0 100% 100%;
+    transform: rotate(-9deg);
+}
+.brand { position: relative; z-index: 1; display: inline-flex; width: fit-content; align-items: center; gap: 12px; text-decoration: none; color: #fff; font-size: clamp(20px, 2.05vw, 32px); letter-spacing: -.7px; white-space: nowrap; }
+.brand em { color: #f4c468; font-style: normal; }
+.brand-mark { display: inline-flex; width: 52px; height: 52px; }
+.brand-mark svg { width: 100%; height: 100%; }
+.teacher-brand-center { position: relative; z-index: 1; width: 100%; margin: auto 0; padding-bottom: min(13vh, 90px); }
+.teacher-brand-center h1 { margin: 0; font-weight: 800; line-height: 1.17; letter-spacing: -.9px; color: #fff; font-size: clamp(35px, 3.55vw, 60px); }
+.teacher-brand-center h1 span { color: #f3c162; }
+.teacher-right-arrow { margin: 32px 5% 0 auto; width: min(47%, 260px); filter: drop-shadow(0 7px 15px rgba(248,192,68,.35)); }
+.teacher-right-arrow svg { display: block; width: 100%; height: auto; }
+
+.auth-right { display: grid; place-items: center; min-height: 0; padding: 22px; background: radial-gradient(circle at 90% 8%, #f9e7be, #f7fafd 52%, #dce8f4); }
+.auth-card { background: #fff; border: 1px solid #eed59d; border-radius: 26px; box-shadow: 0 16px 56px rgba(18,54,88,.15); }
+.teacher-login-card { width: min(100%, 570px); padding: clamp(23px, 3vw, 40px); }
+.auth-icon { display: grid; place-items: center; width: 56px; height: 56px; background: #ffefc5; border-radius: 18px; margin: 0 auto 10px; font-size: 27px; }
+.eyebrow { margin: 0; text-align: center; color: #bb7d14; letter-spacing: 1.8px; font-size: 11px; font-weight: 900; }
+.auth-card h2, .register-card h1 { text-align: center; color: #0c345d; font-size: clamp(22px, 2.45vw, 32px); line-height: 1.15; margin: 10px 0 8px; }
+.auth-sub { text-align: center; color: #66839c; margin: 0 0 20px; font-size: 13px; line-height: 1.35; }
+.teacher-login-card form { display: grid; gap: 13px; }
+.form-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.form-field label { font-size: 12.5px; color: #6d5125; font-weight: 800; }
+.form-field input, .form-field select {
+    display: block;
+    width: 100%; height: 45px; min-width: 0; padding: 9px 13px;
+    background: #fffdf9; border: 1px solid #e9cf98; border-radius: 10px;
+    color: #17405f; font-family: inherit; font-size: 14px;
+}
+.form-field input:focus, .form-field select:focus { outline: 2px solid #dfad49; outline-offset: 1px; }
+.form-field input[type=file] { height: 40px; padding: 6px 8px; font-size: 12px; }
+.primary { border: 0; border-radius: 11px; background: linear-gradient(115deg,#f2c962,#b77a13); color: #fff; font: 800 14px "Segoe UI",Arial,sans-serif; min-height: 44px; padding: 11px 18px; box-shadow: 0 7px 17px rgba(166,112,26,.2); cursor: pointer; }
+.primary:hover { filter: brightness(1.035); }
+.primary:focus-visible { outline: 3px solid #164e8b; outline-offset: 3px; }
+.primary:disabled { opacity: .65; cursor: wait; }
+.feedback { color: #a52d2d; font-size: 12px; margin: 0; min-height: 17px; line-height: 1.3; }
+.feedback.success { color: #187344; }
+.auth-foot { color: #658098; text-align: center; font-size: 12px; margin: 14px 0 0; }
+.auth-back { margin-top: 10px; }
+
+body[data-page=register] { overflow: hidden; }
+.register-shell { height: 100vh; height: 100dvh; width: 100%; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at top right, #f7e3ae, transparent 40%), linear-gradient(125deg,#eaf1f9,#f7fbff 55%,#e9f1fb); padding: 13px; }
+.register-stage { display: grid; place-items: center; width: 100%; height: 100%; min-height: 0; }
+.register-card { width: min(960px, 100%); max-height: 100%; padding: clamp(14px, 1.7vw, 24px) clamp(20px, 3vw, 42px); overflow: hidden; }
+.register-header { margin-bottom: 12px; }
+.register-header .auth-icon { width: 43px; height: 43px; border-radius: 13px; font-size: 21px; margin-bottom: 6px; }
+.register-card h1 { margin: 5px 0; font-size: clamp(21px, 2.2vw, 29px); }
+.register-header .auth-sub { margin: 0; }
+.register-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px 18px; }
+.register-form .form-field { gap: 4px; }
+.register-form .form-field input, .register-form .form-field select { height: 40px; }
+.register-form .form-photo { grid-column: 1 / -1; }
+.register-form .form-photo input { height: 36px; }
+.register-form .feedback { grid-column: 1 / -1; min-height: 16px; margin-top: -2px; }
+.register-form .primary { grid-column: 1 / -1; min-height: 42px; margin: 0; }
+.register-foot { margin: 12px 0 0; }
+.register-foot span { margin: 0 10px; color: #bf9b56; }
+
+@media (max-height: 690px) and (min-width: 761px) {
+    .teacher-login-card { padding: 20px 32px; }
+    .teacher-login-card .auth-icon { width: 45px; height: 45px; margin-bottom: 6px; }
+    .teacher-login-card .auth-sub { margin-bottom: 14px; }
+    .teacher-login-card form { gap: 8px; }
+    .teacher-brand-center { padding-bottom: 20px; }
+    .teacher-brand-center h1 { font-size: clamp(28px, 3vw, 48px); }
+    .register-card { padding: 10px 25px; }
+    .register-header { margin-bottom: 7px; }
+    .register-header .auth-icon { display: none; }
+    .register-card h1 { font-size: 22px; }
+    .register-form { row-gap: 6px; }
+    .register-form .form-field input, .register-form .form-field select { height: 36px; }
+    .register-form .form-photo input { height: 32px; }
+    .register-form .primary { min-height: 36px; padding: 7px 15px; }
+    .register-foot { margin-top: 7px; }
+}
+@media (max-width: 760px) {
+    .auth-shell { min-height: 100vh; height: auto; overflow: visible; grid-template-columns: 1fr; }
+    .auth-brand { height: auto; min-height: 195px; padding: 24px; }
+    .brand { font-size: 22px; }
+    .brand-mark { width: 41px; height: 41px; }
+    .teacher-brand-center { padding: 30px 0 6px; }
+    .teacher-brand-center h1 { font-size: 29px; }
+    .teacher-right-arrow { width: 145px; margin: 8px 0 0 auto; }
+    .auth-right { padding: 19px 12px 30px; }
+    .teacher-login-card { width: 100%; max-width: 540px; padding: 23px 20px; }
+    body[data-page=register] { overflow: auto; }
+    .register-shell { height: auto; min-height: 100dvh; overflow: visible; padding: 15px 10px 30px; }
+    .register-card { max-height: none; width: 100%; padding: 23px 18px; overflow: visible; }
+    .register-form { column-gap: 12px; }
+}
+@media (max-width: 520px) {
+    .register-form { grid-template-columns: 1fr; gap: 10px; }
+    .register-form .form-photo, .register-form .primary, .register-form .feedback { grid-column: 1; }
+    .register-card h1 { font-size: 23px; }
+    .auth-sub { font-size: 12px; }
+    .register-foot span { margin: 0 4px; }
+}

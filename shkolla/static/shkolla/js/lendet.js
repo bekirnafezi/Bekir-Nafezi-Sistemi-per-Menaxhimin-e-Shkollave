@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tableHeader = document.querySelector(".students-table-header");
 
     let lendet = [];
+    let ligjeruesitSipasLendes = {};
     let kerkimi = "";
     let faqjaAktuale = 1;
     let lendaAktuale = null;
@@ -104,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <tr>
                         <th>ID</th>
                         <th>Emri i lëndës</th>
+                        <th>Ligjëruesi / Klasa</th>
                         <th>Veprimet</th>
                     </tr>
                 </thead>
@@ -832,6 +834,10 @@ document.addEventListener("DOMContentLoaded", function () {
         row.appendChild(idCell);
         row.appendChild(nameCell);
 
+        const lecturerCell = document.createElement("td");
+        lecturerCell.textContent = (ligjeruesitSipasLendes[lenda.id] || []).join(" · ") || "Pa ligjërues të caktuar";
+        row.appendChild(lecturerCell);
+
         if (showActions) {
             const actionCell = document.createElement("td");
 
@@ -1149,7 +1155,21 @@ document.addEventListener("DOMContentLoaded", function () {
     async function loadSubjects() {
         subjectsStatus.textContent = "Duke ngarkuar lëndët...";
 
-        lendet = await loadAllSubjects();
+        const [lista, teDhenat] = await Promise.all([
+            loadAllSubjects(),
+            apiRequest("/api/lendet/ligjeruesit/")
+        ]);
+
+        lendet = lista;
+        ligjeruesitSipasLendes = {};
+        for (const angazhimi of teDhenat.angazhimet || []) {
+            const emertimi = `${angazhimi.mesimdhenesi} (${angazhimi.klasa})`;
+            const lendaId = angazhimi.lenda_id;
+            if (!ligjeruesitSipasLendes[lendaId]) ligjeruesitSipasLendes[lendaId] = [];
+            if (!ligjeruesitSipasLendes[lendaId].includes(emertimi)) {
+                ligjeruesitSipasLendes[lendaId].push(emertimi);
+            }
+        }
 
         renderSubjects();
     }

@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#062b58">
+    <title>School Control | Hyr si Mësimdhënës</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/teacher-auth.css' %}?v=20261123-2">
+    <script src="{% static 'shkolla/js/teacher-auth.js' %}?v=1" defer></script>
+</head>
+<body data-page="login">
+    <main class="auth-shell teacher-login-shell">
+        <section class="auth-brand teacher-login-brand">
+            <a class="brand" href="/" aria-label="School Control – Faqja hyrëse">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" fill="none">
+                        <path d="M4 23 32 10l28 13-28 13L4 23Z" fill="#f6c65d"/>
+                        <path d="M15 31v12c8 9 26 10 34 0V31L32 39 15 31Z" fill="#fff"/>
+                        <path d="M58 24v17" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="58" cy="46" r="4" fill="#f6c65d"/>
+                    </svg>
+                </span>
+                <strong>SCHOOL <em>CONTROL</em></strong>
+            </a>
+            <div class="teacher-brand-center">
+                <h1>Mirë se vini në<br><span>School Control,</span><br>Mësimdhënës!</h1>
+                <div class="teacher-right-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 260 72" fill="none">
+                        <path d="M7 36H227" stroke="#f1bd54" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M195 7L230 36 195 65" stroke="#f1bd54" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+        <section class="auth-right teacher-login-right">
+            <div class="auth-card teacher-login-card">
+                <div class="auth-icon" aria-hidden="true">🎓</div>
+                <p class="eyebrow">IDENTIFIKIMI I MËSIMDHËNËSIT</p>
+                <h2>Hyr në llogarinë tënde</h2>
+                <p class="auth-sub">Përdor emailin dhe fjalëkalimin e regjistruar.</p>
+                <form id="teacher-login-form">
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="username" placeholder="mesimdhenesi@shkolla.com" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="password">Fjalëkalimi</label>
+                        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Fjalëkalimi" required>
+                    </div>
+                    <p class="feedback" id="auth-message" role="status" aria-live="polite"></p>
+                    <button class="primary" type="submit">Hyr si Mësimdhënës →</button>
+                </form>
+                <p class="auth-foot">Nuk ke llogari? <a href="/mesimdhenesi/regjistrohu/">Krijo llogari</a></p>
+                <p class="auth-foot auth-back"><a href="/">← Kthehu te zgjedhja e rolit</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

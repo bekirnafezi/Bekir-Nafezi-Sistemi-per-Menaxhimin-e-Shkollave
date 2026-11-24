@@ -1,0 +1,210 @@
+html body.director-step1 {
+    --dir-navy: #062e60;
+    --dir-blue: #0c4b88;
+    --dir-gold: #f0bf59;
+    background: #e8f2fb !important;
+}
+body.director-step1 .app-container {
+    display: grid !important;
+    grid-template-columns: clamp(270px, 21.5vw, 348px) minmax(0, 1fr) !important;
+    grid-template-rows: 83px minmax(0, 1fr) !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+}
+body.director-step1 #director-visual-header {
+    position: relative;
+    z-index: 20;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+    gap: 20px;
+    padding: 0 clamp(18px, 2.4vw, 42px);
+    background: linear-gradient(110deg,#082c59,#0e4d8a 65%,#062b59) !important;
+    color: #fff !important;
+    border-bottom: 4px solid var(--dir-gold) !important;
+    box-shadow: 0 5px 20px #00265030 !important;
+}
+body.director-step1 .director-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(19px, 1.65vw, 27px);
+    font-weight: 900;
+    white-space: nowrap;
+    letter-spacing: -.6px;
+}
+body.director-step1 .director-brand-link b { color: var(--dir-gold); }
+body.director-step1 .director-brand-icon { font-size: 34px; line-height: 1; }
+body.director-step1 .director-header-actions { display: flex; align-items: center; gap: clamp(14px,2vw,30px); margin-left:auto; white-space:nowrap; }
+body.director-step1 #director-visual-header #current-date { color: #f3f7fc !important; font-size: 13px !important; background: none !important; border: 0 !important; padding: 0 !important; }
+body.director-step1 #director-visual-header #logout-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 36px !important;
+    padding: 5px 12px !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 750 !important;
+    border-radius: 8px !important;
+    text-shadow: none !important;
+}
+body.director-step1 #director-visual-header #logout-button:hover { background: #ffffff1b !important; }
+body.director-step1 .app-container > .sidebar {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    position: relative !important;
+    display: flex !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 16px 5px 16px 18px !important;
+    padding: 0 !important;
+    width: auto !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    border: 2px solid var(--dir-gold) !important;
+    border-radius: 25px !important;
+    background: linear-gradient(155deg,#0d4b8a 0%,#063367 37%,#04264e 80%,#0e5596 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 12px 26px #002a5545 !important;
+}
+body.director-step1 .app-container > .sidebar::before,
+body.director-step1 .app-container > .sidebar::after { content: none !important; display: none !important; }
+body.director-step1 .app-container > .sidebar > :not(.director-profile-card) { display: none !important; }
+body.director-step1 .director-profile-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100%;
+    min-height: 0;
+    height: 100%;
+    padding: clamp(15px, 3vh, 32px) 15px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+body.director-step1 .director-profile-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 16%; background: linear-gradient(135deg,#3274ad66,transparent); border-bottom: 1px solid #f4cc6d4c; pointer-events:none; }
+body.director-step1 .director-portrait {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: clamp(110px, 17.5vh, 166px);
+    height: clamp(110px, 17.5vh, 166px);
+    margin: 6px auto 19px;
+    border: 7px solid var(--dir-gold);
+    border-radius: 50%;
+    background: linear-gradient(135deg,#d2e7f8,#f3faff);
+    box-shadow: 0 9px 28px #001f4780;
+    font-size: clamp(64px, 7vw, 88px);
+}
+body.director-step1 .director-profile-title { color: #fff !important; font-size: clamp(23px,2vw,31px) !important; line-height: 1.1; font-weight: 850; margin: 4px 0 14px; overflow-wrap: anywhere; }
+body.director-step1 .director-profile-role { display: block; min-width: 190px; padding: 9px 17px; border-radius: 99px; color: #062c53; background: linear-gradient(115deg,#ffe18a,#e5a93d); font-size: 18px; font-weight: 900; }
+body.director-step1 .director-profile-school { margin-top: 28px; font-size: 13px; color: #eef6ff; line-height: 1.45; font-weight: 650; }
+body.director-step1 .director-profile-divider { flex-shrink: 0; width: 92%; height: 2px; margin: 28px auto 12px; background: linear-gradient(90deg,transparent,#f2c464,transparent); }
+body.director-step1 .director-profile-contact { display: flex; align-items: flex-start; text-align:left; width: 100%; gap: 10px; padding: 7px 4px; color: #fff; font-size: 12px; line-height: 1.4; }
+body.director-step1 .director-profile-contact-icon { font-size: 21px; line-height: 1; color: #f5cf7a; }
+body.director-step1 .director-profile-contact #user-email { display: inline-block !important; font-size: inherit !important; font-weight: 500 !important; color: #fff !important; overflow-wrap: anywhere; text-align: left; line-height: 1.4; }
+body.director-step1 .director-profile-footer { display:flex; flex-direction:column; align-items:center; gap:5px; margin-top:auto; padding-top:15px; color:#d8eaff; font-size:11px; }
+body.director-step1 .director-profile-footer span { color: #f5cb68; font-size: 28px; }
+body.director-step1 .app-container > .main-content {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin: 16px 18px 16px 13px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+body.director-step1 .main-content > .topbar { display:none !important; }
+body.director-step1 #director-visual-nav {
+    z-index: 5;
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7,minmax(0,1fr));
+    align-items: stretch;
+    gap: 5px;
+    min-height: 76px;
+    padding: 8px;
+    border: 1.5px solid var(--dir-gold);
+    border-radius: 20px;
+    background: linear-gradient(110deg,#063364,#0b4d88 70%,#0a4885);
+    box-shadow: 0 6px 15px #00366722;
+}
+body.director-step1 .director-nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 0;
+    padding: 7px 3px;
+    border-radius: 12px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: clamp(10px,.83vw,13px);
+    font-weight: 800;
+    white-space: nowrap;
+    transition: background .15s ease;
+}
+body.director-step1 .director-nav-item:hover,
+body.director-step1 .director-nav-item:focus-visible { color: #092f5b; background: linear-gradient(135deg,#ffe09a,#eeb342); outline: none; }
+body.director-step1 .director-nav-icon { color:#f8ce72; font-size:clamp(17px,1.4vw,21px); line-height:1; }
+body.director-step1 .director-nav-item:hover .director-nav-icon { color: #092f5b; }
+body.director-step1 .main-content > .dashboard-content {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: #a0c2dc transparent;
+    border-radius: 17px;
+}
+@media (max-width: 1180px) {
+    body.director-step1 #director-visual-nav { gap: 2px; }
+    body.director-step1 .director-nav-item { font-size: 10px; flex-direction: column; gap: 5px; }
+}
+@media (max-width: 900px) {
+    html body.director-step1 { height: auto !important; overflow: auto !important; }
+    body.director-step1 .app-container { display: flex !important; flex-direction: column !important; height: auto !important; min-height:100dvh !important; overflow: visible !important; }
+    body.director-step1 #director-visual-header { min-height: 72px; }
+    body.director-step1 .app-container > .sidebar { min-height: 220px !important; margin: 12px 14px 0 !important; }
+    body.director-step1 .director-profile-card { display: grid !important; grid-template-columns: 95px 1fr; grid-template-rows: auto auto auto; gap: 8px 15px; align-content:center; text-align:left; padding: 14px; }
+    body.director-step1 .director-portrait { width: 90px; height:90px; font-size:50px; margin:0; grid-row:1/4; }
+    body.director-step1 .director-profile-title { margin:0; font-size:23px !important; }
+    body.director-step1 .director-profile-role { min-width:0; width:max-content; font-size:13px; padding: 6px 13px; }
+    body.director-step1 .director-profile-school { margin:0; }
+    body.director-step1 .director-profile-divider,.director-profile-contact,.director-profile-footer { display: none !important; }
+    body.director-step1 .app-container > .main-content { min-height: 400px !important; height: auto !important; margin: 12px 14px 18px !important; }
+    body.director-step1 #director-visual-nav { min-height:67px; }
+    body.director-step1 .main-content > .dashboard-content { min-height: 550px !important; }
+}
+@media (max-width: 650px) {
+    body.director-step1 #director-visual-header { padding:10px 14px; flex-wrap:wrap; gap:8px; }
+    body.director-step1 .director-brand-link { font-size:17px; }
+    body.director-step1 .director-brand-icon { font-size:27px; }
+    body.director-step1 .director-header-actions { gap:10px; font-size:11px; }
+    body.director-step1 #director-visual-header #current-date { font-size:11px !important; }
+    body.director-step1 #director-visual-nav { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    body.director-step1 .director-nav-item { white-space: normal; }
+}

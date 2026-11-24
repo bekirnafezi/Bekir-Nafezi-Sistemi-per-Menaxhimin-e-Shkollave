@@ -795,6 +795,9 @@ def nota_detaje_api(request, nota_id):
 @permission_classes([EshteDrejtor])
 def mungesat_api(request):
 
+    if getattr(request.user, 'roli', None) == 'drejtor' and request.method != 'GET':
+        return Response({'gabim': "Drejtori mund vetem t'i shikoje mungesat. mungesat_api"}, status=403)
+
        # GET - Shfaqja dhe filtrimi i mungesave
     if request.method == 'GET':
 
@@ -854,6 +857,9 @@ def mungesat_api(request):
 @api_view(['GET', 'PATCH', 'DELETE'])
 @permission_classes([EshteDrejtor])
 def mungesa_detaje_api(request, mungesa_id):
+
+    if getattr(request.user, 'roli', None) == 'drejtor' and request.method != 'GET':
+        return Response({'gabim': "Drejtori mund vetem t'i shikoje mungesat. mungesa_detaje_api"}, status=403)
 
     # Gjejme mungesen sipas ID-se
     mungesa = get_object_or_404(

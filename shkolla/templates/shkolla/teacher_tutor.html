@@ -1,0 +1,107 @@
+{% extends 'shkolla/teacher_portal_base.html' %}
+{% block page_title %}Klasa ime – Kujdestar{% endblock %}
+{% block portal_content %}
+<!-- SC_TUTOR_LARGE_CARDS_START -->
+<style>
+@media (min-width: 981px) {
+    body[data-teacher-page="klasa-ime"] #portal-content {
+        display: flex !important;
+        flex-direction: column !important;
+        overflow: hidden !important;
+        min-height: 0 !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content:not([hidden]) {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content .tutor-ribbon,
+    body[data-teacher-page="klasa-ime"] #tutor-content .tutor-subnav {
+        flex: 0 0 auto !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content .stat-grid {
+        display: grid !important;
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+        grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
+        align-content: stretch !important;
+        gap: 12px !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content .stat-box {
+        min-height: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 11px !important;
+        padding: 13px !important;
+        border-radius: 17px !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content .stat-box span {
+        font-size: clamp(12px, 1vw, 16px) !important;
+    }
+    body[data-teacher-page="klasa-ime"] #tutor-content .stat-box strong {
+        font-size: clamp(29px, 2.8vw, 44px) !important;
+        line-height: 1.1 !important;
+    }
+}
+@media (min-width: 981px) and (max-height: 520px) {
+    body[data-teacher-page="klasa-ime"] #portal-content { overflow: auto !important; }
+    body[data-teacher-page="klasa-ime"] #tutor-content .stat-grid {
+        flex: 0 0 auto !important;
+        min-height: 220px !important;
+    }
+}
+</style>
+<!-- SC_TUTOR_LARGE_CARDS_END -->
+<style>
+.tutor-ribbon-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    min-width: 160px;
+}
+.tutor-ribbon-control > span {
+    color: #fff;
+    font-size: 12px;
+}
+.tutor-ribbon-select {
+    max-width: 185px;
+    min-width: 105px;
+    padding: 8px 10px;
+    border: 1px solid #eac06c;
+    border-radius: 10px;
+    background: #fffaf0;
+    color: #093864;
+    font-weight: 700;
+    cursor: pointer;
+}
+.tutor-subnav {
+    position: relative;
+    z-index: 2;
+}
+.tutor-subnav .tutor-subtab {
+    position: relative;
+    z-index: 3;
+    pointer-events: auto;
+    cursor: pointer;
+}
+@media (max-width: 820px) {
+    .tutor-ribbon-control {
+        min-width: 0;
+    }
+    .tutor-ribbon-control > span {
+        display: none;
+    }
+}
+</style>
+
+
+<div id="not-tutor" class="surface notice-box" hidden><div class="notice-icon">★</div><h2>Nuk je caktuar si kujdestar klase</h2><p>Kur Drejtori të të caktojë kujdestar, këtu do të shfaqen notat dhe mungesat e klasës përkatëse.</p><a class="btn gold" href="{% url 'teacher_classes' %}">Shiko klasat ku jep mësim →</a></div>
+<div id="tutor-content"><div class="tutor-ribbon"><span>★</span><div><span>KLASA IME · KUJDESTAR</span><strong id="tutor-class-name">—</strong></div><div class="tutor-ribbon-control"><span>Kujdestar i klasës</span><select class="tutor-ribbon-select" id="tutor-class-select" aria-label="Zgjidh klasën ku je kujdestar"></select></div></div>
+<div class="stat-grid"><div class="stat-box"><span>Nxënës në klasë</span><strong id="tutor-students-total">—</strong></div><div class="stat-box"><span>Mesatarja e klasës</span><strong id="tutor-class-average">—</strong></div><div class="stat-box"><span>Mungesa gjithsej</span><strong id="tutor-absence-total">—</strong></div><div class="stat-box"><span>Të arsyeshme</span><strong id="tutor-absence-justified">—</strong></div><div class="stat-box"><span>Të paarsyeshme</span><strong id="tutor-absence-unjustified">—</strong></div><div class="stat-box"><span>Në shqyrtim</span><strong id="tutor-absence-pending">—</strong></div></div>
+<div class="tutor-subnav" style="display:flex!important;justify-content:center!important;align-items:center!important;gap:12px!important;width:100%!important;"><button type="button" class="tutor-subtab active" id="tab-tutor-students" role="tab" aria-selected="true" aria-controls="tutor-students-section">▣ Nxënësit, notat dhe mesataret</button><button type="button" class="tutor-subtab" id="tab-tutor-absences" role="tab" aria-selected="false" aria-controls="tutor-absences-section">▦ Mungesat sipas orëve dhe arsyetimet</button></div><section class="surface tutor-table" id="tutor-students-section"><div class="surface-title"><div><h2>Pasqyra e nxënësve</h2><p>Mesatarja dhe mungesat për secilin nxënës.</p></div><button type="button" class="btn subtle" id="tutor-show-grades">Të gjitha notat sipas lëndëve →</button></div><div class="table-scroll"><table><thead><tr><th>Nr.</th><th>Nxënësi</th><th>Mesatarja</th><th>Nota</th><th>Mungesa</th><th>Të arsyeshme</th><th>Të paarsyeshme</th><th>Veprimet</th></tr></thead><tbody id="tutor-students"><tr><td colspan="8">Duke ngarkuar...</td></tr></tbody></table></div></section>
+<section class="surface absence-section" id="tutor-absences-section" hidden><div class="surface-title"><div><h2>Mungesat me datë dhe orë</h2><p>Kontrollo dhe klasifiko mungesat e klasës.</p></div><div class="right-actions"><select id="abs-student-filter" aria-label="Filtro sipas nxënësit"><option value="">Të gjithë nxënësit</option></select><select id="abs-status-filter" aria-label="Filtro sipas statusit"><option value="">Të gjitha</option><option value="ne_shqyrtim">Në shqyrtim</option><option value="e_arsyeshme">Të arsyeshme</option><option value="e_paarsyeshme">Të paarsyeshme</option></select><button type="button" class="btn blue" id="tutor-record-absence" hidden>＋ Shëno mungesë</button></div></div><div class="table-scroll"><table><thead><tr><th>Nxënësi</th><th>Data</th><th>Ora</th><th>Lënda</th><th>Statusi</th><th>Arsyetimi</th><th>Veprimi</th></tr></thead><tbody id="tutor-absences"><tr><td colspan="7">Duke ngarkuar...</td></tr></tbody></table></div></section></div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'shkolla/teacher_portal_base.html' %}
+
+{% block page_title %}Vendimet e Drejtorit{% endblock %}
+
+{% block portal_content %}
+
+<section class="surface fill">
+
+    <div class="surface-title">
+
+        <h2>Lista e vendimeve</h2>
+
+        <button
+            class="btn subtle"
+            type="button"
+            id="decision-refresh"
+        >
+            ↻ Rifresko
+        </button>
+
+    </div>
+
+    <span id="decision-unread-count" hidden>0</span>
+
+    <div class="decision-grid" id="decision-list">
+        <p class="empty-message">
+            Duke ngarkuar vendimet...
+        </p>
+    </div>
+
+</section>
+
+{% endblock %}

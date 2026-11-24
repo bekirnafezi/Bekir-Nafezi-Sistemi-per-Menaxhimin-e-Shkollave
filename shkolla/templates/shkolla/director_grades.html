@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Control | Notat</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-step1.css' %}?v=20261124-2">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-step2.css' %}?v=20261124-2">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-fix-v3.css' %}?v=20261124-v3">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-grades-readonly.css' %}?v=20261124-1">
+    <script defer src="{% static 'shkolla/js/director-layout-step2.js' %}?v=20261124-2"></script>
+    <script defer src="{% static 'shkolla/js/director-layout-fix-v3.js' %}?v=20261124-v3"></script>
+    <script defer src="{% static 'shkolla/js/director-grades-readonly.js' %}?v=20261124-fix-njoftimi-4"></script>
+    <style id="director-grades-preview-modal-only">
+        #director-grades-page .grades-preview-wrapper {
+            display: none !important;
+        }
+        #director-grades-page .grades-card {
+            flex: 0 0 auto !important;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-activities-final.css' %}?v=20261124-akt-kufizuar-1">
+    <script defer src="{% static 'shkolla/js/director-activities-final.js' %}?v=20261124-akt-final"></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-profile-align.css' %}?v=20261124-dir-profile-1">
+    <script defer src="{% static 'shkolla/js/director-profile-align.js' %}?v=20261124-dir-profile-1"></script>
+    <style id="director-grades-height-final">
+        @media (min-width: 901px) {
+            #director-grades-page .grades-card {
+                flex: 1 1 0 !important;
+                min-height: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><h1>School <span>Control</span></h1></div>
+        <nav class="sidebar-menu" aria-label="Menuja e mëparshme"></nav>
+        <div class="sidebar-bottom">School Control</div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar"><div class="topbar-left"><h2>Notat</h2></div><div class="topbar-right"></div></header>
+        <div class="director-grades-page director-page-content" id="director-grades-page">
+            <section class="grades-stats" aria-label="Statistikat e notave">
+                <div class="grades-stat"><span>Mesatarja shkollore</span><strong id="grades-school-avg">—</strong><small>Mesatarja e nxënësve të vlerësuar</small></div>
+                <div class="grades-stat"><span>Mesatarja e klasës</span><strong id="grades-class-avg">—</strong><small>Klasa e përzgjedhur</small></div>
+                <div class="grades-stat"><span>Mesatarja e nxënësit</span><strong id="grades-student-avg">—</strong><small>Nxënësi i përzgjedhur</small></div>
+                <div class="grades-stat"><span>Notat në tabelë</span><strong id="grades-count">0</strong><small>Sipas filtrave</small></div>
+            </section>
+            <section class="grades-card" aria-label="Lista e notave">
+                <div class="grades-card-header">
+                    <div><h1>Pasqyra e notave</h1></div>
+                    <button type="button" id="grades-open-all" class="grades-gold-button">Shiko të gjitha notat →</button>
+                </div>
+                <div class="grades-filters">
+                    <label>Klasa
+                        <select id="grades-class" aria-label="Zgjidh klasën"><option value="">Të gjitha klasat</option></select>
+                    </label>
+                    <label>Nxënësi
+                        <select id="grades-student" aria-label="Zgjidh nxënësin"><option value="">Të gjithë nxënësit</option></select>
+                    </label>
+                    <button type="button" id="grades-reset" class="grades-reset-button">Pastro filtrat</button>
+                </div>
+                <div class="grades-preview-wrapper">
+                    <table class="grades-table">
+                        <thead><tr><th>Nxënësi</th><th>Klasa</th><th>Lënda</th><th>Nota</th><th>Data</th><th>Mësimdhënësi</th></tr></thead>
+                        <tbody id="grades-preview"><tr><td colspan="6" class="grades-empty">Duke ngarkuar notat...</td></tr></tbody>
+                    </table>
+                </div>
+                <p id="grades-status" class="grades-status" role="status" aria-live="polite"></p>
+            </section>
+        </div>
+    </main>
+</div>
+<dialog id="grades-modal" class="grades-modal" aria-labelledby="grades-modal-title">
+    <div class="grades-modal-head"><div><h2 id="grades-modal-title">Të gjitha notat</h2><p>Pasqyra sipas klasës dhe nxënësit të zgjedhur.</p></div><button type="button" id="grades-close-all" class="grades-close-button" aria-label="Mbyll">✕</button></div>
+    <div class="grades-modal-summary" id="grades-modal-count">—</div>
+    <div class="grades-modal-table-wrapper"><table class="grades-table"><thead><tr><th>Nxënësi</th><th>Klasa</th><th>Lënda</th><th>Nota</th><th>Data</th><th>Mësimdhënësi</th></tr></thead><tbody id="grades-all"></tbody></table></div>
+</dialog>
+</body>
+</html>

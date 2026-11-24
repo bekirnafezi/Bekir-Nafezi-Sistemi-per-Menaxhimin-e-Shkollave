@@ -1,7 +1,6 @@
-
 from django.db.models import Q
 
-from .models import Angazhimi, Nota, Mungesa
+from .models import Angazhimi, Nota, Mungesa, Mesimdhenesi
 
 
 def eshte_drejtor(perdorues):
@@ -15,6 +14,7 @@ def eshte_mesimdhenes(perdorues):
     return (
         perdorues.is_authenticated
         and perdorues.roli == "mesimdhenes"
+        and Mesimdhenesi.objects.filter(perdorues=perdorues, miratuar=True).exists()
     )
 
 
@@ -40,8 +40,9 @@ def notat_e_dukshme(perdorues):
 
     if eshte_mesimdhenes(perdorues):
         return Nota.objects.filter(
-            angazhimi__mesimdhenesi__perdorues_id=perdorues.pk
-        )
+            Q(angazhimi__mesimdhenesi__perdorues_id=perdorues.pk)
+            | Q(nxenesi__klasa__kujdestari__perdorues_id=perdorues.pk)
+        ).distinct()
 
     if eshte_nxenes(perdorues):
         return Nota.objects.filter(

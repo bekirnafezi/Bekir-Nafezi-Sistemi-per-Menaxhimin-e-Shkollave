@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f2f6fc">
+    <title>School Control | Regjistrohu si Mësimdhënës</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/teacher-auth.css' %}?v=20261123-2">
+    <script src="{% static 'shkolla/js/teacher-auth.js' %}?v=1" defer></script>
+</head>
+<body data-page="register">
+    <main class="register-shell">
+        <section class="register-stage">
+            <div class="auth-card register-card">
+                <div class="register-header">
+                    <div class="auth-icon" aria-hidden="true">🎓</div>
+                    <p class="eyebrow">KRIJIMI I LLOGARISË</p>
+                    <h1>Regjistrohu si Mësimdhënës</h1>
+                    <p class="auth-sub">Plotëso të dhënat. Llogaria do t'i dërgohet Drejtorit për miratim.</p>
+                </div>
+                <form id="teacher-register-form" class="register-form" enctype="multipart/form-data">
+                    <div class="form-field">
+                        <label for="emri">Emri</label>
+                        <input id="emri" name="emri" required maxlength="150" autocomplete="given-name">
+                    </div>
+                    <div class="form-field">
+                        <label for="mbiemri">Mbiemri</label>
+                        <input id="mbiemri" name="mbiemri" required maxlength="150" autocomplete="family-name">
+                    </div>
+                    <div class="form-field">
+                        <label for="identifikuesi">ID shkollore</label>
+                        <input id="identifikuesi" name="identifikuesi" required maxlength="35" placeholder="p.sh. MS-001">
+                    </div>
+                    <div class="form-field">
+                        <label for="telefoni">Telefoni</label>
+                        <input id="telefoni" name="telefoni" type="tel" required maxlength="30" autocomplete="tel">
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required autocomplete="email" placeholder="email@shkolla.com">
+                    </div>
+                    <div class="form-field">
+                        <label for="lenda">Lënda që jep</label>
+                        <select id="lenda" name="lenda" required>
+                            <option value="">Duke ngarkuar lëndët...</option>
+                        </select>
+                    </div>
+                    <div class="form-field form-photo">
+                        <label for="foto">Fotografia e profilit (JPG, PNG, WebP, deri në 3 MB)</label>
+                        <input id="foto" name="foto" type="file" accept="image/jpeg,image/png,image/webp">
+                    </div>
+                    <div class="form-field">
+                        <label for="fjalekalimi">Fjalëkalimi</label>
+                        <input id="fjalekalimi" name="fjalekalimi" type="password" autocomplete="new-password" minlength="8" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="perserit_fjalekalimin">Përsërit fjalëkalimin</label>
+                        <input id="perserit_fjalekalimin" name="perserit_fjalekalimin" type="password" autocomplete="new-password" minlength="8" required>
+                    </div>
+                    <p class="feedback" id="auth-message" role="status" aria-live="polite"></p>
+                    <button class="primary" type="submit">Dërgo regjistrimin për miratim →</button>
+                </form>
+                <p class="auth-foot register-foot">Ke llogari? <a href="/login/?role=mesimdhenes">Hyr këtu</a> <span aria-hidden="true">·</span> <a href="/">Kthehu te rolet</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

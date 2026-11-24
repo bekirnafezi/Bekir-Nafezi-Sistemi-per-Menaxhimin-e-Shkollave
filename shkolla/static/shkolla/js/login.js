@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 credentials: "same-origin",
                 body: JSON.stringify({
                     email: email,
-                    password: password
+                    password: password,
+                    role: new URLSearchParams(window.location.search).get('role') || 'drejtor'
                 })
             });
 
@@ -98,7 +99,9 @@ document.addEventListener("DOMContentLoaded", function () {
             passwordInput.value = "";
 
             setTimeout(function () {
-                window.location.assign("/dashboard/");
+                window.location.assign(data.perdoruesi.roli === "mesimdhenes"
+                    ? "/mesimdhenesi/panel/"
+                    : data.perdoruesi.roli === "drejtor" ? "/dashboard/" : "/");
             }, 900);
 
         } catch (error) {

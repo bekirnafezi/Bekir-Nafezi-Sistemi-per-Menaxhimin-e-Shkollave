@@ -66,7 +66,7 @@ class MungesaEvidencaSerializer(MungesaSerializer):
             getattr(self.instance, "ora_mesimore", None)
         )
 
-        if ora is None or not 1 <= ora <= 10:
+        if (ora is None and (self.instance is None or "ora_mesimore" in attrs)) or (ora is not None and not 1 <= ora <= 10):
             raise serializers.ValidationError({
                 "ora_mesimore": "Zgjidh oren mesimore nga 1 deri ne 10."
             })
@@ -221,6 +221,9 @@ def notat_api(request):
 @api_view(["GET", "PATCH", "DELETE"])
 @permission_classes([IsAuthenticated])
 def nota_detaje_api(request, nota_id):
+    if getattr(request.user, "roli", None) == "drejtor" and request.method != "GET":
+        return Response({"gabim": "Drejtori mund vetem t'i shikoje notat."}, status=403)
+
     nota = get_object_or_404(
         notat_e_dukshme(request.user),
         pk=nota_id
@@ -343,6 +346,9 @@ def nota_detaje_api(request, nota_id):
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def mungesat_api(request):
+    if getattr(request.user, 'roli', None) == 'drejtor' and request.method != 'GET':
+        return Response({'gabim': "Drejtori mund vetem t'i shikoje mungesat. mungesat_api"}, status=403)
+
     if request.method == "GET":
         mungesat = mungesat_e_dukshme(
             request.user
@@ -445,6 +451,9 @@ def mungesat_api(request):
 @api_view(["GET", "PATCH", "DELETE"])
 @permission_classes([IsAuthenticated])
 def mungesa_detaje_api(request, mungesa_id):
+    if getattr(request.user, 'roli', None) == 'drejtor' and request.method != 'GET':
+        return Response({'gabim': "Drejtori mund vetem t'i shikoje mungesat. mungesa_detaje_api"}, status=403)
+
     mungesa = get_object_or_404(
         mungesat_e_dukshme(request.user),
         pk=mungesa_id

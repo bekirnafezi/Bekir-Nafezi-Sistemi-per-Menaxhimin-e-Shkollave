@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Control | Mungesat</title>
+    <link rel="stylesheet" href="{% static 'shkolla/css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-step1.css' %}?v=20261124-2">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-step2.css' %}?v=20261124-2">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-layout-fix-v3.css' %}?v=20261124-v3">
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-absences-readonly.css' %}?v=20261124-kompakt-v1">
+    <script defer src="{% static 'shkolla/js/director-layout-step2.js' %}?v=20261124-2"></script>
+    <script defer src="{% static 'shkolla/js/director-layout-fix-v3.js' %}?v=20261124-v3"></script>
+    <script defer src="{% static 'shkolla/js/director-absences-readonly.js' %}?v=20261124-1"></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-activities-final.css' %}?v=20261124-akt-kufizuar-1">
+    <script defer src="{% static 'shkolla/js/director-activities-final.js' %}?v=20261124-akt-final"></script>
+    <link rel="stylesheet" href="{% static 'shkolla/css/director-profile-align.css' %}?v=20261124-dir-profile-1">
+    <script defer src="{% static 'shkolla/js/director-profile-align.js' %}?v=20261124-dir-profile-1"></script>
+</head>
+<body>
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="sidebar-brand"><h1>School <span>Control</span></h1></div>
+        <nav class="sidebar-menu" aria-label="Menuja e mëparshme"></nav>
+        <div class="sidebar-bottom">School Control</div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar"><div class="topbar-left"><h2>Mungesat</h2></div><div class="topbar-right"></div></header>
+        <div class="director-absences-page director-page-content" id="director-absences-page">
+            <section class="absences-stats" aria-label="Statistikat e mungesave">
+                <div class="absences-stat"><span>Mungesa gjithsej</span><strong id="absence-total">0</strong><small>Sipas përzgjedhjes</small></div>
+                <div class="absences-stat"><span>Të arsyeshme</span><strong id="absence-justified">0</strong><small>Mungesa të arsyetuara</small></div>
+                <div class="absences-stat"><span>Të paarsyeshme</span><strong id="absence-unjustified">0</strong><small>Mungesa të paarsyetuara</small></div>
+                <div class="absences-stat"><span>Në shqyrtim</span><strong id="absence-pending">0</strong><small>Në pritje të arsyetimit</small></div>
+            </section>
+            <section class="absences-card" aria-label="Pasqyra e mungesave">
+                <div class="absences-card-header">
+                    <h1>Pasqyra e mungesave</h1>
+                    <button type="button" id="absence-open-all" class="absences-gold-button">Shiko të gjitha mungesat →</button>
+                </div>
+                <div class="absences-filters">
+                    <label>Klasa
+                        <select id="absence-class" aria-label="Zgjidh klasën"><option value="">Të gjitha klasat</option></select>
+                    </label>
+                    <label>Nxënësi
+                        <select id="absence-student" aria-label="Zgjidh nxënësin"><option value="">Të gjithë nxënësit</option></select>
+                    </label>
+                    <label>Statusi
+                        <select id="absence-status-filter" aria-label="Zgjidh statusin">
+                            <option value="">Të gjitha statuset</option>
+                            <option value="e_arsyeshme">Të arsyeshme</option>
+                            <option value="e_paarsyeshme">Të paarsyeshme</option>
+                            <option value="ne_shqyrtim">Në shqyrtim</option>
+                        </select>
+                    </label>
+                    <button type="button" id="absence-reset" class="absences-reset-button">Pastro filtrat</button>
+                </div>
+                <p id="absence-error" class="absences-error" role="alert" hidden></p>
+                <div class="absences-card-decoration" aria-hidden="true"><span>✦</span></div>
+            </section>
+        </div>
+    </main>
+</div>
+<dialog id="absence-modal" class="absences-modal" aria-labelledby="absence-modal-title">
+    <div class="absences-modal-head">
+        <h2 id="absence-modal-title">Lista e mungesave</h2>
+        <button type="button" id="absence-close-all" class="absences-close-button" aria-label="Mbyll">✕</button>
+    </div>
+    <div class="absences-modal-count" id="absence-modal-count" role="status"></div>
+    <div class="absences-modal-table-wrapper">
+        <table class="absences-table">
+            <thead><tr><th>Nxënësi</th><th>Klasa</th><th>Data</th><th>Ora mësimore</th><th>Lënda</th><th>Statusi</th><th>Arsyetimi</th></tr></thead>
+            <tbody id="absence-all"><tr><td colspan="7" class="absences-empty">Duke ngarkuar mungesat...</td></tr></tbody>
+        </table>
+    </div>
+</dialog>
+</body>
+</html>

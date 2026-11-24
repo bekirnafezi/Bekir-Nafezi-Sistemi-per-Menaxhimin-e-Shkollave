@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#072c61">
+    <title>School Control | Zgjidh rolin</title>
+    <style>
+        * { box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; margin: 0; }
+        body { overflow: hidden; background: #062b60; font-family: "Segoe UI", Arial, sans-serif; }
+        main { width: 100%; height: 100%; }
+        .faqja { position: relative; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; }
+        .foto { display: block; width: 100%; height: 100%; object-fit: fill; }
+        .karta { position: absolute; display: block; top: 43.5%; height: 40.8%; border-radius: 22px; cursor: pointer; }
+        .karta:focus-visible { outline: 5px solid #ffe199; outline-offset: -5px; }
+        .drejtori { left: 13.3%; width: 21.4%; }
+        .mesimdhenesi { left: 38.8%; width: 21.5%; }
+        .nxenesi { left: 65%; width: 21.5%; }
+        .data { position: absolute; top: 0; right: 0; width: 21.2%; height: 8.3%; background: linear-gradient(90deg, #08366d, #062b60); display: flex; justify-content: center; align-items: center; gap: .55vw; color: #fff; font-size: clamp(11px, 1.02vw, 18px); white-space: nowrap; pointer-events: none; }
+        .data svg { width: 1.2em; height: 1.2em; }
+        .telefon { display: none; }
+        @media (max-width: 760px) {
+            html, body { height: auto; min-height: 100%; }
+            body { overflow-x: hidden; overflow-y: auto; }
+            main { height: auto; }
+            .faqja { display: none; }
+            .telefon { display: block; min-height: 100dvh; padding: 24px 18px 35px; color: #fff; background: linear-gradient(145deg, #062755, #14518b 55%, #072b60); }
+            .marka { font-size: 25px; font-weight: 850; text-align: center; letter-spacing: -.5px; }
+            .marka span { color: #efbd56; }
+            .data-telefon { margin: 15px auto 30px; text-align: center; color: #ffe3a5; font-size: 14px; }
+            .titull { margin: 0 0 24px; text-align: center; font-size: 17px; font-weight: 500; }
+            .kartat { display: grid; gap: 16px; max-width: 440px; margin: auto; }
+            .karta-telefon { display: block; padding: 22px 18px 18px; border: 3px solid #f1c462; border-radius: 21px; background: #f7faff; color: #102b50; text-decoration: none; text-align: center; box-shadow: 0 12px 30px #001b3b65; }
+            .ikona { display: block; margin-bottom: 8px; font-size: 39px; }
+            .karta-telefon h2 { margin: 0 0 8px; font-size: 22px; }
+            .karta-telefon p { margin: 0 0 16px; font-size: 13px; line-height: 1.45; }
+            .butoni { display: block; padding: 12px; border: 2px solid #eeb957; border-radius: 24px; background: #073974; color: white; font-weight: 700; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="faqja">
+            <img class="foto" src="{% static 'shkolla/images/zgjedhja_e_rolit.png' %}?v=20261122-5" alt="School Control – Hyr si Drejtor, Mësimdhënës ose Nxënës" width="1672" height="941">
+            <div class="data" aria-label="Data e sotme">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/></svg>
+                <time class="data-aktuale"></time>
+            </div>
+            <a class="karta drejtori" href="/drejtori/hyrje/" aria-label="Hyr si Drejtor"></a>
+            <a class="karta mesimdhenesi" href="{% url 'login' %}?role=mesimdhenes" aria-label="Hyr si Mësimdhënës"></a>
+            <a class="karta nxenesi" href="{% url 'login' %}?role=nxenes" aria-label="Hyr si Nxënës"></a>
+        </div>
+        <div class="telefon">
+            <div class="marka">🎓 SCHOOL <span>CONTROL</span></div>
+            <div class="data-telefon"><time class="data-aktuale"></time></div>
+            <p class="titull">Zgjidhni rolin tuaj për të vazhduar.</p>
+            <div class="kartat">
+                <a class="karta-telefon" href="/drejtori/hyrje/"><span class="ikona" aria-hidden="true">♛</span><h2>Hyr si Drejtor</h2><p>Menaxhoni shkollën, klasat, mësimdhënësit, nxënësit, notat dhe statistikat.</p><span class="butoni">Hyr si Drejtor →</span></a>
+                <a class="karta-telefon" href="{% url 'login' %}?role=mesimdhenes"><span class="ikona" aria-hidden="true">👨‍🏫</span><h2>Hyr si Mësimdhënës</h2><p>Menaxhoni lëndët dhe angazhimet, regjistroni notat dhe mungesat.</p><span class="butoni">Hyr si Mësimdhënës →</span></a>
+                <a class="karta-telefon" href="{% url 'login' %}?role=nxenes"><span class="ikona" aria-hidden="true">🎓</span><h2>Hyr si Nxënës</h2><p>Shikoni notat, mesataren, mungesat dhe progresin tuaj.</p><span class="butoni">Hyr si Nxënës →</span></a>
+            </div>
+        </div>
+    </main>
+    <script>
+        function perditesoDaten() {
+            const tani = new Date();
+            const pjeset = new Intl.DateTimeFormat("sq-AL", {
+                timeZone: "Europe/Belgrade",
+                weekday: "long", day: "numeric", month: "long", year: "numeric"
+            }).formatToParts(tani);
+            const vlerat = Object.fromEntries(pjeset.map(p => [p.type, p.value]));
+            const dita = vlerat.weekday.charAt(0).toLocaleUpperCase("sq-AL") + vlerat.weekday.slice(1);
+            const shkrimi = `${dita}, ${vlerat.day} ${vlerat.month} ${vlerat.year}`;
+            const iso = new Intl.DateTimeFormat("sv-SE", {
+                timeZone: "Europe/Belgrade", year: "numeric", month: "2-digit", day: "2-digit"
+            }).format(tani);
+            document.querySelectorAll(".data-aktuale").forEach(el => {
+                el.textContent = shkrimi;
+                el.dateTime = iso;
+            });
+        }
+        perditesoDaten();
+        setInterval(perditesoDaten, 30000);
+        document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) perditesoDaten();
+        });
+    </script>
+
+    <script>
+    document.querySelectorAll('a[href*="role=drejtor"]').forEach(link => {
+        link.addEventListener('click', async event => {
+            const token = sessionStorage.getItem('schoolControlToken');
+            if (!token || sessionStorage.getItem('schoolControlRole') !== 'drejtor') return;
+            event.preventDefault();
+            try {
+                const res = await fetch('/api/me/', {headers: {Authorization: `Token ${token}`}});
+                const data = res.ok ? await res.json() : null;
+                if (data?.roli === 'drejtor') {
+                    window.location.assign('/dashboard/');
+                    return;
+                }
+            } catch (_) {}
+            window.location.assign('/drejtori/hyrje/');
+        });
+    });
+    document.querySelectorAll('a[href*="role=mesimdhenes"]').forEach(link => {
+        link.addEventListener('click', async event => {
+            const token = sessionStorage.getItem('schoolControlToken');
+            if (!token || sessionStorage.getItem('schoolControlRole') !== 'mesimdhenes') return;
+            event.preventDefault();
+            try {
+                const res = await fetch('/api/mesimdhenesi/panel/', {headers: {Authorization: `Token ${token}`}});
+                if (res.ok) {window.location.assign('/mesimdhenesi/panel/');return;}
+            } catch (_) {}
+            window.location.assign('/login/?role=mesimdhenes');
+        });
+    });
+    </script>
+</body>
+</html>

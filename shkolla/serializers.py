@@ -144,6 +144,11 @@ class AngazhimiSerializer(serializers.ModelSerializer):
             getattr(self.instance, 'lenda', None)
         )
 
+        if mesimdhenesi and not mesimdhenesi.miratuar:
+            raise serializers.ValidationError(
+                "Mesimdhenesi duhet te miratohet para caktimit ne klase."
+            )
+
         ekziston = Angazhimi.objects.filter(
             mesimdhenesi=mesimdhenesi,
             klasa=klasa,

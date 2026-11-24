@@ -1,8 +1,12 @@
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def login_page(request):
+    if request.GET.get("role") == "drejtor":
+        return render(request, "shkolla/director_login.html")
+    if request.GET.get("role") == "mesimdhenes":
+        return render(request, "shkolla/teacher_login.html")
+
     return render(request, "shkolla/login.html")
 
 
@@ -36,3 +40,18 @@ def notat_page(request):
 
 def mungesat_page(request):
     return render(request, "shkolla/evidenca.html", {"tipi": "mungesat"})
+
+
+def zgjedh_rolin_page(request):
+    return render(request, "shkolla/zgjedh_rolin.html")
+
+
+def teacher_register_page(request):
+    return render(request, "shkolla/teacher_register.html")
+
+
+def teacher_dashboard_page(request):
+    return redirect("teacher_classes")
+
+def director_requests_page(request):
+    return render(request, "shkolla/director_requests.html")

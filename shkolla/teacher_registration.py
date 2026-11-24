@@ -94,7 +94,8 @@ def regjistro_mesimdhenesin_api(request):
             )
 
             mesimdhenesi = Mesimdhenesi.objects.create(
-                perdorues=perdorues
+                perdorues=perdorues,
+                miratuar=True
             )
 
     except IntegrityError:

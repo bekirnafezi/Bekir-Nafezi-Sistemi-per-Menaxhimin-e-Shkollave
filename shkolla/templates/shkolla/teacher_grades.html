@@ -1,0 +1,55 @@
+{% extends 'shkolla/teacher_portal_base.html' %}
+{% block page_title %}Shto nota{% endblock %}
+{% block portal_content %}
+<div class="two-columns grades-columns">
+    <section class="surface">
+        <div class="form-stack">
+            <label for="grade-assignment">Klasa dhe lënda</label>
+            <select id="grade-assignment">
+                <option value="">Duke ngarkuar...</option>
+            </select>
+        </div>
+        <div class="surface-title middle-title">
+            <h2>2. Regjistro notën</h2>
+        </div>
+        <form id="grade-form" class="form-stack">
+            <label for="grade-student">Nxënësi</label>
+            <select id="grade-student" required></select>
+            <label for="grade-value">Nota</label>
+            <select id="grade-value" required>
+                <option value="">Zgjidh vlerësimin...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button class="btn gold full-button" type="submit">Ruaj notën</button>
+            <p class="form-feedback" id="grade-feedback" role="status"></p>
+        </form>
+    </section>
+    <section class="surface fill">
+        <div class="surface-title">
+            <div>
+                <h2>Lista e nxënësve</h2>
+                <p id="grade-class-hint">Nxënësit e klasës së zgjedhur.</p>
+            </div>
+        </div>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nr.</th>
+                        <th>Nxënësi</th>
+                        <th>Mesatarja</th>
+                        <th>Nota të regjistruara</th>
+                    </tr>
+                </thead>
+                <tbody id="grade-students">
+                    <tr><td colspan="4">Zgjidh një angazhim.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}

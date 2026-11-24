@@ -1,0 +1,239 @@
+html body.director-step1.director-step2.director-fix-v3 {
+    background: #eaf3fb !important;
+}
+
+@media (min-width: 901px) {
+    body.director-step1.director-step2.director-fix-v3 .app-container {
+        display: grid !important;
+        grid-template-columns: clamp(280px, 21.5vw, 354px) minmax(0, 1fr) !important;
+        grid-template-rows: 83px minmax(0, 1fr) !important;
+        height: 100dvh !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 #director-visual-header {
+        box-sizing: border-box !important;
+        height: 83px !important;
+        min-height: 83px !important;
+        max-height: 83px !important;
+        padding: 0 37px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .app-container > .sidebar {
+        margin: 18px 4px 18px 20px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        border-radius: 25px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .app-container > .main-content {
+        margin: 18px 18px 18px 14px !important;
+        gap: 17px !important;
+        min-height: 0 !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 #director-visual-nav {
+        box-sizing: border-box !important;
+        flex: 0 0 80px !important;
+        height: 80px !important;
+        min-height: 80px !important;
+        max-height: 80px !important;
+        border-radius: 20px !important;
+        padding: 8px !important;
+        grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+        gap: 4px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 #director-visual-nav .director-nav-item {
+        min-height: 0 !important;
+        border-radius: 14px !important;
+        font-size: clamp(10px, .76vw, 12px) !important;
+        gap: 5px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .director-profile-card {
+        padding: 24px 15px 22px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .director-portrait {
+        width: clamp(116px, 17vh, 152px) !important;
+        height: clamp(116px, 17vh, 152px) !important;
+        margin: 8px auto 20px !important;
+        border-width: 7px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .director-profile-role {
+        min-width: min(210px, 90%) !important;
+        font-size: 18px !important;
+        padding: 9px 17px !important;
+    }
+    body.director-step1.director-step2.director-fix-v3 .director-profile-divider {
+        margin: 26px auto 15px !important;
+    }
+}
+
+body.director-step1.director-step2.director-fix-v3 .director-profile-school {
+    display: none !important;
+}
+body.director-step1.director-step2.director-fix-v3 .director-profile-contact {
+    align-items: flex-start !important;
+    padding: 9px 5px !important;
+}
+body.director-step1.director-step2.director-fix-v3 .director-portrait {
+    position: relative;
+    overflow: hidden !important;
+    padding: 0 !important;
+    background: #dbeaf6 !important;
+}
+body.director-step1.director-step2.director-fix-v3 .director-portrait.director-has-photo {
+    font-size: 0 !important;
+}
+body.director-step1.director-step2.director-fix-v3 .director-portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+body.director-step1.director-step2.director-fix-v3 .director-profile-card .director-profile-edit-button {
+    position: absolute;
+    top: 16px;
+    right: 14px;
+    width: 41px;
+    height: 41px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(243, 195, 92, .55);
+    border-radius: 13px;
+    background: #154477;
+    color: #f1c668;
+    cursor: pointer;
+    font-size: 21px;
+    font-weight: 800;
+    z-index: 6;
+    box-shadow: 0 3px 7px rgba(0, 23, 49, .2);
+}
+body.director-step1.director-step2.director-fix-v3 .director-profile-card .director-profile-edit-button:hover,
+body.director-step1.director-step2.director-fix-v3 .director-profile-card .director-profile-edit-button:focus-visible {
+    background: #235990;
+    outline: 2px solid #f2c56d;
+    outline-offset: 2px;
+}
+
+.director-profile-dialog {
+    box-sizing: border-box;
+    width: min(620px, calc(100vw - 30px));
+    max-height: min(88dvh, 740px);
+    padding: 0;
+    border: 1px solid #efd18a;
+    border-radius: 20px;
+    color: #0a325f;
+    background: #fff;
+    overflow: auto;
+    box-shadow: 0 22px 65px rgba(4, 29, 63, .35);
+}
+.director-profile-dialog::backdrop { background: rgba(5, 31, 65, .64); backdrop-filter: blur(3px); }
+.director-profile-dialog .dp-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(120deg, #083466, #104b85);
+    color: #fff;
+    padding: 17px 24px;
+}
+.director-profile-dialog .dp-head h2 { margin: 0; color: #fff; font-size: 22px; }
+.director-profile-dialog .dp-close { border: 0; background: transparent; color: #fff; font-size: 28px; cursor: pointer; line-height: 1; }
+.director-profile-dialog .dp-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 23px; }
+.director-profile-dialog .dp-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.director-profile-dialog .dp-wide { grid-column: 1 / -1; }
+.director-profile-dialog .dp-field > label { font-weight: 800; font-size: 13px; }
+.director-profile-dialog .dp-field input:not([type=checkbox]) {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid #c4d5e6;
+    border-radius: 11px;
+    padding: 10px 12px;
+    color: #0a325f;
+    background: #f8fbff;
+    font: inherit;
+    font-size: 14px;
+}
+.director-profile-dialog .dp-field input:focus { outline: 2px solid #e3bc68; outline-offset: 1px; }
+.director-profile-dialog .dp-photo-row { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+.director-profile-dialog .dp-photo-preview {
+    width: 82px;
+    height: 82px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #f1bd54;
+    background: #eaf5ff;
+}
+.director-profile-dialog .dp-photo-placeholder { display: grid; place-items: center; font-size: 43px; }
+.director-profile-dialog .dp-photo-input { flex: 1 1 250px; min-width: 0; }
+.director-profile-dialog .dp-hint { font-size: 12px; color: #6685a3; margin: 4px 0 0; }
+.director-profile-dialog .dp-remove { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #244e79; }
+.director-profile-dialog .dp-error { color: #b32d32; font-size: 13px; grid-column: 1 / -1; margin: 0; min-height: 10px; }
+.director-profile-dialog .dp-error.ok { color: #11734a; }
+.director-profile-dialog .dp-actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px; }
+.director-profile-dialog .dp-actions button { border: 0; border-radius: 11px; padding: 11px 18px; font-size: 13px; font-weight: 800; cursor: pointer; }
+.director-profile-dialog .dp-cancel { color: #24527f; background: #edf5fd; }
+.director-profile-dialog .dp-save { color: #0a335d; background: linear-gradient(120deg, #ffe099, #ecb84e); }
+.director-profile-dialog .dp-save:disabled { opacity: .55; cursor: not-allowed; }
+@media (max-width: 900px) {
+    body.director-step1.director-step2.director-fix-v3 .director-profile-card .director-profile-edit-button { top: 12px; right: 12px; }
+}
+@media (max-width: 540px) {
+    .director-profile-dialog .dp-form { display: flex; flex-direction: column; gap: 12px; }
+    .director-profile-dialog .dp-head { padding: 15px 19px; }
+    .director-profile-dialog .dp-actions { justify-content: stretch; }
+    .director-profile-dialog .dp-actions button { flex: 1; }
+}
+body.director-step1.director-step2.director-fix-v3 .director-profile-footer {
+    font-size: 0 !important;
+}
+body.director-step1.director-step2.director-fix-v3 .director-profile-footer span {
+    font-size: 28px !important;
+}
+
+/* SCHOOL_CONTROL_DREJTORI_PERMASAT_FILLIM */
+@media (min-width: 901px) {
+    html body.director-step1.director-step2.director-fix-v3 .app-container {
+        grid-template-columns: calc(clamp(245px, 20.5vw, 324px) + 18px) minmax(0, 1fr) !important;
+        grid-template-rows: 64px minmax(0, 1fr) !important;
+    }
+
+    html body.director-step1.director-step2.director-fix-v3 #director-visual-header {
+        box-sizing: border-box !important;
+        height: 64px !important;
+        min-height: 64px !important;
+        max-height: 64px !important;
+        padding: 0 clamp(15px, 2.2vw, 40px) !important;
+    }
+
+    html body.director-step1.director-step2.director-fix-v3 .app-container > .sidebar {
+        box-sizing: border-box !important;
+        margin: 14px 4px 14px 14px !important;
+        min-height: 0 !important;
+    }
+
+    html body.director-step1.director-step2.director-fix-v3 .app-container > .main-content {
+        box-sizing: border-box !important;
+        margin: 14px 14px 14px 10px !important;
+        gap: 13px !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+    }
+
+    html body.director-step1.director-step2.director-fix-v3 #director-visual-nav {
+        box-sizing: border-box !important;
+        flex: 0 0 62px !important;
+        height: 62px !important;
+        min-height: 62px !important;
+        max-height: 62px !important;
+        border-radius: 18px !important;
+        padding: 7px !important;
+        gap: 5px !important;
+    }
+
+    html body.director-step1.director-step2.director-fix-v3 #director-visual-nav .director-nav-item {
+        min-height: 0 !important;
+        padding: 5px 2px !important;
+        border-radius: 12px !important;
+    }
+}
+/* SCHOOL_CONTROL_DREJTORI_PERMASAT_FUND */

@@ -1,0 +1,7 @@
+{% extends 'shkolla/teacher_portal_base.html' %}
+{% block page_title %}Klasat e mia{% endblock %}
+{% block portal_content %}
+<span id="classes-total" hidden></span>
+<div class="class-card-grid" id="class-cards"><div class="placeholder-card">Duke ngarkuar klasat...</div></div>
+<section class="surface fill class-preview-surface" id="class-detail"><div class="surface-title"><div><h2 id="class-title">Nxënësit e klasës</h2><p id="class-subtitle" style="display:none !important;">Zgjidh klasën më sipër.</p></div><div class="right-actions"><button class="btn blue" type="button" id="class-record-absence" hidden>＋ Regjistro mungesë</button><a class="btn gold" id="class-grade-link" href="{% url 'teacher_grades' %}">✎ Shto nota</a></div></div><div class="table-scroll class-preview-scroll"><table><thead><tr><th>Nr.</th><th>Emri dhe mbiemri</th><th>Mesatarja</th><th>Numri i notave</th><th>Mungesat</th><th>Veprimet</th></tr></thead><tbody id="class-students"><tr><td colspan="6">Duke ngarkuar...</td></tr></tbody></table></div><div class="class-preview-footer" style="justify-content:flex-end;"><span id="class-preview-count" style="display:none !important;">Zgjidh një klasë.</span><button class="btn class-view-all" id="class-view-all" type="button">Shiko të gjithë nxënësit <span aria-hidden="true">→</span></button></div></section>
+{% endblock %}

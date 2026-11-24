@@ -1,0 +1,13 @@
+{% extends 'shkolla/teacher_portal_base.html' %}
+{% block page_title %}Paneli i Mësimdhënësit{% endblock %}
+{% block portal_content %}
+<section class="portal-heading heading-banner"><div><span class="eyebrow">PANELI I MËSIMDHËNËSIT</span><h1>Menaxhimi i punës mësimore</h1><p>Zgjidh një nga funksionet për të vazhduar.</p></div><span class="heading-emblem">✦</span></section>
+<section class="home-grid" id="home-grid">
+  <a class="feature-card" href="{% url 'teacher_classes' %}"><span class="feature-icon">▣</span><h2>Klasat</h2><p>Të gjitha klasat dhe nxënësit ku jep mësim.</p><span class="card-arrow">Shiko klasat →</span></a>
+  <a class="feature-card" href="{% url 'teacher_grades' %}"><span class="feature-icon">✎</span><h2>Shto nota</h2><p>Vlerëso nxënësit vetëm në lëndët e tua.</p><span class="card-arrow">Regjistro notë →</span></a>
+  <a class="feature-card featured" href="{% url 'teacher_tutor' %}"><span class="feature-icon">★</span><h2>Klasa ime</h2><p>Notat, mesataret, mungesat dhe kujdestaria.</p><span class="card-arrow">Hap kujdestarinë →</span></a>
+  <a class="feature-card" href="{% url 'teacher_decisions' %}"><span class="feature-icon">▤</span><h2>Vendimet e Drejtorit</h2><p>Shiko vendimet dhe njoftimet e reja.</p><span class="card-arrow">Shiko vendimet →</span></a>
+  <a class="feature-card" href="{% url 'teacher_requests' %}"><span class="feature-icon">✉</span><h2>Kërkesa</h2><p>Leje, sqarime dhe propozime disiplinore.</p><span class="card-arrow">Dërgo kërkesë →</span></a>
+</section>
+<section class="home-summary"><div><span>Klasat ku je angazhuar</span><strong id="home-class-count">—</strong></div><div><span>Klasa ku je kujdestar</span><strong id="home-tutor-count">—</strong></div><div><span>Vendimet e reja</span><strong id="home-decision-count">—</strong></div><div><span>Kërkesa në shqyrtim</span><strong id="home-request-count">—</strong></div></section>
+{% endblock %}
