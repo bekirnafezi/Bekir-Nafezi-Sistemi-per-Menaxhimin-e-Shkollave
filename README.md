@@ -71,7 +71,7 @@ Janë realizuar API-të REST, relacionet ndërmjet modeleve, migrimet, validimi 
 
 - Identifikimi dhe menaxhimi i profilit.
 - Shfaqja e klasave dhe lëndëve të caktuara.
-- Menaxhimi i notave.
+- Regjistrimi i notave për angazhimet përkatëse.
 - Menaxhimi i mungesave.
 - Menaxhimi i klasës kujdestare.
 - Pranimi i vendimeve nga drejtori.
@@ -81,18 +81,18 @@ Janë realizuar API-të REST, relacionet ndërmjet modeleve, migrimet, validimi 
 
 ### Nxënësi
 
-- Identifikimi me të dhënat personale, ID dhe fjalëkalim.
+- Identifikimi me emër, mbiemër, ID dhe fjalëkalim.
 - Shfaqja dhe ndryshimi i fotografisë së profilit.
 - Shfaqja e të dhënave të klasës dhe kujdestarit.
 - Shfaqja e notave sipas lëndëve.
-- Llogaritja e mesatares.
+- Shfaqja e mesatares.
 - Shfaqja e mungesave dhe statuseve të tyre.
 - Pranimi i njoftimeve nga drejtori dhe mësimdhënësi.
 - Dërgimi i ankesave te kujdestari.
 - Dërgimi i kërkesave për leje.
 - Kontrollimi i statusit të kërkesave.
 - Sinjalizimi i njoftimeve dhe përgjigjeve të reja.
-- Pastrimi i njoftimeve nga pamja personale në shfletues.
+- Largimi i njoftimeve nga pamja personale në shfletues, pa fshirjen e tyre nga databaza.
 
 ## Autentikimi dhe siguria
 
@@ -102,9 +102,10 @@ Janë realizuar API-të REST, relacionet ndërmjet modeleve, migrimet, validimi 
 - Validimi i të dhënave.
 - Mbrojtja e fjalëkalimeve.
 - Kontrollimi i fotografive gjatë ngarkimit.
+- Ruajtja e historikut të ndryshimeve të evidencës.
 - Përjashtimi i databazës, fotografive private dhe skedarëve sekretë nga Git.
 
-## Dizajni i sistemit
+## Dizajni dhe organizimi i frontend-it
 
 Ndërfaqja grafike është zhvilluar me HTML, CSS dhe JavaScript.
 
@@ -119,7 +120,52 @@ Sistemi përmban:
 - Dritare për shfaqjen e të dhënave.
 - Fotografitë e profileve.
 - Numërues për njoftimet e reja.
-- Komunikim ndërmjet frontend-it dhe backend-it përmes API-ve.
+
+Skedarët HTML, CSS dhe JavaScript janë organizuar veçmas, duke mundësuar mirëmbajtjen dhe zhvillimin më të lehtë të ndërfaqes.
+
+## Integrimi i frontend-it me backend-in
+
+Frontend-i komunikon me backend-in përmes API-ve REST.
+
+Të dhënat e dërguara nga formularët kontrollohen në backend, përpunohen dhe ruhen në databazën SQLite.
+
+Pas përpunimit të kërkesës, ndërfaqja përditësohet me të dhënat përkatëse.
+
+### Rrjedha e regjistrimit të notës
+
+1. Mësimdhënësi përzgjedh nxënësin dhe angazhimin.
+2. Plotëson formularin me notën përkatëse.
+3. Frontend-i dërgon kërkesën POST në API.
+4. Backend-i kontrollon validimin e të dhënave dhe autorizimin.
+5. Nota ruhet në databazën SQLite.
+6. Regjistrohet historiku i veprimit.
+7. API kthen përgjigjen HTTP 201 Created.
+8. Ndërfaqja përditësohet me notën e regjistruar.
+9. Nxënësi shikon notën dhe mesataren e përditësuar.
+10. Drejtori kontrollon notat dhe statistikat.
+
+Kjo rrjedhë është testuar dhe dokumentuar me fotografi reale në Raportin Teknik 3.
+
+## Gjendjet e ndërfaqes
+
+Gjatë zhvillimit janë trajtuar gjendjet:
+
+- Loading State – gjatë ngarkimit të të dhënave.
+- Empty State – kur nuk ka të dhëna për shfaqje.
+- Error State – kur ndodh një gabim gjatë përpunimit të kërkesës.
+- Success State – kur një veprim përfundon me sukses.
+
+Këto gjendje informojnë përdoruesin për rezultatin e veprimeve të tij.
+
+## Analiza e kodit – Code Review
+
+Në Raportin Teknik 3 janë analizuar pjesët kryesore të kodit:
+
+- models.py – struktura e modelit Nota.
+- serializers.py – validimi i notës dhe klasës së nxënësit.
+- evidenca_api.py – përpunimi i kërkesave dhe ruajtja e notave.
+- evidenca_permissions.py – kontrolli i autorizimeve.
+- evidenca_statistika.py – llogaritja e mesatareve dhe statistikave.
 
 ## Instalimi i projektit
 
@@ -172,9 +218,20 @@ Gjatë zhvillimit janë realizuar testime manuale dhe automatike për:
 
 Ekzekutimi i testeve automatike:
 
-    python manage.py test shkolla.test_teacher_notices
+    python manage.py test
 
-Tri testet automatike të njoftimeve kanë kaluar me sukses.
+Kontrollimi i migrimeve:
+
+    python manage.py makemigrations --check --dry-run
+
+### Rezultatet e testimeve për Raportin Teknik 3
+
+| Kontrolli | Rezultati |
+| --- | --- |
+| Testimet manuale | 21/21 me sukses |
+| Testimet automatike | 3/3 me sukses |
+| Django System Check | 0 probleme |
+| Kontrolli i migrimeve | Nuk ka ndryshime të pambuluara |
 
 ## Fazat e zhvillimit
 
@@ -188,13 +245,39 @@ Krijimi i modeleve, relacioneve, migrimeve, autentikimit dhe API-ve.
 
 ### Faza 3 – Frontend dhe integrimi
 
-Zhvillimi i ndërfaqes grafike, krijimi i tri paneleve, integrimi me backend-in dhe testimi i funksionaliteteve.
+Zhvillimi i ndërfaqes grafike, krijimi i tri paneleve, integrimi me backend-in, testimi i funksionaliteteve, dokumentimi i rrjedhës dhe analiza e kodit.
+
+### Faza 4 – Versioni beta dhe përfundimi
+
+Testimi më i plotë i sistemit, përmirësimi i sigurisë, korrigjimi i problemeve të mundshme dhe përgatitja për publikim.
+
+## Dokumentacioni teknik
+
+Dokumentacioni i projektit përmban:
+
+- Raportin Teknik 1 – Planifikimi dhe analiza.
+- Raportin Teknik 2 – Databaza, backend-i dhe API-të.
+- Raportin Teknik 3 – Frontend-i dhe integrimi i sistemit.
+
+Të tre raportet janë bashkuar në një dokument.
+
+[School Control – Raporti Teknik 1, 2 dhe 3](docs/School_Control_Raporti_Teknik.docx)
+
+## Versionimi i projektit
+
+Projekti është zhvilluar gradualisht dhe ndryshimet janë dokumentuar përmes commit-eve në GitHub.
+
+Repository:
+
+https://github.com/bekirnafezi/Bekir-Nafezi-Sistemi-per-Menaxhimin-e-Shkollave
 
 ## Statusi i projektit
 
-Funksionalitetet kryesore të tri paneleve janë realizuar dhe sistemi është në fazën e kontrollit përfundimtar dhe dokumentimit teknik.
+Raporti Teknik 3 është përfunduar.
 
-Dokumentimi i projektit ruhet në dosjen docs/.
+Funksionalitetet kryesore të tri paneleve janë realizuar, frontend-i është integruar me backend-in dhe rrjedhat kryesore janë testuar.
+
+Projekti është i gatshëm për demonstrimin e funksionaliteteve të Raportit Teknik 3 dhe vazhdimin drejt fazës beta.
 
 ## Qëllimi përfundimtar
 
