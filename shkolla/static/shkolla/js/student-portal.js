@@ -199,5 +199,9 @@
     $('student-clear-activities').onclick=()=>askClear('Të fshihen kërkesat e miratuara dhe të refuzuara nga pamja jote? Kërkesat në shqyrtim do të mbeten.',async()=>{saveCleared('aktivitetet',rows.filter(requestFinished).map(activityFingerprint));await renderActivities(me);});
     applyBadge('aktivitetet',reviewKeys(data),true);
   }
-  init().catch(err=>showError(err.message));
+  root.innerHTML='<div class="student-content-center" id="student-initial-loading" role="status" aria-live="polite"><strong>Duke ngarkuar të dhënat...</strong></div>';
+  init().catch(err=>{
+    if ($('student-initial-loading')) root.replaceChildren();
+    showError(err.message || 'Paneli nuk u ngarkua. Provo përsëri.');
+  });
 })();

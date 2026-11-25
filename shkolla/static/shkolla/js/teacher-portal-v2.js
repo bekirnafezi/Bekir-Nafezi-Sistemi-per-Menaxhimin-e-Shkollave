@@ -645,5 +645,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             }catch{}
         },60000);
     }
-    try {await initPage();}catch(error){setMessage(error.message || 'Paneli nuk u ngarkua.');}
+    const initialLoadingMessage = 'Duke ngarkuar të dhënat...';
+    setMessage(initialLoadingMessage);
+    try {
+        await initPage();
+        if ($('portal-message').textContent === initialLoadingMessage) setMessage('');
+    } catch(error) {
+        setMessage(error.message || 'Paneli nuk u ngarkua.');
+    }
 });
